@@ -1,0 +1,108 @@
+
+
+
+This Solution provides an overview of installing FirePass hotfixes.
+Note: Prior to installing a FirePass hotfix, you may optionally want to end current user sessions and enable session lockout to prevent new user sessions. For more information about locking out user sessions and ending user sessions, refer to the FirePass Controller Administrator Guide.
+Installing a hotfix
+To install a hotfix on a FirePass controller, perform the following procedure:
+
+    Logon to the FirePass Administrative Console.
+    Click Device Management.
+    Click Maintenance.
+    Click Local Update.
+    Unless you were given a different password by F5 Networks Technical Support personnel, enter F5Networks in the Password field.
+    In the File field, enter the full path to the hotfix file on the client system.
+    Click the Submit button.
+
+FirePass will install the hotfix and reboot.
+Installing hotfixes on a FirePass failover pair
+In a FirePass high availability configuration, install the hotfix on the active controller first. When the active controller reboots after the hotfix installation, the standby controller becomes active. Install the hotfix on the active controller (previously the standby controller). After that controller reboots, the original active controller becomes active again and the original standby controller becomes standby again.
+Installing hotfixes on a FirePass cluster
+In a FirePass cluster configuration, you can install the hotfix on the cluster members in any order. However, synchronization between cluster members may be affected. If the hotfix you install on the primary (master) cluster member is not compatible with the hotfixes installed on the secondary (slave) cluster member, synchronization will not resume until a compatible hotfix is installed on the secondary cluster member. Conversely, if the hotfix you install on the secondary cluster member is not compatible with the hotfixes installed on the primary cluster member, synchronization will not resume until a compatible hotfix is installed on the primary cluster member. F5 Networks strongly recommends that all members of a FirePass cluster have identical hotfixes installed.
+Removing a hotfix
+To remove a hotfix from a FirePass controller, perform the following procedure:
+
+    Logon to the FirePass Administrative Console.
+    Click Device Management.
+    Click Current Settings.
+    In the FirePass Hot-Fixes row in the FirePass Version section, a list of installed hotfixes is displayed.
+    Click the name of the hotfix you want to remove.
+    
+    Important: Hotfixes must be removed in the reverse order from which they were installed. For example, if you installed three hotfixes and you want to remove the first hotfix, you must remove the third hotfix and then the second hotfix before you have the option to remove the first hotfix.
+     
+    Click the Uninstall hot-fix link.
+    Click the OK button to confirm hotfix removal.
+
+
+
+
+
+This Solution provides an overview of installing FirePass hotfixes.
+Note: Prior to installing a FirePass hotfix, you may optionally want to end current user sessions and enable session lockout to prevent new user sessions. For more information about locking out user sessions and ending user sessions, refer to the FirePass Controller Administrator Guide.
+Installing a hotfix
+To install a hotfix on a FirePass controller, perform the following procedure:
+
+    Logon to the FirePass Administrative Console.
+    Click Device Management.
+    Click Maintenance.
+    Click Local Update.
+    Unless you were given a different password by F5 Networks Technical Support personnel, enter F5Networks in the Password field.
+    In the File field, enter the full path to the hotfix file on the client system.
+    Click the Submit button.
+
+FirePass will install the hotfix and reboot.
+Installing hotfixes on a FirePass failover pair
+In a FirePass high availability configuration, install the hotfix on the active controller first. When the active controller reboots after the hotfix installation, the standby controller becomes active. Install the hotfix on the active controller (previously the standby controller). After that controller reboots, the original active controller becomes active again and the original standby controller becomes standby again.
+Installing hotfixes on a FirePass cluster
+In a FirePass cluster configuration, you can install the hotfix on the cluster members in any order. However, synchronization between cluster members may be affected. If the hotfix you install on the primary (master) cluster member is not compatible with the hotfixes installed on the secondary (slave) cluster member, synchronization will not resume until a compatible hotfix is installed on the secondary cluster member. Conversely, if the hotfix you install on the secondary cluster member is not compatible with the hotfixes installed on the primary cluster member, synchronization will not resume until a compatible hotfix is installed on the primary cluster member. F5 Networks strongly recommends that all members of a FirePass cluster have identical hotfixes installed.
+Removing a hotfix
+To remove a hotfix from a FirePass controller, perform the following procedure:
+
+    Logon to the FirePass Administrative Console.
+    Click Device Management.
+    Click Current Settings.
+    In the FirePass Hot-Fixes row in the FirePass Version section, a list of installed hotfixes is displayed.
+    Click the name of the hotfix you want to remove.
+    
+    Important: Hotfixes must be removed in the reverse order from which they were installed. For example, if you installed three hotfixes and you want to remove the first hotfix, you must remove the third hotfix and then the second hotfix before you have the option to remove the first hotfix.
+     
+    Click the Uninstall hot-fix link.
+    Click the OK button to confirm hotfix removal.
+
+
+
+
+
+This Solution provides an overview of installing FirePass hotfixes.
+Note: Prior to installing a FirePass hotfix, you may optionally want to end current user sessions and enable session lockout to prevent new user sessions. For more information about locking out user sessions and ending user sessions, refer to the FirePass Controller Administrator Guide.
+Installing a hotfix
+To install a hotfix on a FirePass controller, perform the following procedure:
+
+    Logon to the FirePass Administrative Console.
+    Click Device Management.
+    Click Maintenance.
+    Click Local Update.
+    Unless you were given a different password by F5 Networks Technical Support personnel, enter F5Networks in the Password field.
+    In the File field, enter the full path to the hotfix file on the client system.
+    Click the Submit button.
+
+FirePass will install the hotfix and reboot.
+Installing hotfixes on a FirePass failover pair
+In a FirePass high availability configuration, install the hotfix on the active controller first. When the active controller reboots after the hotfix installation, the standby controller becomes active. Install the hotfix on the active controller (previously the standby controller). After that controller reboots, the original active controller becomes active again and the original standby controller becomes standby again.
+Installing hotfixes on a FirePass cluster
+In a FirePass cluster configuration, you can install the hotfix on the cluster members in any order. However, synchronization between cluster members may be affected. If the hotfix you install on the primary (master) cluster member is not compatible with the hotfixes installed on the secondary (slave) cluster member, synchronization will not resume until a compatible hotfix is installed on the secondary cluster member. Conversely, if the hotfix you install on the secondary cluster member is not compatible with the hotfixes installed on the primary cluster member, synchronization will not resume until a compatible hotfix is installed on the primary cluster member. F5 Networks strongly recommends that all members of a FirePass cluster have identical hotfixes installed.
+Removing a hotfix
+To remove a hotfix from a FirePass controller, perform the following procedure:
+
+    Logon to the FirePass Administrative Console.
+    Click Device Management.
+    Click Current Settings.
+    In the FirePass Hot-Fixes row in the FirePass Version section, a list of installed hotfixes is displayed.
+    Click the name of the hotfix you want to remove.
+    
+    Important: Hotfixes must be removed in the reverse order from which they were installed. For example, if you installed three hotfixes and you want to remove the first hotfix, you must remove the third hotfix and then the second hotfix before you have the option to remove the first hotfix.
+     
+    Click the Uninstall hot-fix link.
+    Click the OK button to confirm hotfix removal.
+
+

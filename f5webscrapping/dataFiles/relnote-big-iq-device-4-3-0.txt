@@ -1,0 +1,726 @@
+
+
+
+ - Screen resolution requirement
+ - Browser support
+ - User documentation for this release
+ - Software installation
+ - Upgrading BIG-IQ Device
+ - New features
+ - Fixes
+ - Known issues
+ - Removing BIG-IQ system services from a BIG-IP device
+ - Contacting F5 Networks
+ - Legal notices
+
+Product description
+As a network administrator, you can use BIG-IQ Device to centrally manage multiple physical and virtual BIG-IP devices. This management includes license management, software image installation, back up and restoration of UCS files, and back up and restoration of specific configuration files to one or more BIG-IP devices. BIG-IQ Device also helps you with device inventory tasks by keeping you apprised of every detail about your managed devices, and provides you with the infrastructure to use SNMP to manage system events and send email alerts.
+
+Screen resolution requirement
+To properly display, the BIG-IQ system requires that your screen resolution is set to 1280x1024 or higher.
+
+
+Browser support
+BIG-IQ Device supports the following browsers and versions:
+
+Microsoft Internet Explorer version 9 and later
+Mozilla Firefox version 18.x and later
+Google Chrome version 18.x and later
+
+
+
+User documentation for this release
+For a comprehensive list of documentation that is relevant to this release, refer to the BIG-IQ 4.3.0 Documentation page.
+
+
+Software installation
+For procedures about specifying network options and performing initial configuration, refer to the BIG-IQ System: Licensing and Initial Configuration guide.
+
+
+Upgrading BIG-IQ Device
+Before you can upgrade the BIG-IQ system, you must perform the following tasks:
+
+Download the .iso file for the upgrade from F5 Downloads to /shared/images on the BIG-IQ system. If you need to create this directory, use the exact name /shared/images.
+Select a disk volume on which to install the upgrade. Do not select the volume on which you installed the previous version of BIG-IQ software.
+Locate the user configuration set (UCS) in the /var/local/ucs directory on the source installation location, and copy the UCS file to another system for safe keeping.
+
+
+Use this procedure to upgrade BIG-IQ systems.
+Warning: These procedures require that the BIG-IQ system is temporarily unavailable and unable to manage BIG-IP devices until the upgrade is complete. BIG-IP devices can continue to manage traffic during this time.
+If you have configured the BIG-IQ system in a high availability cluster, perform these steps on each BIG-IQ system in the cluster in immediate succession. It is important to get the cluster members on the same software version as quickly as possible to avoid potential user experience issues.
+
+
+Log in to BIG-IQ system with your administrator user name and password.
+At the top of the screen, click System > Overview .
+Select License and click the Re-Activate button. The screen refreshes to display the activation keys.
+Click the Activate button. The BIG-IQ system license reactivates and the screen refreshes to display the license details.
+Log in to the BIG-IQ system's command line with your root user name and password and type setdb liveinstall.saveConfig enable. This command prompts the BIG-IQ system to transfer your current configuration (including self IP addresses, host names, devices discovered, and so forth) to the new volume.
+Type the following command where <image name> is the name of the .iso file you downloaded, and <volume name> is the volume to which you want to install the file on BIG-IQ system. tmsh install sys software image <image name> volume <volume name> reboot The installation will take a few minutes, and BIG-IQ reboots after completion.
+Log back in to the BIG-IQ system's command line with your root user name and password and type bigstart restart restjavad to restart the required Java workers.
+Log in to the BIG-IQ system with your administrator user name and password. 
+On the Device panel, click the properties icon for each device.
+If a Discovery Failed message displays: 
+Type the device's administrator user name and password.
+Click the Save button. This step is required only if you are upgrading from a version prior to BIG-IQ version 4.2.
+
+The BIG-IQ system rediscovers managed devices in your network.
+
+If your system is configured in high availability cluster, repeat these steps on each additional BIG-IQ system to complete the upgrade process.
+
+
+New features
+SNMP integration
+You can configure BIG-IQ Device to integrate with a third-party SNMP manager compatible with SNMPv1, SNMPv2, and SNMPv3. Once configured, the SNMP agent sends data collected from BIG-IQ Device to your SNMP manager. You can use this information to troubleshoot potential issues with your managed BIG-IP devices.
+Email alerts for system events
+BIG-IQ Device can send locally-generated email messages to specific recipients for system events, based on configurable thresholds, using Simple Mail Transfer Protocol (SMTP). These alerts can be configured for BIG-IQ Device systems themselves, as well as for managed devices. This feature enables administrators to be immediately notified when certain system events occur.
+High availability cluster
+You can configure BIG-IQ Device in a high availability cluster to support multiple layers of redundancy and partitioning of application traffic.
+Upgrades and hotfix installation
+BIG-IQ Device supports the installation of software upgrades and hotfixes on managed devices.
+BIG-IQ system upgrades
+You can upgrade the BIG-IQ system itself through the user interface.
+Configuration files deployment
+You can deploy a set of configuration files to a managed device through the user interface.
+
+
+Fixes
+
+Issue
+Description
+440828
+When you create a virtual BIG-IP device outside of the BIG-IQ system and the BIG-IQ system later discovers it, the device information populates in the Virtual Devices panel. You are now able to delete the device if you find you no longer need it.
+
+413335
+BIG-IQ Cloud no longer discovers the same device more than once, even if the device has a different IP address.
+
+425314
+If device discovery fails, the BIG-IQ system now prompts you to retry discovery, rather than returning a "(0)null" error.
+
+440939
+You can no longer delete a managed BIG-IP device until the BIG-IQ system completes the discovery process.
+
+427810
+Starting in this release, you can modify the BIG-IQ system's self IP address without adversely impacting the device discovery process.
+
+428064
+When activating a production license for the BIG-IQ system, the expiration date on the Properties screen no longer displays the benign error message "NaN".
+
+440644
+If an error occurs when adding a BIG-IQ system to a high availability configuration, the BIG-IQ system now displays an error message.
+
+439026
+The BIG-IQ system can now search for IPv6 addresses within a subnet.
+
+441049
+Health statistics now properly display in the Device panel after you restart the BIG-IQ system.
+
+418295
+In previous releases, VMware vSphere hypervisor returned TMM restart messages when using the four-core configuration option. This issue is resolved and the errors no longer occur.
+
+448605
+You can now create qkview reports with more than 3GB of files in the BIG-IQ system's /var/config/rest/storage directory.
+
+
+
+
+
+Known issues
+
+Issue
+Description
+Workaround (if available)
+428383
+When you use the search field to filter for a number or phrase associated with a particular BIG-IP device, you may get some unexpected results. This occurs because BIG-IQ Device filters on all fields, not just those displayed in the Devices panel.
+ 
+440333
+If you delete a BIG-IQ peer from a high availability active-active pair, then add the same BIG-IQ Device back to the same, or to another high availability pair, data between the devices no longer synchronizes.
+After you delete a BIG-IQ system from a high availability active-active pair, create a backup to the BIG-IQ system. Then reset the system to factory settings by typing the following command on that device: bigstart stop restjavad && rm -rf /var/config/rest && bigstart start restjavad. Then, you can add it as a new backup in a high availability pair, and they will properly synchronize.
+435629
+When two BIG-IQ 7000 Platform devices are configured in a high availability pair, communication may only work in one direction between the two devices. This is exhibited by the following behavior: -- Device A is marked as standby, and reports its peer as active. -- Device B is marked as active, and reports its peer as down. If this occurs, high availability functionality does not work correctly. Device B will always assume Device A is down, so it will always remain active.
+To work around this issue, you must re-initialize the certificates. If resetting the configuration to factory settings is an option, type the following commands on each device: bigstart stop restjavad; rm -rf /shared/em/ssl.crt/*.*; rm -rf /shared/em/ssl.key/*.*; rm -rf /var/config/rest/storage; rm -rf /var/config/rest/index/; bigstart start restjavad . If you cannot clear the configuration, perform the following steps on each device: 1) On the High Availability panel, delete the HA peer, and associated devices. 2) From the command line, type the following command to delete the local device: curl -X DELETE http://localhost:8100/shared/resolver/device-groups/cm-shared-all-big-iqs/devices. 3) To remove the existing certificates and restart the service, type the following commands on each device: bigstart stop restjavad; rm -rf /shared/em/ssl.crt/*.*; rm -rf /shared/em/ssl.key/*.*;bigstart start restjavad
+426708
+When a BIG-IQ system in a high availability active-standby configuration fails over to the peer system, the formerly active BIG-IQ system incorrectly displays in the devices panel as a managed device.
+To work around this issue, from the active BIG-IQ system, delete the BIG-IQ system from the managed devices list. You may receive a benign error message.
+426320
+Discovering a device, such as declaring management authority or setting a peer device, fails with the following error message: "Unable to discover the device to be managed";this occurs because you cannot discover device [IP ADDRESS] through group [YOUR GROUP] because that group does not contain local host.
+Refer to SOL14593: "Device discovery may fail due to local host discovery failure" for information about how to work around this issue.
+437741
+If you do not discover devices using a self IP address on VLAN named "internal" on the BIG-IQ system and the managed BIG-IP device, you receive this message while logged to the BIG-IP restjavad.0.log. every minute for each system and device. "[8100/shared/identified-devices IdentifiedDevicesWorker][failed] java.net.ProtocolException: Status code:401"
+To work around this issue, you must configure an internal VLAN and self IP address for the BIG-IQ system and all managed devices.
+431398
+When you are booting the BIG-IQ system, it may display the following warning in the console or logs: "SKIPPING unix_config_httpd: /defaults/config/templates/xui.tmpl doesn't exist!!!"
+This message is benign and has no impact on the BIG-IQ system's functionality. You can ignore this benign message.
+449642
+After rebuilding or upgrading a BIG-IQ system, REST Java workers may become unresponsive. When this occurs, the following error displays in the /var/log/restjavad.0.log file: [WARNING][50438][20 Feb 2014 17:34:58 UTC][8100/shared/authz/tokens AuthTokenWorker][dispatchOrQueueSynchronized] Queue limit exceeded for worker
+To resolve this issue, log in to the BIG-IQ system's command line with your root user name and password and type bigstart restart restjavad to restart the required Java workers.
+449063
+After upgrading or restarting a BIG-IQ system, the login screen displays, but when you attempt to log in, an invalid user credentials error displays.
+
+To work around this issue, clear the browser cache and refresh. (You may have to refresh several times.) When the login screen properly displays the hostname of the BIG-IQ server, log back in.
+449969
+When you attempt to discover a device that has the "Update Automatically" check box selected for the Auto Update Framework setting, the discovery process may result in an HTTP error.
+To work around this issue, log out and log back in to the BIG-IQ system or, manually update the REST framework. For instructions, refer to the “Installing required BIG-IQ components onto BIG-IP devices ” chapter of the "BIG-IQ Device: Device Management" guide.
+4499991
+For the BIG-IQ 7000 platform, when the source port and destination port are the same, traffic (such as NTP) initiated from the (NTP) host may direct the response incorrectly. This results in a dropped response.
+The only way to work around this issue is to specify a different port number for the source and destination port.
+450378
+You cannot install the required BIG-IQ system components on BIG-IP devices running version 11.5 from the user interface, because of a BIG-IP version 11.5 compatibility issue with the BIG-IQ system. Furthermore, if you attempt to discover a BIG-IP version 11.5 device before you manually install the required BIG-IQ components onto the device, discovery fails, without an error, even if you selected the Auto Update Framework.
+To properly discover and manage a BIG-IP device running version 11.5, you must manually update the required framework. For instructions, refer to the “Installing required BIG-IQ components onto BIG-IP devices ” chapter of the "BIG-IQ Device: Device Management" guide.
+
+
+
+
+Removing BIG-IQ system services from a BIG-IP device
+To manage a BIG-IP device using the BIG-IQ system, you must install specific BIG-IQ system components onto that device using the procedure outlined in the BIG-IQ Device: Device Management guide. In the event that you have to remove these services for any reason, use this procedure.
+
+Log in to the command line of the BIG-IP device.
+Stop any running BIG-IQ system services.Note: The msgbusd service may not be installed. You can use the bigstart status command to see if it is running.
+$ bigstart stop restjavad
+$ bigstart stop msgbusd
+
+Remove the RPM packages related to the BIG-IQ system.mount -o remount,rw /usr
+rpm -qa | grep f5-rest-java | xargs rpm -e --nodeps
+rpm -qa | grep msgbusd | xargs rpm -e  --nodeps
+mount -o remount,ro /usr
+This removes the BIG-IQ system components from the BIG-IP device, including the F5-contributed cloud connector iApp template (cloud_connector.tmpl).
+
+Optional: Reinstall the F5-contributed cloud connector iApp template:
+Download the cloud_connector.tmpl iApp template from F5 DevCentral, https://devcentral.f5.com/wiki/iApp.Cloud_Connector_iApp_Template.ashx.Note: You need an account to access the DevCentral site.
+
+Unzip the file, and on the BIG-IP system, upload it to the /var/local/app_template directory.
+Install the template with this command: tmsh load / sys application template cloud_connector.tmpl
+
+
+
+
+
+Contacting F5 Networks
+
+Phone:
+(206) 272-6888
+Fax:
+(206) 272-6802
+Web:
+http://support.f5.com
+Email:
+support@f5.com
+
+
+For additional information, please visit http://www.f5.com.
+Additional resources
+You can find additional support resources and technical documentation through a variety of sources.
+
+The F5 Networks Technical Support web site: http://www.f5.com/support/
+The AskF5 web site: http://support.f5.com/kb/en-us.html
+The F5 DevCentral web site: http://devcentral.f5.com/
+AskF5 TechNews
+
+
+F5 Networks Technical Support
+Free self-service tools give you 24x7 access to a wealth of knowledge and technical support. Whether it is providing quick answers to questions, training your staff, or handling entire implementations from design to deployment, F5 services teams are ready to ensure that you get the most from your F5 technology.
+
+AskF5
+AskF5 is your storehouse for thousands of solutions to help you manage your F5 products more effectively. Whether you want to search the knowledge base periodically to research a solution, or you need the most recent news about your F5 products, AskF5 is your source.
+
+F5 DevCentral
+The F5 DevCentral community helps you get more from F5 products and technologies. You can connect with user groups, learn about the latest F5 tools, and discuss F5 products and technology.
+
+AskF5 TechNews
+
+Weekly HTML TechNews The weekly TechNews HTML email includes timely information about known issues, product releases, hotfix releases, updated and new solutions, and new feature notices. To subscribe, click TechNews Subscription, complete the required fields, and click the Subscribe button. You will receive a confirmation. Unsubscribe at any time by clicking the Unsubscribe link at the bottom of the TechNews email. Periodic plain text TechNews F5 Networks sends a timely TechNews email any time a product or hotfix is released. (This information is always included in the next weekly HTML TechNews email.) To subscribe, send a blank email to technews-subscribe@lists.f5.com from the email address you are using to subscribe. Unsubscribe by sending a blank email to technews-unsubscribe@lists.f5.com.
+
+
+
+Legal notices
+
+Copyright © 2014, F5 Networks, Inc. All rights reserved.
+For a current list of F5 trademarks and service marks, click here. All other product and company names herein may be trademarks of their respective owners.
+
+
+
+
+
+
+
+
+ - Screen resolution requirement
+ - Browser support
+ - User documentation for this release
+ - Software installation
+ - Upgrading BIG-IQ Device
+ - New features
+ - Fixes
+ - Known issues
+ - Removing BIG-IQ system services from a BIG-IP device
+ - Contacting F5 Networks
+ - Legal notices
+
+Product description
+As a network administrator, you can use BIG-IQ Device to centrally manage multiple physical and virtual BIG-IP devices. This management includes license management, software image installation, back up and restoration of UCS files, and back up and restoration of specific configuration files to one or more BIG-IP devices. BIG-IQ Device also helps you with device inventory tasks by keeping you apprised of every detail about your managed devices, and provides you with the infrastructure to use SNMP to manage system events and send email alerts.
+
+Screen resolution requirement
+To properly display, the BIG-IQ system requires that your screen resolution is set to 1280x1024 or higher.
+
+
+Browser support
+BIG-IQ Device supports the following browsers and versions:
+
+Microsoft Internet Explorer version 9 and later
+Mozilla Firefox version 18.x and later
+Google Chrome version 18.x and later
+
+
+
+User documentation for this release
+For a comprehensive list of documentation that is relevant to this release, refer to the BIG-IQ 4.3.0 Documentation page.
+
+
+Software installation
+For procedures about specifying network options and performing initial configuration, refer to the BIG-IQ System: Licensing and Initial Configuration guide.
+
+
+Upgrading BIG-IQ Device
+Before you can upgrade the BIG-IQ system, you must perform the following tasks:
+
+Download the .iso file for the upgrade from F5 Downloads to /shared/images on the BIG-IQ system. If you need to create this directory, use the exact name /shared/images.
+Select a disk volume on which to install the upgrade. Do not select the volume on which you installed the previous version of BIG-IQ software.
+Locate the user configuration set (UCS) in the /var/local/ucs directory on the source installation location, and copy the UCS file to another system for safe keeping.
+
+
+Use this procedure to upgrade BIG-IQ systems.
+Warning: These procedures require that the BIG-IQ system is temporarily unavailable and unable to manage BIG-IP devices until the upgrade is complete. BIG-IP devices can continue to manage traffic during this time.
+If you have configured the BIG-IQ system in a high availability cluster, perform these steps on each BIG-IQ system in the cluster in immediate succession. It is important to get the cluster members on the same software version as quickly as possible to avoid potential user experience issues.
+
+
+Log in to BIG-IQ system with your administrator user name and password.
+At the top of the screen, click System > Overview .
+Select License and click the Re-Activate button. The screen refreshes to display the activation keys.
+Click the Activate button. The BIG-IQ system license reactivates and the screen refreshes to display the license details.
+Log in to the BIG-IQ system's command line with your root user name and password and type setdb liveinstall.saveConfig enable. This command prompts the BIG-IQ system to transfer your current configuration (including self IP addresses, host names, devices discovered, and so forth) to the new volume.
+Type the following command where <image name> is the name of the .iso file you downloaded, and <volume name> is the volume to which you want to install the file on BIG-IQ system. tmsh install sys software image <image name> volume <volume name> reboot The installation will take a few minutes, and BIG-IQ reboots after completion.
+Log back in to the BIG-IQ system's command line with your root user name and password and type bigstart restart restjavad to restart the required Java workers.
+Log in to the BIG-IQ system with your administrator user name and password. 
+On the Device panel, click the properties icon for each device.
+If a Discovery Failed message displays: 
+Type the device's administrator user name and password.
+Click the Save button. This step is required only if you are upgrading from a version prior to BIG-IQ version 4.2.
+
+The BIG-IQ system rediscovers managed devices in your network.
+
+If your system is configured in high availability cluster, repeat these steps on each additional BIG-IQ system to complete the upgrade process.
+
+
+New features
+SNMP integration
+You can configure BIG-IQ Device to integrate with a third-party SNMP manager compatible with SNMPv1, SNMPv2, and SNMPv3. Once configured, the SNMP agent sends data collected from BIG-IQ Device to your SNMP manager. You can use this information to troubleshoot potential issues with your managed BIG-IP devices.
+Email alerts for system events
+BIG-IQ Device can send locally-generated email messages to specific recipients for system events, based on configurable thresholds, using Simple Mail Transfer Protocol (SMTP). These alerts can be configured for BIG-IQ Device systems themselves, as well as for managed devices. This feature enables administrators to be immediately notified when certain system events occur.
+High availability cluster
+You can configure BIG-IQ Device in a high availability cluster to support multiple layers of redundancy and partitioning of application traffic.
+Upgrades and hotfix installation
+BIG-IQ Device supports the installation of software upgrades and hotfixes on managed devices.
+BIG-IQ system upgrades
+You can upgrade the BIG-IQ system itself through the user interface.
+Configuration files deployment
+You can deploy a set of configuration files to a managed device through the user interface.
+
+
+Fixes
+
+Issue
+Description
+440828
+When you create a virtual BIG-IP device outside of the BIG-IQ system and the BIG-IQ system later discovers it, the device information populates in the Virtual Devices panel. You are now able to delete the device if you find you no longer need it.
+
+413335
+BIG-IQ Cloud no longer discovers the same device more than once, even if the device has a different IP address.
+
+425314
+If device discovery fails, the BIG-IQ system now prompts you to retry discovery, rather than returning a "(0)null" error.
+
+440939
+You can no longer delete a managed BIG-IP device until the BIG-IQ system completes the discovery process.
+
+427810
+Starting in this release, you can modify the BIG-IQ system's self IP address without adversely impacting the device discovery process.
+
+428064
+When activating a production license for the BIG-IQ system, the expiration date on the Properties screen no longer displays the benign error message "NaN".
+
+440644
+If an error occurs when adding a BIG-IQ system to a high availability configuration, the BIG-IQ system now displays an error message.
+
+439026
+The BIG-IQ system can now search for IPv6 addresses within a subnet.
+
+441049
+Health statistics now properly display in the Device panel after you restart the BIG-IQ system.
+
+418295
+In previous releases, VMware vSphere hypervisor returned TMM restart messages when using the four-core configuration option. This issue is resolved and the errors no longer occur.
+
+448605
+You can now create qkview reports with more than 3GB of files in the BIG-IQ system's /var/config/rest/storage directory.
+
+
+
+
+
+Known issues
+
+Issue
+Description
+Workaround (if available)
+428383
+When you use the search field to filter for a number or phrase associated with a particular BIG-IP device, you may get some unexpected results. This occurs because BIG-IQ Device filters on all fields, not just those displayed in the Devices panel.
+ 
+440333
+If you delete a BIG-IQ peer from a high availability active-active pair, then add the same BIG-IQ Device back to the same, or to another high availability pair, data between the devices no longer synchronizes.
+After you delete a BIG-IQ system from a high availability active-active pair, create a backup to the BIG-IQ system. Then reset the system to factory settings by typing the following command on that device: bigstart stop restjavad && rm -rf /var/config/rest && bigstart start restjavad. Then, you can add it as a new backup in a high availability pair, and they will properly synchronize.
+435629
+When two BIG-IQ 7000 Platform devices are configured in a high availability pair, communication may only work in one direction between the two devices. This is exhibited by the following behavior: -- Device A is marked as standby, and reports its peer as active. -- Device B is marked as active, and reports its peer as down. If this occurs, high availability functionality does not work correctly. Device B will always assume Device A is down, so it will always remain active.
+To work around this issue, you must re-initialize the certificates. If resetting the configuration to factory settings is an option, type the following commands on each device: bigstart stop restjavad; rm -rf /shared/em/ssl.crt/*.*; rm -rf /shared/em/ssl.key/*.*; rm -rf /var/config/rest/storage; rm -rf /var/config/rest/index/; bigstart start restjavad . If you cannot clear the configuration, perform the following steps on each device: 1) On the High Availability panel, delete the HA peer, and associated devices. 2) From the command line, type the following command to delete the local device: curl -X DELETE http://localhost:8100/shared/resolver/device-groups/cm-shared-all-big-iqs/devices. 3) To remove the existing certificates and restart the service, type the following commands on each device: bigstart stop restjavad; rm -rf /shared/em/ssl.crt/*.*; rm -rf /shared/em/ssl.key/*.*;bigstart start restjavad
+426708
+When a BIG-IQ system in a high availability active-standby configuration fails over to the peer system, the formerly active BIG-IQ system incorrectly displays in the devices panel as a managed device.
+To work around this issue, from the active BIG-IQ system, delete the BIG-IQ system from the managed devices list. You may receive a benign error message.
+426320
+Discovering a device, such as declaring management authority or setting a peer device, fails with the following error message: "Unable to discover the device to be managed";this occurs because you cannot discover device [IP ADDRESS] through group [YOUR GROUP] because that group does not contain local host.
+Refer to SOL14593: "Device discovery may fail due to local host discovery failure" for information about how to work around this issue.
+437741
+If you do not discover devices using a self IP address on VLAN named "internal" on the BIG-IQ system and the managed BIG-IP device, you receive this message while logged to the BIG-IP restjavad.0.log. every minute for each system and device. "[8100/shared/identified-devices IdentifiedDevicesWorker][failed] java.net.ProtocolException: Status code:401"
+To work around this issue, you must configure an internal VLAN and self IP address for the BIG-IQ system and all managed devices.
+431398
+When you are booting the BIG-IQ system, it may display the following warning in the console or logs: "SKIPPING unix_config_httpd: /defaults/config/templates/xui.tmpl doesn't exist!!!"
+This message is benign and has no impact on the BIG-IQ system's functionality. You can ignore this benign message.
+449642
+After rebuilding or upgrading a BIG-IQ system, REST Java workers may become unresponsive. When this occurs, the following error displays in the /var/log/restjavad.0.log file: [WARNING][50438][20 Feb 2014 17:34:58 UTC][8100/shared/authz/tokens AuthTokenWorker][dispatchOrQueueSynchronized] Queue limit exceeded for worker
+To resolve this issue, log in to the BIG-IQ system's command line with your root user name and password and type bigstart restart restjavad to restart the required Java workers.
+449063
+After upgrading or restarting a BIG-IQ system, the login screen displays, but when you attempt to log in, an invalid user credentials error displays.
+
+To work around this issue, clear the browser cache and refresh. (You may have to refresh several times.) When the login screen properly displays the hostname of the BIG-IQ server, log back in.
+449969
+When you attempt to discover a device that has the "Update Automatically" check box selected for the Auto Update Framework setting, the discovery process may result in an HTTP error.
+To work around this issue, log out and log back in to the BIG-IQ system or, manually update the REST framework. For instructions, refer to the “Installing required BIG-IQ components onto BIG-IP devices ” chapter of the "BIG-IQ Device: Device Management" guide.
+4499991
+For the BIG-IQ 7000 platform, when the source port and destination port are the same, traffic (such as NTP) initiated from the (NTP) host may direct the response incorrectly. This results in a dropped response.
+The only way to work around this issue is to specify a different port number for the source and destination port.
+450378
+You cannot install the required BIG-IQ system components on BIG-IP devices running version 11.5 from the user interface, because of a BIG-IP version 11.5 compatibility issue with the BIG-IQ system. Furthermore, if you attempt to discover a BIG-IP version 11.5 device before you manually install the required BIG-IQ components onto the device, discovery fails, without an error, even if you selected the Auto Update Framework.
+To properly discover and manage a BIG-IP device running version 11.5, you must manually update the required framework. For instructions, refer to the “Installing required BIG-IQ components onto BIG-IP devices ” chapter of the "BIG-IQ Device: Device Management" guide.
+
+
+
+
+Removing BIG-IQ system services from a BIG-IP device
+To manage a BIG-IP device using the BIG-IQ system, you must install specific BIG-IQ system components onto that device using the procedure outlined in the BIG-IQ Device: Device Management guide. In the event that you have to remove these services for any reason, use this procedure.
+
+Log in to the command line of the BIG-IP device.
+Stop any running BIG-IQ system services.Note: The msgbusd service may not be installed. You can use the bigstart status command to see if it is running.
+$ bigstart stop restjavad
+$ bigstart stop msgbusd
+
+Remove the RPM packages related to the BIG-IQ system.mount -o remount,rw /usr
+rpm -qa | grep f5-rest-java | xargs rpm -e --nodeps
+rpm -qa | grep msgbusd | xargs rpm -e  --nodeps
+mount -o remount,ro /usr
+This removes the BIG-IQ system components from the BIG-IP device, including the F5-contributed cloud connector iApp template (cloud_connector.tmpl).
+
+Optional: Reinstall the F5-contributed cloud connector iApp template:
+Download the cloud_connector.tmpl iApp template from F5 DevCentral, https://devcentral.f5.com/wiki/iApp.Cloud_Connector_iApp_Template.ashx.Note: You need an account to access the DevCentral site.
+
+Unzip the file, and on the BIG-IP system, upload it to the /var/local/app_template directory.
+Install the template with this command: tmsh load / sys application template cloud_connector.tmpl
+
+
+
+
+
+Contacting F5 Networks
+
+Phone:
+(206) 272-6888
+Fax:
+(206) 272-6802
+Web:
+http://support.f5.com
+Email:
+support@f5.com
+
+
+For additional information, please visit http://www.f5.com.
+Additional resources
+You can find additional support resources and technical documentation through a variety of sources.
+
+The F5 Networks Technical Support web site: http://www.f5.com/support/
+The AskF5 web site: http://support.f5.com/kb/en-us.html
+The F5 DevCentral web site: http://devcentral.f5.com/
+AskF5 TechNews
+
+
+F5 Networks Technical Support
+Free self-service tools give you 24x7 access to a wealth of knowledge and technical support. Whether it is providing quick answers to questions, training your staff, or handling entire implementations from design to deployment, F5 services teams are ready to ensure that you get the most from your F5 technology.
+
+AskF5
+AskF5 is your storehouse for thousands of solutions to help you manage your F5 products more effectively. Whether you want to search the knowledge base periodically to research a solution, or you need the most recent news about your F5 products, AskF5 is your source.
+
+F5 DevCentral
+The F5 DevCentral community helps you get more from F5 products and technologies. You can connect with user groups, learn about the latest F5 tools, and discuss F5 products and technology.
+
+AskF5 TechNews
+
+Weekly HTML TechNews The weekly TechNews HTML email includes timely information about known issues, product releases, hotfix releases, updated and new solutions, and new feature notices. To subscribe, click TechNews Subscription, complete the required fields, and click the Subscribe button. You will receive a confirmation. Unsubscribe at any time by clicking the Unsubscribe link at the bottom of the TechNews email. Periodic plain text TechNews F5 Networks sends a timely TechNews email any time a product or hotfix is released. (This information is always included in the next weekly HTML TechNews email.) To subscribe, send a blank email to technews-subscribe@lists.f5.com from the email address you are using to subscribe. Unsubscribe by sending a blank email to technews-unsubscribe@lists.f5.com.
+
+
+
+Legal notices
+
+Copyright © 2014, F5 Networks, Inc. All rights reserved.
+For a current list of F5 trademarks and service marks, click here. All other product and company names herein may be trademarks of their respective owners.
+
+
+
+
+
+
+
+
+ - Screen resolution requirement
+ - Browser support
+ - User documentation for this release
+ - Software installation
+ - Upgrading BIG-IQ Device
+ - New features
+ - Fixes
+ - Known issues
+ - Removing BIG-IQ system services from a BIG-IP device
+ - Contacting F5 Networks
+ - Legal notices
+
+Product description
+As a network administrator, you can use BIG-IQ Device to centrally manage multiple physical and virtual BIG-IP devices. This management includes license management, software image installation, back up and restoration of UCS files, and back up and restoration of specific configuration files to one or more BIG-IP devices. BIG-IQ Device also helps you with device inventory tasks by keeping you apprised of every detail about your managed devices, and provides you with the infrastructure to use SNMP to manage system events and send email alerts.
+
+Screen resolution requirement
+To properly display, the BIG-IQ system requires that your screen resolution is set to 1280x1024 or higher.
+
+
+Browser support
+BIG-IQ Device supports the following browsers and versions:
+
+Microsoft Internet Explorer version 9 and later
+Mozilla Firefox version 18.x and later
+Google Chrome version 18.x and later
+
+
+
+User documentation for this release
+For a comprehensive list of documentation that is relevant to this release, refer to the BIG-IQ 4.3.0 Documentation page.
+
+
+Software installation
+For procedures about specifying network options and performing initial configuration, refer to the BIG-IQ System: Licensing and Initial Configuration guide.
+
+
+Upgrading BIG-IQ Device
+Before you can upgrade the BIG-IQ system, you must perform the following tasks:
+
+Download the .iso file for the upgrade from F5 Downloads to /shared/images on the BIG-IQ system. If you need to create this directory, use the exact name /shared/images.
+Select a disk volume on which to install the upgrade. Do not select the volume on which you installed the previous version of BIG-IQ software.
+Locate the user configuration set (UCS) in the /var/local/ucs directory on the source installation location, and copy the UCS file to another system for safe keeping.
+
+
+Use this procedure to upgrade BIG-IQ systems.
+Warning: These procedures require that the BIG-IQ system is temporarily unavailable and unable to manage BIG-IP devices until the upgrade is complete. BIG-IP devices can continue to manage traffic during this time.
+If you have configured the BIG-IQ system in a high availability cluster, perform these steps on each BIG-IQ system in the cluster in immediate succession. It is important to get the cluster members on the same software version as quickly as possible to avoid potential user experience issues.
+
+
+Log in to BIG-IQ system with your administrator user name and password.
+At the top of the screen, click System > Overview .
+Select License and click the Re-Activate button. The screen refreshes to display the activation keys.
+Click the Activate button. The BIG-IQ system license reactivates and the screen refreshes to display the license details.
+Log in to the BIG-IQ system's command line with your root user name and password and type setdb liveinstall.saveConfig enable. This command prompts the BIG-IQ system to transfer your current configuration (including self IP addresses, host names, devices discovered, and so forth) to the new volume.
+Type the following command where <image name> is the name of the .iso file you downloaded, and <volume name> is the volume to which you want to install the file on BIG-IQ system. tmsh install sys software image <image name> volume <volume name> reboot The installation will take a few minutes, and BIG-IQ reboots after completion.
+Log back in to the BIG-IQ system's command line with your root user name and password and type bigstart restart restjavad to restart the required Java workers.
+Log in to the BIG-IQ system with your administrator user name and password. 
+On the Device panel, click the properties icon for each device.
+If a Discovery Failed message displays: 
+Type the device's administrator user name and password.
+Click the Save button. This step is required only if you are upgrading from a version prior to BIG-IQ version 4.2.
+
+The BIG-IQ system rediscovers managed devices in your network.
+
+If your system is configured in high availability cluster, repeat these steps on each additional BIG-IQ system to complete the upgrade process.
+
+
+New features
+SNMP integration
+You can configure BIG-IQ Device to integrate with a third-party SNMP manager compatible with SNMPv1, SNMPv2, and SNMPv3. Once configured, the SNMP agent sends data collected from BIG-IQ Device to your SNMP manager. You can use this information to troubleshoot potential issues with your managed BIG-IP devices.
+Email alerts for system events
+BIG-IQ Device can send locally-generated email messages to specific recipients for system events, based on configurable thresholds, using Simple Mail Transfer Protocol (SMTP). These alerts can be configured for BIG-IQ Device systems themselves, as well as for managed devices. This feature enables administrators to be immediately notified when certain system events occur.
+High availability cluster
+You can configure BIG-IQ Device in a high availability cluster to support multiple layers of redundancy and partitioning of application traffic.
+Upgrades and hotfix installation
+BIG-IQ Device supports the installation of software upgrades and hotfixes on managed devices.
+BIG-IQ system upgrades
+You can upgrade the BIG-IQ system itself through the user interface.
+Configuration files deployment
+You can deploy a set of configuration files to a managed device through the user interface.
+
+
+Fixes
+
+Issue
+Description
+440828
+When you create a virtual BIG-IP device outside of the BIG-IQ system and the BIG-IQ system later discovers it, the device information populates in the Virtual Devices panel. You are now able to delete the device if you find you no longer need it.
+
+413335
+BIG-IQ Cloud no longer discovers the same device more than once, even if the device has a different IP address.
+
+425314
+If device discovery fails, the BIG-IQ system now prompts you to retry discovery, rather than returning a "(0)null" error.
+
+440939
+You can no longer delete a managed BIG-IP device until the BIG-IQ system completes the discovery process.
+
+427810
+Starting in this release, you can modify the BIG-IQ system's self IP address without adversely impacting the device discovery process.
+
+428064
+When activating a production license for the BIG-IQ system, the expiration date on the Properties screen no longer displays the benign error message "NaN".
+
+440644
+If an error occurs when adding a BIG-IQ system to a high availability configuration, the BIG-IQ system now displays an error message.
+
+439026
+The BIG-IQ system can now search for IPv6 addresses within a subnet.
+
+441049
+Health statistics now properly display in the Device panel after you restart the BIG-IQ system.
+
+418295
+In previous releases, VMware vSphere hypervisor returned TMM restart messages when using the four-core configuration option. This issue is resolved and the errors no longer occur.
+
+448605
+You can now create qkview reports with more than 3GB of files in the BIG-IQ system's /var/config/rest/storage directory.
+
+
+
+
+
+Known issues
+
+Issue
+Description
+Workaround (if available)
+428383
+When you use the search field to filter for a number or phrase associated with a particular BIG-IP device, you may get some unexpected results. This occurs because BIG-IQ Device filters on all fields, not just those displayed in the Devices panel.
+ 
+440333
+If you delete a BIG-IQ peer from a high availability active-active pair, then add the same BIG-IQ Device back to the same, or to another high availability pair, data between the devices no longer synchronizes.
+After you delete a BIG-IQ system from a high availability active-active pair, create a backup to the BIG-IQ system. Then reset the system to factory settings by typing the following command on that device: bigstart stop restjavad && rm -rf /var/config/rest && bigstart start restjavad. Then, you can add it as a new backup in a high availability pair, and they will properly synchronize.
+435629
+When two BIG-IQ 7000 Platform devices are configured in a high availability pair, communication may only work in one direction between the two devices. This is exhibited by the following behavior: -- Device A is marked as standby, and reports its peer as active. -- Device B is marked as active, and reports its peer as down. If this occurs, high availability functionality does not work correctly. Device B will always assume Device A is down, so it will always remain active.
+To work around this issue, you must re-initialize the certificates. If resetting the configuration to factory settings is an option, type the following commands on each device: bigstart stop restjavad; rm -rf /shared/em/ssl.crt/*.*; rm -rf /shared/em/ssl.key/*.*; rm -rf /var/config/rest/storage; rm -rf /var/config/rest/index/; bigstart start restjavad . If you cannot clear the configuration, perform the following steps on each device: 1) On the High Availability panel, delete the HA peer, and associated devices. 2) From the command line, type the following command to delete the local device: curl -X DELETE http://localhost:8100/shared/resolver/device-groups/cm-shared-all-big-iqs/devices. 3) To remove the existing certificates and restart the service, type the following commands on each device: bigstart stop restjavad; rm -rf /shared/em/ssl.crt/*.*; rm -rf /shared/em/ssl.key/*.*;bigstart start restjavad
+426708
+When a BIG-IQ system in a high availability active-standby configuration fails over to the peer system, the formerly active BIG-IQ system incorrectly displays in the devices panel as a managed device.
+To work around this issue, from the active BIG-IQ system, delete the BIG-IQ system from the managed devices list. You may receive a benign error message.
+426320
+Discovering a device, such as declaring management authority or setting a peer device, fails with the following error message: "Unable to discover the device to be managed";this occurs because you cannot discover device [IP ADDRESS] through group [YOUR GROUP] because that group does not contain local host.
+Refer to SOL14593: "Device discovery may fail due to local host discovery failure" for information about how to work around this issue.
+437741
+If you do not discover devices using a self IP address on VLAN named "internal" on the BIG-IQ system and the managed BIG-IP device, you receive this message while logged to the BIG-IP restjavad.0.log. every minute for each system and device. "[8100/shared/identified-devices IdentifiedDevicesWorker][failed] java.net.ProtocolException: Status code:401"
+To work around this issue, you must configure an internal VLAN and self IP address for the BIG-IQ system and all managed devices.
+431398
+When you are booting the BIG-IQ system, it may display the following warning in the console or logs: "SKIPPING unix_config_httpd: /defaults/config/templates/xui.tmpl doesn't exist!!!"
+This message is benign and has no impact on the BIG-IQ system's functionality. You can ignore this benign message.
+449642
+After rebuilding or upgrading a BIG-IQ system, REST Java workers may become unresponsive. When this occurs, the following error displays in the /var/log/restjavad.0.log file: [WARNING][50438][20 Feb 2014 17:34:58 UTC][8100/shared/authz/tokens AuthTokenWorker][dispatchOrQueueSynchronized] Queue limit exceeded for worker
+To resolve this issue, log in to the BIG-IQ system's command line with your root user name and password and type bigstart restart restjavad to restart the required Java workers.
+449063
+After upgrading or restarting a BIG-IQ system, the login screen displays, but when you attempt to log in, an invalid user credentials error displays.
+
+To work around this issue, clear the browser cache and refresh. (You may have to refresh several times.) When the login screen properly displays the hostname of the BIG-IQ server, log back in.
+449969
+When you attempt to discover a device that has the "Update Automatically" check box selected for the Auto Update Framework setting, the discovery process may result in an HTTP error.
+To work around this issue, log out and log back in to the BIG-IQ system or, manually update the REST framework. For instructions, refer to the “Installing required BIG-IQ components onto BIG-IP devices ” chapter of the "BIG-IQ Device: Device Management" guide.
+4499991
+For the BIG-IQ 7000 platform, when the source port and destination port are the same, traffic (such as NTP) initiated from the (NTP) host may direct the response incorrectly. This results in a dropped response.
+The only way to work around this issue is to specify a different port number for the source and destination port.
+450378
+You cannot install the required BIG-IQ system components on BIG-IP devices running version 11.5 from the user interface, because of a BIG-IP version 11.5 compatibility issue with the BIG-IQ system. Furthermore, if you attempt to discover a BIG-IP version 11.5 device before you manually install the required BIG-IQ components onto the device, discovery fails, without an error, even if you selected the Auto Update Framework.
+To properly discover and manage a BIG-IP device running version 11.5, you must manually update the required framework. For instructions, refer to the “Installing required BIG-IQ components onto BIG-IP devices ” chapter of the "BIG-IQ Device: Device Management" guide.
+
+
+
+
+Removing BIG-IQ system services from a BIG-IP device
+To manage a BIG-IP device using the BIG-IQ system, you must install specific BIG-IQ system components onto that device using the procedure outlined in the BIG-IQ Device: Device Management guide. In the event that you have to remove these services for any reason, use this procedure.
+
+Log in to the command line of the BIG-IP device.
+Stop any running BIG-IQ system services.Note: The msgbusd service may not be installed. You can use the bigstart status command to see if it is running.
+$ bigstart stop restjavad
+$ bigstart stop msgbusd
+
+Remove the RPM packages related to the BIG-IQ system.mount -o remount,rw /usr
+rpm -qa | grep f5-rest-java | xargs rpm -e --nodeps
+rpm -qa | grep msgbusd | xargs rpm -e  --nodeps
+mount -o remount,ro /usr
+This removes the BIG-IQ system components from the BIG-IP device, including the F5-contributed cloud connector iApp template (cloud_connector.tmpl).
+
+Optional: Reinstall the F5-contributed cloud connector iApp template:
+Download the cloud_connector.tmpl iApp template from F5 DevCentral, https://devcentral.f5.com/wiki/iApp.Cloud_Connector_iApp_Template.ashx.Note: You need an account to access the DevCentral site.
+
+Unzip the file, and on the BIG-IP system, upload it to the /var/local/app_template directory.
+Install the template with this command: tmsh load / sys application template cloud_connector.tmpl
+
+
+
+
+
+Contacting F5 Networks
+
+Phone:
+(206) 272-6888
+Fax:
+(206) 272-6802
+Web:
+http://support.f5.com
+Email:
+support@f5.com
+
+
+For additional information, please visit http://www.f5.com.
+Additional resources
+You can find additional support resources and technical documentation through a variety of sources.
+
+The F5 Networks Technical Support web site: http://www.f5.com/support/
+The AskF5 web site: http://support.f5.com/kb/en-us.html
+The F5 DevCentral web site: http://devcentral.f5.com/
+AskF5 TechNews
+
+
+F5 Networks Technical Support
+Free self-service tools give you 24x7 access to a wealth of knowledge and technical support. Whether it is providing quick answers to questions, training your staff, or handling entire implementations from design to deployment, F5 services teams are ready to ensure that you get the most from your F5 technology.
+
+AskF5
+AskF5 is your storehouse for thousands of solutions to help you manage your F5 products more effectively. Whether you want to search the knowledge base periodically to research a solution, or you need the most recent news about your F5 products, AskF5 is your source.
+
+F5 DevCentral
+The F5 DevCentral community helps you get more from F5 products and technologies. You can connect with user groups, learn about the latest F5 tools, and discuss F5 products and technology.
+
+AskF5 TechNews
+
+Weekly HTML TechNews The weekly TechNews HTML email includes timely information about known issues, product releases, hotfix releases, updated and new solutions, and new feature notices. To subscribe, click TechNews Subscription, complete the required fields, and click the Subscribe button. You will receive a confirmation. Unsubscribe at any time by clicking the Unsubscribe link at the bottom of the TechNews email. Periodic plain text TechNews F5 Networks sends a timely TechNews email any time a product or hotfix is released. (This information is always included in the next weekly HTML TechNews email.) To subscribe, send a blank email to technews-subscribe@lists.f5.com from the email address you are using to subscribe. Unsubscribe by sending a blank email to technews-unsubscribe@lists.f5.com.
+
+
+
+Legal notices
+
+Copyright © 2014, F5 Networks, Inc. All rights reserved.
+For a current list of F5 trademarks and service marks, click here. All other product and company names herein may be trademarks of their respective owners.
+
+
+
+
+

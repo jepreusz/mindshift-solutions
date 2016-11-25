@@ -1,0 +1,54 @@
+
+
+
+
+Description
+The Enterprise Manager fails to collect statistics from the devices in its inventory when all of the following conditions are met:
+
+The Time Zone of the Enterprise Manager is configured to any other time zone than America/Los Angeles.
+The Statistics Data Collection feature is enabled on the Enterprise Manager.
+The Enterprise Manager is configured to discover a new device.
+
+
+Impact
+The Enterprise Manager fails to provide performance statistics for the devices in its inventory.
+
+Symptoms
+As a result of this issue, you may encounter the following symptoms:
+BIG-IP iHealth lists Heuristic H886789 on the Diagnostics > Identified > Medium screen.
+If you navigate to Enterprise Management > Devices > Statistics, the system displays the following message under the Data column, instead of displaying graphs, for all devices:No Data
+
+An error message similar to the following is logged to the /var/log/em file for all newly-discovered devices:emstatsd[PID]: 0402010e:3: EX!StatMessageProcessor.cpp:245::run:f5em::DbException 'Unable to updateThresholdState: Incorrect datetime value: '1970-01-01 00:00:01' for column 'last_alert_fired' at row 0
+
+
+
+Status
+F5 Product Development has assigned ID 355713 and ID 357838 to this issue, and has confirmed that this issue exists in the products listed in the Applies To box. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Solutions
+Release
+2.3.0
+SOL2200: Most recent versions of F5 software
+Hotfix
+None
+None
+
+Workaround
+To work around this issue, you can configure the time zone of the affected Enterprise Manager to America/Los Angeles. To do so, perform the following procedure:
+Impact of workaround: Changing the time zone may cause the reported time on the affected system to differ from other devices in the network.
+
+Log in to the Configuration utility.
+Navigate to System > Platform.
+From the Time Zone drop-down menu, select America/Los Angeles.
+To save the modifications, click the Update button.Note: Although the modification is immediately effective, the Enterprise Manager may display only the statistics collected after a minute or more, depending on the Collection Interval setting you have configured. Typically, the default Statistics Collection Profiles are configured with 60 seconds for the Collection Interval.
+
+
+
+Supplemental Information
+None
+
+

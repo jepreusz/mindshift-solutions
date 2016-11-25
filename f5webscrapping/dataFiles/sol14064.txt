@@ -1,0 +1,124 @@
+
+
+
+Known Issue
+
+The BIG-IP 3900 High-Speed Bridge (HSB) may intermittently fail.
+
+Impact
+
+This issue may cause the BIG-IP system to trigger a fail-safe event.
+
+
+Symptoms
+
+As a result of this issue, you may encounter the following symptoms:
+
+BIG-IP iHealth lists Heuristic H412938 on the Diagnostics > Identified > High screen.
+The BIG-IP system will encounter a failover event, which may lead to a restart and a failover to the standby system.
+In the /var/log/ltm file, you may encounter error messages similar to the following example:tmm1 crit tmm1[8052]: 01230111:2: Interface 0.2: HSB DMA lockup on transmitter failure.
+ tmm3 crit tmm3[8054]: 01230111:2: Interface 0.4: HSB DMA lockup on transmitter failure.
+ tmm2 crit tmm2[8053]: 01230111:2: Interface 0.3: HSB DMA lockup on transmitter failure.
+ <hostname> notice overdog[5041]: 01140029:5: HA nic_failsafe tmm1 fails action is reboot.
+ <hostname> emerg overdog[5041]: 01140043:0: Ha feature nic_failsafe reboot requested.
+
+In the /var/log/tmm file, you may encounter error messages similar to the following example:<hostname> notice hsb2: tx watchdog check 10
+
+
+ResolutionStatus
+
+F5 Product Development has assigned ID 403111 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+11.3.0
+SOL2200: Most recent versions of F5 Software
+Hotfix
+11.2.1 HF8
+ 10.2.4 HF12
+SOL9502: BIG-IP hotfix matrix
+
+
+Workaround
+
+To work around this issue, you can change the Traffic Management Microkernel (TMM) configuration. To do so, perform the following procedure:
+Impact of workaround:  You will need to restart the TMM process, which will result in a failover if the system is active. You should perform this procedure in a maintenance window, or while the system is in standby mode.
+
+Log in to the BIG-IP system as the root user.
+Using a text editor, create the /config/tmm_init.tcl file.
+
+Add the following line to the file:Important: This line must be added exactly as shown. Any errors will result in TMM not restarting.
+HSB::failures_before_reset 100
+
+Save the file.
+Restart the TMM process by typing the following command:bigstart restart tmm
+
+
+Supplemental InformationSOL4918: Overview of the F5 critical issue hotfix policySOL167: Downloading software and firmware from F5SOL13123: Managing BIG-IP product hotfixes (11.x - 12.x)SOL10025: Managing BIG-IP product hotfixes (10.x)
+
+
+
+
+Known Issue
+
+The BIG-IP 3900 High-Speed Bridge (HSB) may intermittently fail.
+
+Impact
+
+This issue may cause the BIG-IP system to trigger a fail-safe event.
+
+
+Symptoms
+
+As a result of this issue, you may encounter the following symptoms:
+
+BIG-IP iHealth lists Heuristic H412938 on the Diagnostics > Identified > High screen.
+The BIG-IP system will encounter a failover event, which may lead to a restart and a failover to the standby system.
+In the /var/log/ltm file, you may encounter error messages similar to the following example:tmm1 crit tmm1[8052]: 01230111:2: Interface 0.2: HSB DMA lockup on transmitter failure.
+ tmm3 crit tmm3[8054]: 01230111:2: Interface 0.4: HSB DMA lockup on transmitter failure.
+ tmm2 crit tmm2[8053]: 01230111:2: Interface 0.3: HSB DMA lockup on transmitter failure.
+ <hostname> notice overdog[5041]: 01140029:5: HA nic_failsafe tmm1 fails action is reboot.
+ <hostname> emerg overdog[5041]: 01140043:0: Ha feature nic_failsafe reboot requested.
+
+In the /var/log/tmm file, you may encounter error messages similar to the following example:<hostname> notice hsb2: tx watchdog check 10
+
+
+ResolutionStatus
+
+F5 Product Development has assigned ID 403111 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+11.3.0
+SOL2200: Most recent versions of F5 Software
+Hotfix
+11.2.1 HF8
+ 10.2.4 HF12
+SOL9502: BIG-IP hotfix matrix
+
+
+Workaround
+
+To work around this issue, you can change the Traffic Management Microkernel (TMM) configuration. To do so, perform the following procedure:
+Impact of workaround:  You will need to restart the TMM process, which will result in a failover if the system is active. You should perform this procedure in a maintenance window, or while the system is in standby mode.
+
+Log in to the BIG-IP system as the root user.
+Using a text editor, create the /config/tmm_init.tcl file.
+
+Add the following line to the file:Important: This line must be added exactly as shown. Any errors will result in TMM not restarting.
+HSB::failures_before_reset 100
+
+Save the file.
+Restart the TMM process by typing the following command:bigstart restart tmm
+
+
+Supplemental InformationSOL4918: Overview of the F5 critical issue hotfix policySOL167: Downloading software and firmware from F5SOL13123: Managing BIG-IP product hotfixes (11.x - 12.x)SOL10025: Managing BIG-IP product hotfixes (10.x)
+
