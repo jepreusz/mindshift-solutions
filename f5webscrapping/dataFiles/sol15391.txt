@@ -1,0 +1,24 @@
+
+
+
+Known Issue
+
+The BIG-IP system may not properly reorder Datagram Transport Layer Security (DTLS) handshake messages that are out of order.
+This issue occurs when the following condition is met:
+
+DTLS handshake messages are received out of order.
+
+
+Impact
+
+Clients may fail to establish DTLS sessions with the BIG-IP system.
+
+Symptoms
+
+As a result of this issue, you may encounter the following symptom:
+
+The BIG-IP system responds with an incorrect DTLS handshake.
+
+
+ResolutionStatusF5 Product Development has assigned ID 420580 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:Type of FixFixes Introduced InRelated ArticlesRelease11.5.0SOL2200: Most recent versions of F5 softwareHotfixNoneNoneWorkaroundNoneSupplemental InformationSOL4918: Overview of the F5 critical issue hotfix policySOL167: Downloading software and firmware from F5SOL13123: Managing BIG-IP product hotfixes (11.x)
+

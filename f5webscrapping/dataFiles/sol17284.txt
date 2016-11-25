@@ -1,0 +1,74 @@
+
+
+
+Known Issue
+
+Viewing Data Group objects in the Configuration utility results in a No Access error message.
+This issue occurs when the following condition is met:
+
+You use the Configuration utility to view objects located in Local Traffic > iRules > Data Group List.
+
+
+Impact
+
+This innocuous issue prevents users from viewing or editing Data Group objects using the Configuration utility. You can view or edit Data Group objects using the Traffic Management Shell (tmsh).
+
+
+Symptoms
+
+As a result of this issue, you may encounter the following symptom:
+
+When you click Data Group objects to view their properties, the system displays the No Access error message.
+
+ResolutionStatus
+
+F5 Product Development has assigned ID 470184 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+Versions Fixed
+Related Articles
+Release
+11.6.0
+SOL2200: Most recent versions of F5 software
+Hotfix
+11.5.3 HF2
+
+SOL9502: BIG-IP hotfix matrix
+
+
+Workaround
+
+To work around this issue, you can view or edit Data Group objects using the tmsh utility. To do so, perform the following procedure:
+Impact of workaround: Performing the following procedure should not have a negative impact on your system.
+
+
+Log in to the Traffic Management Shell (tmsh) by typing the following command:
+ 
+ tmsh
+To view the configuration for an existing data-group, use the following command syntax:
+ 
+ list /ltm data-group <external or internal> <name of data group object>
+ 
+ For example, to view the configuration for the internal data group object private_net, type the following command:
+ 
+ list /ltm data-group internal private_net
+ 
+ The output should appear similar to the following example:
+ 
+ ltm data-group internal private_net {
+     records {
+         10.0.0.0/8 { }
+         172.16.0.0/12 { }
+         192.168.0.0/16 { }
+     }
+     type ip
+ }
+
+Supplemental Information
+
+SOL4918: Overview of the F5 critical issue hotfix policy
+SOL167: Downloading software and firmware from F5
+SOL13123: Managing BIG-IP product hotfixes (11.x - 12.x)
+
+
+

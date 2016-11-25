@@ -1,0 +1,86 @@
+
+
+
+Known IssueDescription
+Real-Time Streaming Protocol (RTSP) ALG connections do not have the data session translation address or ports logged as Large Scale NAT (LSN) translations.
+This issue occurs when the following condition is met:
+
+
+A carrier-grade network address translation (CGNAT) virtual server is associated with an RTSP ALG profile and an LSN pool.
+
+Impact
+Media flows cannot be traced to identify subscribers.
+Symptoms
+As a result of this issue, you may encounter the following symptoms:
+
+BIG-IP iHealth  lists Heuristic H437215 on the Diagnostics > Identified > High screen.
+Established RTSP media flows do not have their public translation address and ports logged as LSN translations.
+
+F5 Product Development has assigned ID 431240 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+11.6.0
+SOL2200: Most recent versions of F5 software
+Hotfix
+None
+None
+
+
+Workaround
+None
+Supplemental Information
+
+SOL14823: Overview of CGNAT Persistence
+The BIG-IP CGNAT: Implementations guide
+SOL167: Downloading software and firmware from F5
+
+
+
+
+
+
+Known IssueDescription
+Real-Time Streaming Protocol (RTSP) ALG connections do not have the data session translation address or ports logged as Large Scale NAT (LSN) translations.
+This issue occurs when the following condition is met:
+
+
+A carrier-grade network address translation (CGNAT) virtual server is associated with an RTSP ALG profile and an LSN pool.
+
+Impact
+Media flows cannot be traced to identify subscribers.
+Symptoms
+As a result of this issue, you may encounter the following symptoms:
+
+BIG-IP iHealth  lists Heuristic H437215 on the Diagnostics > Identified > High screen.
+Established RTSP media flows do not have their public translation address and ports logged as LSN translations.
+
+F5 Product Development has assigned ID 431240 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+11.6.0
+SOL2200: Most recent versions of F5 software
+Hotfix
+None
+None
+
+
+Workaround
+None
+Supplemental Information
+
+SOL14823: Overview of CGNAT Persistence
+The BIG-IP CGNAT: Implementations guide
+SOL167: Downloading software and firmware from F5
+
+
+

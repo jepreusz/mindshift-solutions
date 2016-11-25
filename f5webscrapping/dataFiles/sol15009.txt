@@ -1,0 +1,303 @@
+
+
+
+Purpose
+You should consider using this procedure under the following condition:
+
+You want to have a key-based secure shell (SSH) login to access an Amazon Machine Instance (AMI)-based BIG-IP Virtual Edition (VE) system, which is managed by BIG-IQ Cloud or Device hosted in an Amazon Web Services (AWS) environment.
+
+Prerequisites
+You must meet the following prerequisites to use this procedure:
+
+You have an instance of BIG-IP VE provisioned using BIG-IQ Cloud or Device hosted in an AWS environment.
+You have used the AWS auto-provisioning function to create an instance of BIG-IP VE AMI.
+You have REST API authentication access privileges to BIG-IQ Cloud or Device.
+You have a REST client add-on/plugin installed on your browser.
+
+Description
+When you manually create a BIG-IP instance on AWS, AWS gives the user an option to either use an existing key pair or create and download the PEM file. The PEM file contains the RSA private key required for remote access to the BIG-IP system AMI using key-based SSH login.
+
+However, when provisioning an AWS BIG-IP system using BIG-IQ Cloud, you do not have this option. Therefore, you must create the PEM file manually after you create the BIG-IP instance.
+Procedures
+To create the PEM file, you must first use the BIG-IQ Cloud API implementation to obtain the PEM contents (RSA private key) of the provisioned BIG-IP VE AMI hosted in AWS. With the PEM file, you can convert it to a PPK file. Using the PPK file, you can perform key-based SSH access to the BIG-IP VE AMI. To do so, perform the following procedure:
+
+Impact of procedure: Performing the following procedure should not have a negative impact on your system.
+
+Use the API to obtain the connectorID associated with the target BIG-IP VE AMI using the following API command syntax:
+ 
+Method: GET 
+ URL: https://<BIG-IQ_Mgmt_IP_Address>/mgmt/cm/cloud/connectors/ec2 
+ 
+ In this command syntax, note the following:
+
+<BIG-IQ_Mgmt_IP_Address> is the management IP address of the BIG-IQ system managing the BIG-IP VE AMI
+
+For example:
+ 
+Method: GET 
+ URL: https://10.10.10.100/mgmt/cm/cloud/connectors/ec2
+ 
+ Inspect the API responses and locate the connector ID associated with the target BIG-IP VE AMI that you have provisioned.
+
+Use the following API to obtain the RSA private key for the node (iSSH target BIG-IP VE AMI) of the connector ID using the following command syntax:
+ 
+ Method: GET 
+ URL: https://<BIG-IQ_Mgmt_IP_Address>/mgmt/cm/cloud/connectors/ec2/<connector_ID>/nodes
+ 
+ For example:
+ 
+ Method: GET 
+ URL: https://10.10.10.100/mgmt/cm/cloud/connectors/ec2/70b814jd-fb32-4a7b-b3ea-57gffb73097f/nodes
+ 
+ Inspect the API response and locate the sizeable chunk of encrypted text that represents the RSA Private Key associated with the node (SSH target BIG-IP system) defined according to the desired connector ID.
+
+To save the RSA private key into the text file, use a text editor to perform a copy/paste operation.
+ 
+ Example RSA private key output may appear similar to the following:
+ 
+ -----BEGIN RSA PRIVATE KEY-----
+ MIIEpQIBAAKCAQEA2RDzMRLDRTpiZQIvW12hty8nKnNxqaUxE+D+p9CnVV40/NohtyODYrNSdVE4
+ ZCrgDDYYkkXOToEYCLqYrf1/AFV4yisp6PmQnJ/LAVdPyhDB7Q7g8BcRsLOwhYnrNyu5/h60P/dH
+ kPvkAKqyrAGBOSdxBehWEC4AJCCAWqElUeLZKfs+Wc1fN3pB322qPPHwnRSumICyk0b180HPc7J2
+ ML2FjJqVodAfgqcNegqiN6bodDLYBWyqATT5BI9PcDQT1hSvrCUeJphEzvPHk9uiEk9TLkIr7nil
+ Ya/skE8xHeyOvbe0MRD8JNYwOvSl/b9u0LPS3aH1/dzFrT7FpXI9PQIDAQABAoIBAHhg/w2TAzoM
+ Q+8ShCLeTUXi34yaU0mqtAn7OB7nBzW/thEYA6SmDEIbgrpPHb/nSzNaeMv97Ij67NJCcVPkhp8v
+ x3oO8AIlDT7fG10WB8je/D00iCh+ErB1JosYTprdJBu6+WmUAFt2Zh68i7P6bai9p8+H1trIOAnR
+ AH3Caoj7CMuDqjMkkCEl8PKT8BbIXssINTaJk2E+7rjPqjOvI2+dkOmVORVJBwJhOaLvVQpwFKJH
+ 3DN653QhDeJ4JaWkiCpPfW8rWgVn8oke/UunI+GmuUQdue6DVmgU0oBe2NqKx0Gbj034dVHXYs5p
+ cVn1CdUS+dh/1AOD9OxyJK2c7oECgYEAdmFI37TZPMHWyhPgTux4bOCwM1TtjeB/94+3KD2IJ/fu
+ jNUpUuiz/b/YP9EppFO6tU7NDrSpBz7A4Pw3Req4U7y5xZiIKtGhNfBTna5Zmf+4vtaulx+p5eZb
+ Opdqk/2mArOcILQ8RTei7G9jmEKFlswx0MrEM1h1Z9hdUzSqgl0CgYkA6RxbhiVx4duJt0Ef+pRS
+ kQDpBbqiaE3eTR34Go4m0XBligEKRtc7+xNTI3pXiv1SMNVO62BAmp3vk0cqZpx6wjL7cnNJtv9/
+ hXn7m6AKcP0QyNgzLNB2AY/cgYgvjmNavYMW8Sn1HPVLoZNCHEtyusAocvyIg9QqoFsKMxV0uGEC
+ gYEAx4eWv+lYjIqThsHsVyOICVppIg5MaR0o/8bDwGMAvLPCcQ9bb5JoVlVmZMRm3q1W8rvq2AxQ
+ D0hvmeKDQXqenzixJrvt/ilJjsSCWNG/Hi/2K4b2zHgsdcrDQd/LzePaORit7pHugOF49f6mlqPX
+ vcldSS7v2yqH20w3kEcMkeECgYEAqzS1j5eOxYfc5GeDWiF3ZqIKFk8Vmq+eFlttbet7XRVErg/H
+ gXHwzqkKFaN0Clc0+sKfXMvrjON0ImIBJS3GBz00acF8oVeTS+/kOE9Ze9SRcEFBjKdqFkmZtNTV
+ wKj96vQNdIARUvxhWMDzrB5JnBknXBRXGyNHT1Ct9AjNGeECgYEA0yfC7GFMwFyPFAauYtgR69yN
+ x/yvWIm4jo0oUiFKjShpOc+thWdO08n44I1kboPnaM1RYHHpAcst6R4oB+/ppDL4Eqg+V/Ptu5bU
+ 62b+1rl472hinwrBnwGvJMZNBMXaetT5suzzjRL6MPCZQuqs4k9+hxtbnU4DhASgp6Qneus=
+ -----END RSA PRIVATE KEY-----
+Rename the text file that you created in Step 3 with the file extension from .txt to .pem.
+Repeat Step 2 through Step 4, if you have more than one SSH target node.
+Use PuTTyGen to convert the .pem file to .ppk format and save the key file on the host where the source of SSH login will originate. 
+ 
+ For detailed instructions about using PuTTyGen, refer to the Connect to Your Amazon EC2 Instance from Windows Using PuTTY AWS document.
+ 
+ Important: If you follow the steps explicitly in the AWS documentation, note that you should skip Step 6g.You do not need to start the web server.
+ 
+ You may now perform SSH access to the target BIG-IP VE AMI using the key-based SSH login with the .ppk file.
+
+
+Supplemental Information
+Note: A DevCentral login is required to access the following content.
+
+The BIG-IQ Cloud API: Implementations guide 
+
+The BIG-IQ Cloud Service API Reference Guide 
+
+
+
+
+
+
+
+Purpose
+You should consider using this procedure under the following condition:
+
+You want to have a key-based secure shell (SSH) login to access an Amazon Machine Instance (AMI)-based BIG-IP Virtual Edition (VE) system, which is managed by BIG-IQ Cloud or Device hosted in an Amazon Web Services (AWS) environment.
+
+Prerequisites
+You must meet the following prerequisites to use this procedure:
+
+You have an instance of BIG-IP VE provisioned using BIG-IQ Cloud or Device hosted in an AWS environment.
+You have used the AWS auto-provisioning function to create an instance of BIG-IP VE AMI.
+You have REST API authentication access privileges to BIG-IQ Cloud or Device.
+You have a REST client add-on/plugin installed on your browser.
+
+Description
+When you manually create a BIG-IP instance on AWS, AWS gives the user an option to either use an existing key pair or create and download the PEM file. The PEM file contains the RSA private key required for remote access to the BIG-IP system AMI using key-based SSH login.
+
+However, when provisioning an AWS BIG-IP system using BIG-IQ Cloud, you do not have this option. Therefore, you must create the PEM file manually after you create the BIG-IP instance.
+Procedures
+To create the PEM file, you must first use the BIG-IQ Cloud API implementation to obtain the PEM contents (RSA private key) of the provisioned BIG-IP VE AMI hosted in AWS. With the PEM file, you can convert it to a PPK file. Using the PPK file, you can perform key-based SSH access to the BIG-IP VE AMI. To do so, perform the following procedure:
+
+Impact of procedure: Performing the following procedure should not have a negative impact on your system.
+
+Use the API to obtain the connectorID associated with the target BIG-IP VE AMI using the following API command syntax:
+ 
+Method: GET 
+ URL: https://<BIG-IQ_Mgmt_IP_Address>/mgmt/cm/cloud/connectors/ec2 
+ 
+ In this command syntax, note the following:
+
+<BIG-IQ_Mgmt_IP_Address> is the management IP address of the BIG-IQ system managing the BIG-IP VE AMI
+
+For example:
+ 
+Method: GET 
+ URL: https://10.10.10.100/mgmt/cm/cloud/connectors/ec2
+ 
+ Inspect the API responses and locate the connector ID associated with the target BIG-IP VE AMI that you have provisioned.
+
+Use the following API to obtain the RSA private key for the node (iSSH target BIG-IP VE AMI) of the connector ID using the following command syntax:
+ 
+ Method: GET 
+ URL: https://<BIG-IQ_Mgmt_IP_Address>/mgmt/cm/cloud/connectors/ec2/<connector_ID>/nodes
+ 
+ For example:
+ 
+ Method: GET 
+ URL: https://10.10.10.100/mgmt/cm/cloud/connectors/ec2/70b814jd-fb32-4a7b-b3ea-57gffb73097f/nodes
+ 
+ Inspect the API response and locate the sizeable chunk of encrypted text that represents the RSA Private Key associated with the node (SSH target BIG-IP system) defined according to the desired connector ID.
+
+To save the RSA private key into the text file, use a text editor to perform a copy/paste operation.
+ 
+ Example RSA private key output may appear similar to the following:
+ 
+ -----BEGIN RSA PRIVATE KEY-----
+ MIIEpQIBAAKCAQEA2RDzMRLDRTpiZQIvW12hty8nKnNxqaUxE+D+p9CnVV40/NohtyODYrNSdVE4
+ ZCrgDDYYkkXOToEYCLqYrf1/AFV4yisp6PmQnJ/LAVdPyhDB7Q7g8BcRsLOwhYnrNyu5/h60P/dH
+ kPvkAKqyrAGBOSdxBehWEC4AJCCAWqElUeLZKfs+Wc1fN3pB322qPPHwnRSumICyk0b180HPc7J2
+ ML2FjJqVodAfgqcNegqiN6bodDLYBWyqATT5BI9PcDQT1hSvrCUeJphEzvPHk9uiEk9TLkIr7nil
+ Ya/skE8xHeyOvbe0MRD8JNYwOvSl/b9u0LPS3aH1/dzFrT7FpXI9PQIDAQABAoIBAHhg/w2TAzoM
+ Q+8ShCLeTUXi34yaU0mqtAn7OB7nBzW/thEYA6SmDEIbgrpPHb/nSzNaeMv97Ij67NJCcVPkhp8v
+ x3oO8AIlDT7fG10WB8je/D00iCh+ErB1JosYTprdJBu6+WmUAFt2Zh68i7P6bai9p8+H1trIOAnR
+ AH3Caoj7CMuDqjMkkCEl8PKT8BbIXssINTaJk2E+7rjPqjOvI2+dkOmVORVJBwJhOaLvVQpwFKJH
+ 3DN653QhDeJ4JaWkiCpPfW8rWgVn8oke/UunI+GmuUQdue6DVmgU0oBe2NqKx0Gbj034dVHXYs5p
+ cVn1CdUS+dh/1AOD9OxyJK2c7oECgYEAdmFI37TZPMHWyhPgTux4bOCwM1TtjeB/94+3KD2IJ/fu
+ jNUpUuiz/b/YP9EppFO6tU7NDrSpBz7A4Pw3Req4U7y5xZiIKtGhNfBTna5Zmf+4vtaulx+p5eZb
+ Opdqk/2mArOcILQ8RTei7G9jmEKFlswx0MrEM1h1Z9hdUzSqgl0CgYkA6RxbhiVx4duJt0Ef+pRS
+ kQDpBbqiaE3eTR34Go4m0XBligEKRtc7+xNTI3pXiv1SMNVO62BAmp3vk0cqZpx6wjL7cnNJtv9/
+ hXn7m6AKcP0QyNgzLNB2AY/cgYgvjmNavYMW8Sn1HPVLoZNCHEtyusAocvyIg9QqoFsKMxV0uGEC
+ gYEAx4eWv+lYjIqThsHsVyOICVppIg5MaR0o/8bDwGMAvLPCcQ9bb5JoVlVmZMRm3q1W8rvq2AxQ
+ D0hvmeKDQXqenzixJrvt/ilJjsSCWNG/Hi/2K4b2zHgsdcrDQd/LzePaORit7pHugOF49f6mlqPX
+ vcldSS7v2yqH20w3kEcMkeECgYEAqzS1j5eOxYfc5GeDWiF3ZqIKFk8Vmq+eFlttbet7XRVErg/H
+ gXHwzqkKFaN0Clc0+sKfXMvrjON0ImIBJS3GBz00acF8oVeTS+/kOE9Ze9SRcEFBjKdqFkmZtNTV
+ wKj96vQNdIARUvxhWMDzrB5JnBknXBRXGyNHT1Ct9AjNGeECgYEA0yfC7GFMwFyPFAauYtgR69yN
+ x/yvWIm4jo0oUiFKjShpOc+thWdO08n44I1kboPnaM1RYHHpAcst6R4oB+/ppDL4Eqg+V/Ptu5bU
+ 62b+1rl472hinwrBnwGvJMZNBMXaetT5suzzjRL6MPCZQuqs4k9+hxtbnU4DhASgp6Qneus=
+ -----END RSA PRIVATE KEY-----
+Rename the text file that you created in Step 3 with the file extension from .txt to .pem.
+Repeat Step 2 through Step 4, if you have more than one SSH target node.
+Use PuTTyGen to convert the .pem file to .ppk format and save the key file on the host where the source of SSH login will originate. 
+ 
+ For detailed instructions about using PuTTyGen, refer to the Connect to Your Amazon EC2 Instance from Windows Using PuTTY AWS document.
+ 
+ Important: If you follow the steps explicitly in the AWS documentation, note that you should skip Step 6g.You do not need to start the web server.
+ 
+ You may now perform SSH access to the target BIG-IP VE AMI using the key-based SSH login with the .ppk file.
+
+
+Supplemental Information
+Note: A DevCentral login is required to access the following content.
+
+The BIG-IQ Cloud API: Implementations guide 
+
+The BIG-IQ Cloud Service API Reference Guide 
+
+
+
+
+
+
+
+Purpose
+You should consider using this procedure under the following condition:
+
+You want to have a key-based secure shell (SSH) login to access an Amazon Machine Instance (AMI)-based BIG-IP Virtual Edition (VE) system, which is managed by BIG-IQ Cloud or Device hosted in an Amazon Web Services (AWS) environment.
+
+Prerequisites
+You must meet the following prerequisites to use this procedure:
+
+You have an instance of BIG-IP VE provisioned using BIG-IQ Cloud or Device hosted in an AWS environment.
+You have used the AWS auto-provisioning function to create an instance of BIG-IP VE AMI.
+You have REST API authentication access privileges to BIG-IQ Cloud or Device.
+You have a REST client add-on/plugin installed on your browser.
+
+Description
+When you manually create a BIG-IP instance on AWS, AWS gives the user an option to either use an existing key pair or create and download the PEM file. The PEM file contains the RSA private key required for remote access to the BIG-IP system AMI using key-based SSH login.
+
+However, when provisioning an AWS BIG-IP system using BIG-IQ Cloud, you do not have this option. Therefore, you must create the PEM file manually after you create the BIG-IP instance.
+Procedures
+To create the PEM file, you must first use the BIG-IQ Cloud API implementation to obtain the PEM contents (RSA private key) of the provisioned BIG-IP VE AMI hosted in AWS. With the PEM file, you can convert it to a PPK file. Using the PPK file, you can perform key-based SSH access to the BIG-IP VE AMI. To do so, perform the following procedure:
+
+Impact of procedure: Performing the following procedure should not have a negative impact on your system.
+
+Use the API to obtain the connectorID associated with the target BIG-IP VE AMI using the following API command syntax:
+ 
+Method: GET 
+ URL: https://<BIG-IQ_Mgmt_IP_Address>/mgmt/cm/cloud/connectors/ec2 
+ 
+ In this command syntax, note the following:
+
+<BIG-IQ_Mgmt_IP_Address> is the management IP address of the BIG-IQ system managing the BIG-IP VE AMI
+
+For example:
+ 
+Method: GET 
+ URL: https://10.10.10.100/mgmt/cm/cloud/connectors/ec2
+ 
+ Inspect the API responses and locate the connector ID associated with the target BIG-IP VE AMI that you have provisioned.
+
+Use the following API to obtain the RSA private key for the node (iSSH target BIG-IP VE AMI) of the connector ID using the following command syntax:
+ 
+ Method: GET 
+ URL: https://<BIG-IQ_Mgmt_IP_Address>/mgmt/cm/cloud/connectors/ec2/<connector_ID>/nodes
+ 
+ For example:
+ 
+ Method: GET 
+ URL: https://10.10.10.100/mgmt/cm/cloud/connectors/ec2/70b814jd-fb32-4a7b-b3ea-57gffb73097f/nodes
+ 
+ Inspect the API response and locate the sizeable chunk of encrypted text that represents the RSA Private Key associated with the node (SSH target BIG-IP system) defined according to the desired connector ID.
+
+To save the RSA private key into the text file, use a text editor to perform a copy/paste operation.
+ 
+ Example RSA private key output may appear similar to the following:
+ 
+ -----BEGIN RSA PRIVATE KEY-----
+ MIIEpQIBAAKCAQEA2RDzMRLDRTpiZQIvW12hty8nKnNxqaUxE+D+p9CnVV40/NohtyODYrNSdVE4
+ ZCrgDDYYkkXOToEYCLqYrf1/AFV4yisp6PmQnJ/LAVdPyhDB7Q7g8BcRsLOwhYnrNyu5/h60P/dH
+ kPvkAKqyrAGBOSdxBehWEC4AJCCAWqElUeLZKfs+Wc1fN3pB322qPPHwnRSumICyk0b180HPc7J2
+ ML2FjJqVodAfgqcNegqiN6bodDLYBWyqATT5BI9PcDQT1hSvrCUeJphEzvPHk9uiEk9TLkIr7nil
+ Ya/skE8xHeyOvbe0MRD8JNYwOvSl/b9u0LPS3aH1/dzFrT7FpXI9PQIDAQABAoIBAHhg/w2TAzoM
+ Q+8ShCLeTUXi34yaU0mqtAn7OB7nBzW/thEYA6SmDEIbgrpPHb/nSzNaeMv97Ij67NJCcVPkhp8v
+ x3oO8AIlDT7fG10WB8je/D00iCh+ErB1JosYTprdJBu6+WmUAFt2Zh68i7P6bai9p8+H1trIOAnR
+ AH3Caoj7CMuDqjMkkCEl8PKT8BbIXssINTaJk2E+7rjPqjOvI2+dkOmVORVJBwJhOaLvVQpwFKJH
+ 3DN653QhDeJ4JaWkiCpPfW8rWgVn8oke/UunI+GmuUQdue6DVmgU0oBe2NqKx0Gbj034dVHXYs5p
+ cVn1CdUS+dh/1AOD9OxyJK2c7oECgYEAdmFI37TZPMHWyhPgTux4bOCwM1TtjeB/94+3KD2IJ/fu
+ jNUpUuiz/b/YP9EppFO6tU7NDrSpBz7A4Pw3Req4U7y5xZiIKtGhNfBTna5Zmf+4vtaulx+p5eZb
+ Opdqk/2mArOcILQ8RTei7G9jmEKFlswx0MrEM1h1Z9hdUzSqgl0CgYkA6RxbhiVx4duJt0Ef+pRS
+ kQDpBbqiaE3eTR34Go4m0XBligEKRtc7+xNTI3pXiv1SMNVO62BAmp3vk0cqZpx6wjL7cnNJtv9/
+ hXn7m6AKcP0QyNgzLNB2AY/cgYgvjmNavYMW8Sn1HPVLoZNCHEtyusAocvyIg9QqoFsKMxV0uGEC
+ gYEAx4eWv+lYjIqThsHsVyOICVppIg5MaR0o/8bDwGMAvLPCcQ9bb5JoVlVmZMRm3q1W8rvq2AxQ
+ D0hvmeKDQXqenzixJrvt/ilJjsSCWNG/Hi/2K4b2zHgsdcrDQd/LzePaORit7pHugOF49f6mlqPX
+ vcldSS7v2yqH20w3kEcMkeECgYEAqzS1j5eOxYfc5GeDWiF3ZqIKFk8Vmq+eFlttbet7XRVErg/H
+ gXHwzqkKFaN0Clc0+sKfXMvrjON0ImIBJS3GBz00acF8oVeTS+/kOE9Ze9SRcEFBjKdqFkmZtNTV
+ wKj96vQNdIARUvxhWMDzrB5JnBknXBRXGyNHT1Ct9AjNGeECgYEA0yfC7GFMwFyPFAauYtgR69yN
+ x/yvWIm4jo0oUiFKjShpOc+thWdO08n44I1kboPnaM1RYHHpAcst6R4oB+/ppDL4Eqg+V/Ptu5bU
+ 62b+1rl472hinwrBnwGvJMZNBMXaetT5suzzjRL6MPCZQuqs4k9+hxtbnU4DhASgp6Qneus=
+ -----END RSA PRIVATE KEY-----
+Rename the text file that you created in Step 3 with the file extension from .txt to .pem.
+Repeat Step 2 through Step 4, if you have more than one SSH target node.
+Use PuTTyGen to convert the .pem file to .ppk format and save the key file on the host where the source of SSH login will originate. 
+ 
+ For detailed instructions about using PuTTyGen, refer to the Connect to Your Amazon EC2 Instance from Windows Using PuTTY AWS document.
+ 
+ Important: If you follow the steps explicitly in the AWS documentation, note that you should skip Step 6g.You do not need to start the web server.
+ 
+ You may now perform SSH access to the target BIG-IP VE AMI using the key-based SSH login with the .ppk file.
+
+
+Supplemental Information
+Note: A DevCentral login is required to access the following content.
+
+The BIG-IQ Cloud API: Implementations guide 
+
+The BIG-IQ Cloud Service API Reference Guide 
+
+
+
+

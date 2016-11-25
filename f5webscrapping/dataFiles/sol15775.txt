@@ -1,0 +1,96 @@
+
+
+
+Known Issue
+
+The Clusters or Templates page of the BIG-IP Configuration utility is blank and displays a General Database Error.
+This issue occurs when all of the following conditions are met:
+
+You are using a multi-blade VIPRION chassis system.
+
+Using the BIG-IP Configuration utility, you navigate to the Clusters page, and then attempt to navigate to the Templates page.or
+You navigate to the Templates page, and then attempt to navigate to the Clusters page.
+
+
+Impact
+
+You are unable to make changes to the Templates or the Clusters page using the Big-IP Configuration utility.
+
+Symptoms
+
+As a result of this issue, you may encounter one or more of the following symptoms:
+
+BIG-IP iHealth lists Heuristic H486524 on the Diagnostics > Identified > High screen.
+The system presents a blank page.
+
+In the Configuration utility, you see an error message similar to the following example:General Database Error
+
+In the /var/log/tomcat/catalina.out log file, you see an error message similar to the following example:ERROR [TP-Processor3] application_005ftemplate.list_jsp:_jspService - Column not found: SLOT_ID in statement [SELECT LIMIT 0 10 OPTIMIZED * FROM app_template ORDER BY slot_id ASC]
+
+
+ResolutionStatusF5 Product Development has assigned ID 460165 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:Type of FixVersions FixedRelated ArticlesRelease11.5.4SOL2200: Most recent versions of F5 softwareHotfixNoneNoneWorkaroundTo work around this issue, you can restart the tomcat service after encountering the error. To do so, perform the following procedure:Impact of workaround: The BIG-IP Configuration utility will be temporarily unavailable while the tomcat service restarts.Log in to the BIG-IP system as the root user.At the command prompt, type the following command:	bigstart restart tomcat	Supplemental InformationSOL4918: Overview of the F5 critical issue hotfix policySOL167: Downloading software and firmware from F5SOL13123: Managing BIG-IP product hotfixes (11.x - 12.x)
+
+
+
+
+Known Issue
+
+The Clusters or Templates page of the BIG-IP Configuration utility is blank and displays a General Database Error.
+This issue occurs when all of the following conditions are met:
+
+You are using a multi-blade VIPRION chassis system.
+
+Using the BIG-IP Configuration utility, you navigate to the Clusters page, and then attempt to navigate to the Templates page.or
+You navigate to the Templates page, and then attempt to navigate to the Clusters page.
+
+
+Impact
+
+You are unable to make changes to the Templates or the Clusters page using the Big-IP Configuration utility.
+
+Symptoms
+
+As a result of this issue, you may encounter one or more of the following symptoms:
+
+BIG-IP iHealth lists Heuristic H486524 on the Diagnostics > Identified > High screen.
+The system presents a blank page.
+
+In the Configuration utility, you see an error message similar to the following example:General Database Error
+
+In the /var/log/tomcat/catalina.out log file, you see an error message similar to the following example:ERROR [TP-Processor3] application_005ftemplate.list_jsp:_jspService - Column not found: SLOT_ID in statement [SELECT LIMIT 0 10 OPTIMIZED * FROM app_template ORDER BY slot_id ASC]
+
+
+ResolutionStatusF5 Product Development has assigned ID 460165 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:Type of FixVersions FixedRelated ArticlesRelease11.5.4SOL2200: Most recent versions of F5 softwareHotfixNoneNoneWorkaroundTo work around this issue, you can restart the tomcat service after encountering the error. To do so, perform the following procedure:Impact of workaround: The BIG-IP Configuration utility will be temporarily unavailable while the tomcat service restarts.Log in to the BIG-IP system as the root user.At the command prompt, type the following command:	bigstart restart tomcat	Supplemental InformationSOL4918: Overview of the F5 critical issue hotfix policySOL167: Downloading software and firmware from F5SOL13123: Managing BIG-IP product hotfixes (11.x - 12.x)
+
+
+
+
+Known Issue
+
+The Clusters or Templates page of the BIG-IP Configuration utility is blank and displays a General Database Error.
+This issue occurs when all of the following conditions are met:
+
+You are using a multi-blade VIPRION chassis system.
+
+Using the BIG-IP Configuration utility, you navigate to the Clusters page, and then attempt to navigate to the Templates page.or
+You navigate to the Templates page, and then attempt to navigate to the Clusters page.
+
+
+Impact
+
+You are unable to make changes to the Templates or the Clusters page using the Big-IP Configuration utility.
+
+Symptoms
+
+As a result of this issue, you may encounter one or more of the following symptoms:
+
+BIG-IP iHealth lists Heuristic H486524 on the Diagnostics > Identified > High screen.
+The system presents a blank page.
+
+In the Configuration utility, you see an error message similar to the following example:General Database Error
+
+In the /var/log/tomcat/catalina.out log file, you see an error message similar to the following example:ERROR [TP-Processor3] application_005ftemplate.list_jsp:_jspService - Column not found: SLOT_ID in statement [SELECT LIMIT 0 10 OPTIMIZED * FROM app_template ORDER BY slot_id ASC]
+
+
+ResolutionStatusF5 Product Development has assigned ID 460165 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:Type of FixVersions FixedRelated ArticlesRelease11.5.4SOL2200: Most recent versions of F5 softwareHotfixNoneNoneWorkaroundTo work around this issue, you can restart the tomcat service after encountering the error. To do so, perform the following procedure:Impact of workaround: The BIG-IP Configuration utility will be temporarily unavailable while the tomcat service restarts.Log in to the BIG-IP system as the root user.At the command prompt, type the following command:	bigstart restart tomcat	Supplemental InformationSOL4918: Overview of the F5 critical issue hotfix policySOL167: Downloading software and firmware from F5SOL13123: Managing BIG-IP product hotfixes (11.x - 12.x)
+
