@@ -16,8 +16,20 @@ class WebScrap:
         #Update URL for future use
         self.update_url="https://support.f5.com/kb/en-us/recentadditions.html?rs=30"
         pass
-    def dowload_file(self):
-        pass
+    
+    def downloadData(self,fname,url):
+        loc="dataFiles/"+str(fname)
+        file_open=open(loc,'a')
+        try:
+            connection = urllib.urlopen(url)
+        except Exception as e:
+            print(e.code)
+            exit(-1)
+        dom = lxml.html.fromstring(connection.read())
+        query = "//div[@class='parsys pageContent']//text()"
+        for text in dom.xpath(query):
+            file_open.write(text)
+        file_open.close()
 
     def getDetails(self,url):
         driver = webdriver.PhantomJS()
@@ -49,9 +61,9 @@ class WebScrap:
         return tag,pro_ver
 
     def getFiles(self):
-        #Number of test doc
-        outfile = open('prod.csv', 'w')
-        outfile.close()
+        #Number of test doc 15
+        #outfile = open('prod.csv', 'w')
+        #outfile.close()
         outfile = open('prod.csv', 'a')
         writer = csv.writer(outfile)
         for i in range(1,15):
@@ -78,6 +90,7 @@ class WebScrap:
                 for key, value in prod.items():
                     writer.writerow([file_name,lnk,tag,key, value])
                 #Add part to download the data content of lnk 
+                self.downloadData(file_name,lnk)
 
 
 if __name__ == '__main__':
