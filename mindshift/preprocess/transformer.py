@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 class Transformer:
 
     def __init__(self):
-        self.vectorizer = TfidfVectorizer()
+        self.vectorizer = TfidfVectorizer(stop_words=None)
         self.vector_features = []
 
     def vectorize_text(self, text):
