@@ -11,7 +11,7 @@ class Transformer:
     def vectorize_text(self, text):
         vectorized_text = self.vectorizer.fit_transform(text)
         self.vector_features = self.vectorizer.get_feature_names()
-        return vectorized_text.toarray()
+        return vectorized_text
 
     def get_features(self):
         return self.vector_features

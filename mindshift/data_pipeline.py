@@ -1,6 +1,7 @@
 # top level script to orchestrate data pre-processing & processing
 from mindshift.extract import extractor
 from mindshift.preprocess import data_filter, transformer
+from mindshift.process import clustering
 import argparse
 import pandas
 
@@ -12,6 +13,7 @@ class DataPipeline:
         self.data_extractor = extractor.Extractor(self.dataset_directory, clean)
         self.datafilter = data_filter.DataFilter()
         self.data_transformer = transformer.Transformer()
+        self.processor = clustering.Cluster()
 
     def load_data(self):
         return self.data_extractor.as_dataframe()
@@ -21,6 +23,9 @@ class DataPipeline:
 
     def transform_data(self, data):
         return self.data_transformer.vectorize_text(data)
+
+    def process_data(self, data):
+        return self.processor.do_kmeans(data)
 
 
 if __name__ == "__main__":
@@ -38,4 +43,7 @@ if __name__ == "__main__":
         # clean_data = pandas.DataFrame(df.apply(pipeline.preprocess_data, axis=1))
         # clean_data.columns = ['content']
         vectorized_data = pipeline.transform_data(df['content'])
-        print(vectorized_data)
+        # print(vectorized_data.toarray())
+        labels = pipeline.process_data(vectorized_data)
+        clustered_df = df.join(pandas.DataFrame(labels, index=df.index))
+        print(clustered_df)
