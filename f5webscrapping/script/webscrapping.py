@@ -3,32 +3,47 @@ import csv
 import urllib.request as urllib
 import lxml.html
 import signal
-#Two ouput:
-# 1 xls file with data file name, Product and version, Default Tag
-#Collection of all the data file
 import sys
 import os
 import lxml.html
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 class WebScrap:
     def __init__(self):
         #Main URL include query to remove the archived and also select all
-        self.main_url="https://support.f5.com/kb/en-us/search.res.html?q=+inmeta:archived%3DArchived%2520documents%2520excluded&dnavs=inmeta:archived%3DArchived%2520documents%2520excluded&filter=p&num="
+        self.main_url="https://support.f5.com/csp/#/article/KXXXXXXXX"
         #"https://support.f5.com/kb/en-us/search.res.html?productList=big-ip%2Cbc%2Cfp%2C3-dns%2Clc%2Cts%2Cwj%2Cwa_5_x%2Csam%2Clinerate-eol&versionList=all%2C&searchType=basic&isFromGSASearch=false&query=&site=support_external&client=support-f5-com&q=&prodName=ALL&prodVersText=&docTypeName=ALL&includeArchived=false&submit_form=&product=all&eolProducts=all&documentType=all"
         #Update URL for future use
-        self.logfile=open("logfile",'a')
+        #self.logfile=open("logfile",'a')
         self.update_url="https://support.f5.com/kb/en-us/recentadditions.html?rs=30"
         desired_cap = {
-        'phantomjs.page.settings.loadImages' : True,
-        'phantomjs.page.settings.resourceTimeout' : 10000,
+        'phantomjs.page.settings.loadImages' : False,
+        'phantomjs.page.settings.resourceTimeout' : 100000000,
         'phantomjs.page.settings.userAgent' : '...'
         }
         self.driver= webdriver.PhantomJS('/u/ankswarn/MindShift/phantomjs-2.1.1-linux-x86_64/bin/phantomjs',desired_capabilities=desired_cap)
         #self.driver= webdriver.Chrome(chromedriver,service_args=service_args,service_log_path=service_log_path)        
         pass
-    def dowload_file(self):
-        pass
-
+    def download_files(self):
+        i=16500
+        logfile = open('new.log.file', 'a')
+       
+        while(True):
+            print("\r\n Link ID:"+str(i))
+            return_id=self.getFiles(str(i))
+            logfile.write("\r\nLink ID: K"+str(i)+" Return: "+str(return_id))
+            i+=1
+            if i >= 999999999:
+              break
+        self.driver.close()
+        #logfile.close()  
+        '''
+        #test
+        self.getFiles(str(4852))
+        self.driver.close()
+        #logfile.close()
+        '''
+        
     def getDetails(self,url):
         #driver = webdriver.PhantomJS('/u/ankswarn/MindShift/phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
         list_Product = []
@@ -60,7 +75,7 @@ class WebScrap:
         except Exception as e:
             print(e)
             print("Exception with url:"+str(url))
-            self.logfile.write("Exception with url:"+str(url)+"\n")
+            self.logfile.write("\nException with url:"+str(url)+"\n")
         finally:
             print("")
            # driver.service.process.send_signal(signal.SIGTERM) # kill the specific phantomjs child proc
@@ -68,9 +83,9 @@ class WebScrap:
            # driver.close()
         return tag,pro_ver
 
-    def downloadData(self,fname,url):
+    def writeData(self,fname,url):
         loc="dataFiles/"+str(fname)
-        file_open=open(loc,'w')
+        file_open=open(loc,'a')
         try:
             connection = urllib.urlopen(url)
         except Exception as e:
@@ -83,43 +98,52 @@ class WebScrap:
             file_open.write(text)
         file_open.close()
 
-
-
-    def getFiles(self):
+    def getFiles(self,linkid):
         #Number of test doc
         #outfile = open('prod.csv', 'w')
-        # outfile.close()
-        outfile = open('prod.csv', 'a')
-        writer = csv.writer(outfile)
-        for i in range(1,40):
-            link_id=i*10
-            link=self.main_url+str(link_id)+str("&start=")+str(link_id)
-            try:
-                connection = urllib.urlopen(link)
-            except urllib.HTTPError as e:
-                print('The server couldn\'t fulfill the request.')
-                print('Error code: ', e)
-                continue
-            except urllib.URLError as e:
-                print('We failed to reach a server.')
-                print('Reason: ', e)
-                continue
-            dom = lxml.html.fromstring(connection.read())
-            query = "//div[@class=\"main-results\"]//a/@href"
-            for lnk in dom.xpath(query):
-                file_name=str(lnk).rsplit('/',1)[-1].replace("html","txt")
-                tag,prod=self.getDetails(lnk)
-                print(file_name)
-                print(tag)
-                print(prod)
-                for key, value in prod.items():
-                    writer.writerow([file_name,lnk,tag,key, value])
+        #outfile.close()
+        loc="dataFiles/K"+linkid
+        #outfile = open('prod.csv', 'a')
+        #writer = csv.writer(outfile)
+        link=self.main_url.replace("XXXXXXXX",linkid)
+        
+        try:
+            self.driver.get(link)
+            title=self.driver.find_element_by_xpath("//div[@class=\"col-sm-12 col-lg-12\"]/h2")
+            #attrs = self.driver.execute_script('var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', title)
+            #print(attrs)
+             
+            test3=self.driver.find_elements_by_xpath("//div[@class=\"row productInfo\"]/div[@class=\"col-sm-12 col-lg-12\"]/div[@class=\"ng-scope\"]/div[@class=\"article-content ng-binding\"]/p")
+            if test3.__len__()==0 :
+              return -1
+            file_open=open(loc,'w')
+            file_open.write(title.get_attribute('innerText'))
+            file_open.write("\r\n")
+            for t in test3:
+                file_open.write(t.get_attribute('innerText'))
+                file_open.write(" ")
+            file_open.close()
+            return 0
+        except urllib.HTTPError as e:
+            print('The server couldn\'t fulfill the request.')
+            print('Error code: ', e)
+            return -1
+            
+        except urllib.URLError as e:
+            print('We failed to reach a server.')
+            print('Reason: ', e)
+            return -1
+        except NoSuchElementException as e:
+            print('Element not error')
+            return -1
+        except Exception as e:
+            print("Some Error")
+            return -1
 
-                self.downloadData(file_name,lnk)
-        self.driver.quit()
+       # exit(-1)
+        #outfile.close()
 
 
 if __name__ == '__main__':
     w=WebScrap()
-    w.getFiles()
-
+    w.download_files()
