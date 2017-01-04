@@ -27,8 +27,8 @@ class DataPipeline:
     def process_data(self, data):
         return self.processor.do_kmeans(data)
         
-    def hierachical_clustering(self,data):
-        Z=self.data_transformer.get_cosine(data)
+    def hierachical_clustering(self, data):
+        Z = self.data_transformer.get_cosine(data)
         return self.processor.do_ward(Z)
 
 
@@ -48,6 +48,7 @@ if __name__ == "__main__":
         # clean_data.columns = ['content']
         vectorized_data = pipeline.transform_data(df['content'])
         # print(vectorized_data.toarray())
+        print(pipeline.data_transformer.get_features())
         labels = pipeline.hierachical_clustering(vectorized_data)
         clustered_df = df.join(pandas.DataFrame(labels, index=df.index))
         print(clustered_df)

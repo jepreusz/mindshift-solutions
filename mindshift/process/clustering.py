@@ -17,14 +17,8 @@ class Cluster:
         km_model.fit_transform(dataset)
         return km_model.labels_
    
-    def do_ward(self,dataset):
+    def do_ward(self, dataset):
         #Pass cosine distance matrix
         linkage_matrix = ward(dataset)
         clusters = fcluster(linkage_matrix, self.max_d, criterion='distance')
         return clusters
-        
-        
-        
-        
-        
-        

@@ -6,7 +6,7 @@ class TestDataFilter(TestCase):
     def test_rm_stopwords(self):
         data_filt = data_filter.DataFilter()
         cleaned_text = data_filt.rm_stopwords('\n\n\n\n\nwhat the '
-                                              'fuck is this'
+                                              'is this'
                                               ''
                                               ''
                                               ' non-sense')
@@ -15,7 +15,7 @@ class TestDataFilter(TestCase):
     def test_rm_blanklines(self):
         data_filt = data_filter.DataFilter()
         cleaned_text = data_filt.rm_blanklines('what the '
-                                               '\n\n\nfuck is this'
+                                               '\n\n\nis this'
                                                ''
                                                ''
                                                ' non-sense')
