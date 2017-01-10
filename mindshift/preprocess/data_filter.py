@@ -1,6 +1,6 @@
 # script to clean the input data by removing stopwords, special characters, etc.
 from nltk.tokenize import word_tokenize,sent_tokenize
-from nltk.corpus import stopwords
+from nltk.corpus import stopwords, words
 from nltk.tokenize import LineTokenizer, RegexpTokenizer
 from nltk.stem import SnowballStemmer
 
@@ -20,3 +20,6 @@ class DataFilter:
 
     def tokenzie_and_stem(self, text):
         return [self.stemmer.stem(word) for sent in sent_tokenize(text) for word in self.re_tokenizer.tokenize(sent)]
+
+    def rm_nonwords(self, text):
+        return " ".join([word for word in word_tokenize(text) if word.lower() in words.words()])

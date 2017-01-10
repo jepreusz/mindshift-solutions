@@ -13,7 +13,7 @@ class Cluster:
         self.max_d = 50
 
     def do_kmeans(self, dataset):
-        km_model = KMeans(n_clusters=self.NCLUSTERS, n_init=self.NITER, verbose=1)
+        km_model = KMeans(n_clusters=self.NCLUSTERS, n_init=self.NITER)
         km_model.fit_transform(dataset)
         return km_model.labels_
    
