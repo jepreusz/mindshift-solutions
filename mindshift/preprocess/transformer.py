@@ -13,7 +13,7 @@ class Transformer:
         self.tokenizer = data_filter.DataFilter()
         self.stemmer = SnowballStemmer('english')
         self.custom_vocabulary = self._get_vocabulary()
-        self.vectorizer = TfidfVectorizer('english', min_df=5, analyzer='word', vocabulary=self.custom_vocabulary,
+        self.vectorizer = TfidfVectorizer('english', min_df=0.05, max_df=0.6, analyzer='word', max_features=2000,
                                           tokenizer=self.tokenizer.tokenzie_and_stem)
         self.vector_features = []
 
