@@ -1,5 +1,0 @@
-
-
-
-Known IssueThe Portal Access reverse-proxy engine does not currently support Microsoft Silverlight. If a user accesses a website with Silverlight objects, the objects may fail to load properly.Silverlight is a programmable web browser plugin that enables features such as animation and high-definition video. For more information about Silverlight, refer to http://www.microsoft.com/SILVERLIGHT/.F5 Product Development is tracking an enhancement request as CR92640 to add support for Silverlight to the Portal Access reverse-proxy engine.Supplemental InformationNone
-

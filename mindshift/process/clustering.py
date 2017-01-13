@@ -7,8 +7,8 @@ from scipy.cluster.hierarchy import fcluster
 class Cluster:
 
     def __init__(self):
-        self.NCLUSTERS = 10
-        self.NITER = 3
+        self.NCLUSTERS = 40
+        self.NITER = 40
         #Trial variable for number of cluster
         self.max_d = 50
 
