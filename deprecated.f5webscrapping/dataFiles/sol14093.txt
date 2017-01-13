@@ -1,0 +1,102 @@
+
+
+
+Description
+The BIG-IP Edge Client for iOS does not pass the certificate common name (CN) as the logon user name.
+
+This issue occurs when all of the following conditions are met:
+
+Client certificate authentication is configured on the BIG-IP Edge Client for iOS.
+The user name field is blank on the BIG-IP Edge Client for iOS.
+The BIG-IP APM or FirePass device is configured to use the client certificate CN as the logon user name.
+
+Impact
+iOS users are unable to use certificate authentication to the BIG-IP APM or FirePass device.
+Symptoms
+As a result of this issue, you may encounter the following symptoms:
+
+Client authentication fails.
+Logon logs show login attempts with a blank user name.
+
+Status
+F5 Product Development has assigned ID 402036 to this issue, and has confirmed that this issue exists in the products listed in the Applies To box. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+None
+None
+ 
+Hotfix
+None
+None
+
+
+Workaround
+To work around this issue, you can populate the user name field on the BIG-IP Edge Client for iOS.
+Impact of workaround: This workaround requires manual configuration of the BIG-IP Edge Client for iOS on the client device.
+
+
+Supplemental Information
+
+SOL4918: Overview of the F5 critical issue hotfix policy
+BIG-IP Edge Client for iOS release note
+
+BIG-IP Edge Client for iOS on iTunes store
+
+
+
+
+
+
+Description
+The BIG-IP Edge Client for iOS does not pass the certificate common name (CN) as the logon user name.
+
+This issue occurs when all of the following conditions are met:
+
+Client certificate authentication is configured on the BIG-IP Edge Client for iOS.
+The user name field is blank on the BIG-IP Edge Client for iOS.
+The BIG-IP APM or FirePass device is configured to use the client certificate CN as the logon user name.
+
+Impact
+iOS users are unable to use certificate authentication to the BIG-IP APM or FirePass device.
+Symptoms
+As a result of this issue, you may encounter the following symptoms:
+
+Client authentication fails.
+Logon logs show login attempts with a blank user name.
+
+Status
+F5 Product Development has assigned ID 402036 to this issue, and has confirmed that this issue exists in the products listed in the Applies To box. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+None
+None
+ 
+Hotfix
+None
+None
+
+
+Workaround
+To work around this issue, you can populate the user name field on the BIG-IP Edge Client for iOS.
+Impact of workaround: This workaround requires manual configuration of the BIG-IP Edge Client for iOS on the client device.
+
+
+Supplemental Information
+
+SOL4918: Overview of the F5 critical issue hotfix policy
+BIG-IP Edge Client for iOS release note
+
+BIG-IP Edge Client for iOS on iTunes store
+
+
+

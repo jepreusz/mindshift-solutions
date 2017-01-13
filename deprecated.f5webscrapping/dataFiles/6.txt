@@ -1,0 +1,508 @@
+
+
+
+
+         
+Glossary
+
+ 
+         
+
+            
+BIG-IQ ADC module terminology
+
+  
+  
+            
+
+               
+Before you manage device resources, it is important that you understand some common
+    terms as they are defined within the context of the BIG-IQ®
+    ADC module.
+
+    
+               
+
+                  
+
+                     
+
+                        
+
+                           
+Term
+
+                           Definition
+
+                        
+
+
+                     
+
+
+                     
+
+                        
+
+                           
+
+                              deployment
+                           
+
+                           In the ADC module, you can make configuration changes to a managed device, but
+              the changes are not actually applied to the device until you deploy them.
+
+                        
+
+
+                        
+
+                           
+
+                              BIG-IP
+                           
+
+                           In the ADC module, there are two primary modes for interacting with the managed
+              device. In this read-only mode, settings that display are from the most recent refresh
+              of the managed device.
+
+                        
+
+
+                        
+
+                           
+
+                              BIG-IQ
+                           
+
+                           In the ADC module, there are two primary modes for interacting with the managed
+              device. In this mode, you can edit any setting for which you have permissions;
+              settings that display include any modifications you have made to the managed object
+              configuration.
+
+                        
+
+
+                        
+
+                           
+
+                              refresh configuration
+                           
+
+                           In the ADC module, you can refresh the view of the configuration objects for a managed object and get an update of the device statistics.
+
+                        
+
+
+                        
+
+                           
+
+                              overwrite configuration
+                           
+
+                           In the ADC module, you can discard any undeployed changes you have made to the configuration objects for a managed object.
+
+                        
+
+
+                     
+
+
+                  
+
+               
+
+
+            
+
+
+         
+
+      
+
+
+
+
+
+
+
+         
+Glossary
+
+ 
+         
+
+            
+BIG-IQ ADC module terminology
+
+  
+  
+            
+
+               
+Before you manage device resources, it is important that you understand some common
+    terms as they are defined within the context of the BIG-IQ®
+    ADC module.
+
+    
+               
+
+                  
+
+                     
+
+                        
+
+                           
+Term
+
+                           Definition
+
+                        
+
+
+                     
+
+
+                     
+
+                        
+
+                           
+
+                              deployment
+                           
+
+                           In the ADC module, you can make configuration changes to a managed device, but
+              the changes are not actually applied to the device until you deploy them.
+
+                        
+
+
+                        
+
+                           
+
+                              BIG-IP
+                           
+
+                           In the ADC module, there are two primary modes for interacting with the managed
+              device. In this read-only mode, settings that display are from the most recent refresh
+              of the managed device.
+
+                        
+
+
+                        
+
+                           
+
+                              BIG-IQ
+                           
+
+                           In the ADC module, there are two primary modes for interacting with the managed
+              device. In this mode, you can edit any setting for which you have permissions;
+              settings that display include any modifications you have made to the managed object
+              configuration.
+
+                        
+
+
+                        
+
+                           
+
+                              refresh configuration
+                           
+
+                           In the ADC module, you can refresh the view of the configuration objects for a managed object and get an update of the device statistics.
+
+                        
+
+
+                        
+
+                           
+
+                              overwrite configuration
+                           
+
+                           In the ADC module, you can discard any undeployed changes you have made to the configuration objects for a managed object.
+
+                        
+
+
+                     
+
+
+                  
+
+               
+
+
+            
+
+
+         
+
+      
+
+
+
+
+
+
+
+         
+Glossary
+
+ 
+         
+
+            
+BIG-IQ ADC module terminology
+
+  
+  
+            
+
+               
+Before you manage device resources, it is important that you understand some common
+    terms as they are defined within the context of the BIG-IQ®
+    ADC module.
+
+    
+               
+
+                  
+
+                     
+
+                        
+
+                           
+Term
+
+                           Definition
+
+                        
+
+
+                     
+
+
+                     
+
+                        
+
+                           
+
+                              deployment
+                           
+
+                           In the ADC module, you can make configuration changes to a managed device, but
+              the changes are not actually applied to the device until you deploy them.
+
+                        
+
+
+                        
+
+                           
+
+                              BIG-IP
+                           
+
+                           In the ADC module, there are two primary modes for interacting with the managed
+              device. In this read-only mode, settings that display are from the most recent refresh
+              of the managed device.
+
+                        
+
+
+                        
+
+                           
+
+                              BIG-IQ
+                           
+
+                           In the ADC module, there are two primary modes for interacting with the managed
+              device. In this mode, you can edit any setting for which you have permissions;
+              settings that display include any modifications you have made to the managed object
+              configuration.
+
+                        
+
+
+                        
+
+                           
+
+                              refresh configuration
+                           
+
+                           In the ADC module, you can refresh the view of the configuration objects for a managed object and get an update of the device statistics.
+
+                        
+
+
+                        
+
+                           
+
+                              overwrite configuration
+                           
+
+                           In the ADC module, you can discard any undeployed changes you have made to the configuration objects for a managed object.
+
+                        
+
+
+                     
+
+
+                  
+
+               
+
+
+            
+
+
+         
+
+      
+
+
+
+
+
+
+
+         
+Glossary
+
+ 
+         
+
+            
+BIG-IQ ADC module terminology
+
+  
+  
+            
+
+               
+Before you manage device resources, it is important that you understand some common
+    terms as they are defined within the context of the BIG-IQ®
+    ADC module.
+
+    
+               
+
+                  
+
+                     
+
+                        
+
+                           
+Term
+
+                           Definition
+
+                        
+
+
+                     
+
+
+                     
+
+                        
+
+                           
+
+                              deployment
+                           
+
+                           In the ADC module, you can make configuration changes to a managed device, but
+              the changes are not actually applied to the device until you deploy them.
+
+                        
+
+
+                        
+
+                           
+
+                              BIG-IP
+                           
+
+                           In the ADC module, there are two primary modes for interacting with the managed
+              device. In this read-only mode, settings that display are from the most recent refresh
+              of the managed device.
+
+                        
+
+
+                        
+
+                           
+
+                              BIG-IQ
+                           
+
+                           In the ADC module, there are two primary modes for interacting with the managed
+              device. In this mode, you can edit any setting for which you have permissions;
+              settings that display include any modifications you have made to the managed object
+              configuration.
+
+                        
+
+
+                        
+
+                           
+
+                              refresh configuration
+                           
+
+                           In the ADC module, you can refresh the view of the configuration objects for a managed object and get an update of the device statistics.
+
+                        
+
+
+                        
+
+                           
+
+                              overwrite configuration
+                           
+
+                           In the ADC module, you can discard any undeployed changes you have made to the configuration objects for a managed object.
+
+                        
+
+
+                     
+
+
+                  
+
+               
+
+
+            
+
+
+         
+
+      
+
+
+

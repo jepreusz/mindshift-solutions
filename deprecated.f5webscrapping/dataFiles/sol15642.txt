@@ -1,0 +1,399 @@
+
+
+
+The vulnerability described in this article has been resolved, or does not affect any F5 products. There will be no further updates, unless new information is discovered.
+
+
+
+
+
+
+Vulnerability DescriptionSamba 4.0.x before 4.0.11 and 4.1.x before 4.1.1, when LDAP or HTTP is provided over SSL, uses world-readable permissions for a private key, which allows local users to obtain sensitive information by reading the key file, as demonstrated by access to the local filesystem on an AD domain controller. (CVE-2013-4476)ImpactNone. F5 products are not affected by this vulnerability.Security Issue Status
+To determine if your release is known to be vulnerable, the components or features that are affected by the vulnerability, and for information about releases or hotfixes that address the vulnerability, refer to the following table:
+
+Product
+Versions known to be vulnerable
+Versions known to be not vulnerable
+Vulnerable component or feature
+BIG-IP LTM
+None
+
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP AAM
+None
+11.4.0 - 11.6.0
+None
+BIG-IP AFM
+None
+11.3.0 - 11.6.0
+None
+BIG-IP Analytics
+None
+11.0.0 - 11.6.0
+None
+BIG-IP APM
+None
+
+11.0.0 - 11.6.0
+ 10.1.0 - 10.2.4
+None
+BIG-IP ASM
+None
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP Edge Gateway
+
+None
+11.0.0 - 11.3.0
+ 10.1.0 - 10.2.4
+None
+BIG-IP GTM
+None
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP Link Controller
+None
+
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP PEM
+None
+
+11.3.0 - 11.6.0
+
+None
+BIG-IP PSM
+None
+11.0.0 - 11.4.1
+ 10.0.0 - 10.2.4
+None
+BIG-IP WebAccelerator
+None
+11.0.0 - 11.3.0
+ 10.0.0 - 10.2.4
+None
+BIG-IP WOM
+None
+11.0.0 - 11.3.0
+ 10.0.0 - 10.2.4
+None
+ARX
+None
+6.0.0 - 6.4.0
+None
+Enterprise Manager
+None
+3.0.0 - 3.1.1
+ 2.1.0 - 2.3.0
+None
+FirePass
+None
+7.0.0
+ 6.0.0 - 6.1.0
+None
+BIG-IQ Cloud
+None
+
+4.0.0 - 4.4.0
+
+None
+BIG-IQ Device
+None
+
+4.2.0 - 4.4.0
+
+None
+BIG-IQ Security
+None
+
+4.0.0 - 4.4.0
+
+None
+
+Vulnerability Recommended Actions
+None
+Supplemental Information
+
+SOL9970: Subscribing to email notifications regarding F5 products
+SOL9957: Creating a custom RSS feed to view new and updated documents.
+SOL4602: Overview of the F5 security vulnerability response policy
+SOL4918: Overview of the F5 critical issue hotfix policy
+SOL167: Downloading software and firmware from F5
+
+
+
+
+
+
+The vulnerability described in this article has been resolved, or does not affect any F5 products. There will be no further updates, unless new information is discovered.
+
+
+
+
+
+
+Vulnerability DescriptionSamba 4.0.x before 4.0.11 and 4.1.x before 4.1.1, when LDAP or HTTP is provided over SSL, uses world-readable permissions for a private key, which allows local users to obtain sensitive information by reading the key file, as demonstrated by access to the local filesystem on an AD domain controller. (CVE-2013-4476)ImpactNone. F5 products are not affected by this vulnerability.Security Issue Status
+To determine if your release is known to be vulnerable, the components or features that are affected by the vulnerability, and for information about releases or hotfixes that address the vulnerability, refer to the following table:
+
+Product
+Versions known to be vulnerable
+Versions known to be not vulnerable
+Vulnerable component or feature
+BIG-IP LTM
+None
+
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP AAM
+None
+11.4.0 - 11.6.0
+None
+BIG-IP AFM
+None
+11.3.0 - 11.6.0
+None
+BIG-IP Analytics
+None
+11.0.0 - 11.6.0
+None
+BIG-IP APM
+None
+
+11.0.0 - 11.6.0
+ 10.1.0 - 10.2.4
+None
+BIG-IP ASM
+None
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP Edge Gateway
+
+None
+11.0.0 - 11.3.0
+ 10.1.0 - 10.2.4
+None
+BIG-IP GTM
+None
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP Link Controller
+None
+
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP PEM
+None
+
+11.3.0 - 11.6.0
+
+None
+BIG-IP PSM
+None
+11.0.0 - 11.4.1
+ 10.0.0 - 10.2.4
+None
+BIG-IP WebAccelerator
+None
+11.0.0 - 11.3.0
+ 10.0.0 - 10.2.4
+None
+BIG-IP WOM
+None
+11.0.0 - 11.3.0
+ 10.0.0 - 10.2.4
+None
+ARX
+None
+6.0.0 - 6.4.0
+None
+Enterprise Manager
+None
+3.0.0 - 3.1.1
+ 2.1.0 - 2.3.0
+None
+FirePass
+None
+7.0.0
+ 6.0.0 - 6.1.0
+None
+BIG-IQ Cloud
+None
+
+4.0.0 - 4.4.0
+
+None
+BIG-IQ Device
+None
+
+4.2.0 - 4.4.0
+
+None
+BIG-IQ Security
+None
+
+4.0.0 - 4.4.0
+
+None
+
+Vulnerability Recommended Actions
+None
+Supplemental Information
+
+SOL9970: Subscribing to email notifications regarding F5 products
+SOL9957: Creating a custom RSS feed to view new and updated documents.
+SOL4602: Overview of the F5 security vulnerability response policy
+SOL4918: Overview of the F5 critical issue hotfix policy
+SOL167: Downloading software and firmware from F5
+
+
+
+
+
+
+The vulnerability described in this article has been resolved, or does not affect any F5 products. There will be no further updates, unless new information is discovered.
+
+
+
+
+
+
+Vulnerability DescriptionSamba 4.0.x before 4.0.11 and 4.1.x before 4.1.1, when LDAP or HTTP is provided over SSL, uses world-readable permissions for a private key, which allows local users to obtain sensitive information by reading the key file, as demonstrated by access to the local filesystem on an AD domain controller. (CVE-2013-4476)ImpactNone. F5 products are not affected by this vulnerability.Security Issue Status
+To determine if your release is known to be vulnerable, the components or features that are affected by the vulnerability, and for information about releases or hotfixes that address the vulnerability, refer to the following table:
+
+Product
+Versions known to be vulnerable
+Versions known to be not vulnerable
+Vulnerable component or feature
+BIG-IP LTM
+None
+
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP AAM
+None
+11.4.0 - 11.6.0
+None
+BIG-IP AFM
+None
+11.3.0 - 11.6.0
+None
+BIG-IP Analytics
+None
+11.0.0 - 11.6.0
+None
+BIG-IP APM
+None
+
+11.0.0 - 11.6.0
+ 10.1.0 - 10.2.4
+None
+BIG-IP ASM
+None
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP Edge Gateway
+
+None
+11.0.0 - 11.3.0
+ 10.1.0 - 10.2.4
+None
+BIG-IP GTM
+None
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP Link Controller
+None
+
+11.0.0 - 11.6.0
+ 10.0.0 - 10.2.4
+
+None
+BIG-IP PEM
+None
+
+11.3.0 - 11.6.0
+
+None
+BIG-IP PSM
+None
+11.0.0 - 11.4.1
+ 10.0.0 - 10.2.4
+None
+BIG-IP WebAccelerator
+None
+11.0.0 - 11.3.0
+ 10.0.0 - 10.2.4
+None
+BIG-IP WOM
+None
+11.0.0 - 11.3.0
+ 10.0.0 - 10.2.4
+None
+ARX
+None
+6.0.0 - 6.4.0
+None
+Enterprise Manager
+None
+3.0.0 - 3.1.1
+ 2.1.0 - 2.3.0
+None
+FirePass
+None
+7.0.0
+ 6.0.0 - 6.1.0
+None
+BIG-IQ Cloud
+None
+
+4.0.0 - 4.4.0
+
+None
+BIG-IQ Device
+None
+
+4.2.0 - 4.4.0
+
+None
+BIG-IQ Security
+None
+
+4.0.0 - 4.4.0
+
+None
+
+Vulnerability Recommended Actions
+None
+Supplemental Information
+
+SOL9970: Subscribing to email notifications regarding F5 products
+SOL9957: Creating a custom RSS feed to view new and updated documents.
+SOL4602: Overview of the F5 security vulnerability response policy
+SOL4918: Overview of the F5 critical issue hotfix policy
+SOL167: Downloading software and firmware from F5
+
+
+

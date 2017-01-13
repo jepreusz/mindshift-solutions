@@ -1,0 +1,2328 @@
+
+
+
+
+         
+
+ 
+         
+
+
+         
+
+            
+Upgrade version 5.0 BIG-IQ systems to version
+  5.1
+
+ 
+            
+
+               
+After you mount the storage drives, use these procedures to upgrade the managing BIG-IQ® Centralized Management devices in your cluster.
+
+            
+
+
+            
+
+               
+What you need to do before you upgrade to
+  BIG-IQ version 5.1
+
+ 
+               
+
+                  
+Before you can upgrade F5®
+      BIG-IQ® Centralized Management, you must perform each of the following
+      procedures.
+
+    
+    
+                  
+
+                     
+
+        
+        
+                        
+
+                           
+
+                              
+Required Procedures
+
+                              Notes
+
+                           
+
+
+                        
+
+
+                        
+
+                           
+
+                              
+Re-activate the BIG-IQ system license. 
+
+                              You must do this on both the active and the standby BIG-IQ if they are running in
+              an HA pair. For specific instructions about how to reactivate a license, refer to the
+                  F5®
+                BIG-IQ® Central Management: Licensing and Initial Setup
+              guide.
+
+                           
+
+
+                           
+
+                              
+Create a UCS backup of the BIG-IQ system's current configuration and store it on
+              a remote server.
+
+                              You can use this backup in the event you want to restore BIG-IQ version
+              5.0.
+
+                           
+
+
+                           
+
+                              
+Decide which disk volume you want to install the upgrade on. You must have at
+              least two volumes to upgrade BIG-IQ. 
+
+                              If you are running BIG-IQ Virtual Edition and you don't have two volumes, refer
+              to: SOL17406: Using the tmsh utility to create a new software volume for installing a
+              new image or hotfix on the BIG-IQ system at:
+                https://support.f5.com/kb/en-us/solutions/public/17000/400/sol17406.html
+                              
+
+                           
+
+
+                           
+
+                              
+Upgrade all managed BIG-IP devices to version 11.5.2 or later.
+
+                              For more information about this process, review the documentation associated with
+              the functionality that you're deploying changes for.
+
+                           
+
+
+                        
+
+
+                     
+
+                  
+
+
+
+               
+
+
+            
+
+            
+
+               
+How to upgrade from BIG-IQ version 5.0 to
+  BIG-IQ version 5.1
+
+ 
+               
+
+                  
+To upgrade F5®
+   BIG-IQ® Centralized Management from BIG-IQ version 5.0 to version 5.1,
+   perform these procedures.
+
+                  
+
+                     
+
+                        
+Note: It is important that you follow these
+    procedures in the order stated.
+
+                  
+
+
+                  
+
+                     
+Complete all of the pre-requisites outlined in
+    the topic titled, What you need to do before you upgrade to BIG-IQ version
+    5.1.
+
+                     
+Download the BIG-IQ version 5.1
+     iso file from the F5 Downloads site to your desktop. 
+
+                     
+Upload the software image to BIG-IQ.
+
+                     
+Remove the secondary BIG-IQ system from the
+    primary BIG-IQ system, if they are configured in an HA pair.
+
+                     
+Upgrade the primary BIG-IQ system, if they are
+    configured in an HA pair. 
+
+                     
+Upgrade the secondary BIG-IQ system, if they
+    are configured in an HA pair.
+
+                     
+Re-establish the HA configuration, if they are
+    configured in an HA pair.
+
+                  
+
+
+               
+
+
+            
+
+            
+
+    
+    
+               
+Download the BIG-IQ version 5.1 software
+        image from F5 Networks
+
+    
+               
+
+                  
+ Downloading a software image from
+            F5 Networks is the first step to making it available to install on BIG-IQ® Centralized Management.
+
+                  
+
+                     
+
+                        
+Log in to the F5 Downloads site,
+                    https://downloads.f5.com.
+                     
+
+                     
+
+                        
+Click the Find a Download button.
+                     
+
+                     
+
+                        
+Click the name of the product line.
+                     
+
+                     
+
+                        
+Click the product name, Centralized Management.
+                     
+
+                     
+
+                        
+Click V5.1.0.
+                     
+
+                     
+
+                        
+Read the End User Software License agreement and click the I
+                        Accept button if you agree with the terms.
+                     
+
+                     
+
+                        
+Click the BIG-IQ version 5.1 .iso file name.
+                     
+
+                     
+
+                        
+Click the name of the closest geographical location to you.
+                        
+The software image downloads to your local system
+                     
+
+                  
+
+
+                  
+The software image is now available
+            for you to upload to BIG-IQ.
+
+               
+
+
+            
+
+            
+
+    
+               
+Upload the BIG-IQ version 5.1 software
+        image to BIG-IQ version 5.0
+
+    
+               
+
+                  
+Before you can upload the software
+            image to BIG-IQ®Centralized Management, you must have first
+            downloaded it from the F5 Downloads site.
+
+                  
+
+                     
+Upload the BIG-IQ version 5.1 software image to make it available for this upgrade.
+            
+
+                  
+
+
+                  
+
+                     
+
+                        
+Log in to F5®
+                    BIG-IQ® Centralized Management with your user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select System Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+On the left, click SOFTWARE MANAGEMENT.
+                     
+
+                     
+
+                        
+On the left, click 
+                              SOFTWARE MANAGEMENT > Available Images
+                           .
+                     
+
+                     
+
+                        
+Click the Upload Image button.
+                     
+
+                     
+
+                        
+Click the Choose File button and navigate to the
+                    location to which you downloaded the image, and click the
+                        Open button to upload it to BIG-IQ.
+                     
+
+                     
+
+                        
+Click the Upload button.
+                        
+The screen refreshes to display the progress of the upload.
+                     
+
+                  
+
+
+                  
+When the image is done uploading, it
+            shows in the Available Images list.
+
+               
+
+
+            
+
+            
+
+    
+    
+               
+Remove the secondary BIG-IQ version 5.0
+        from an HA pair
+
+    
+               
+
+                  
+If the F5®BIG-IQ® Centralized Management system version 5.0 is configured in
+            an HA pair, you must remove the secondary BIG-IQ® system before you
+            upgrade the primary BIG-IQ.
+
+                  
+
+                     
+
+                        
+Log in to the primary BIG-IQ system with your administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select System Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+At the top of the screen, click Inventory.
+                     
+
+                     
+
+                        
+On the left, click BIG-IQ HA.
+                     
+
+                     
+
+                        
+Select the check box next to the secondary BIG-IQ, and click the
+                        Remove Device button.
+                        
+A dialog box opens, prompting you to confirm that you want to remove the
+                    peer device from this group.
+                     
+
+                     
+
+                        
+Click Delete in the dialog box to confirm the
+                    removal.
+                     
+
+                  
+
+
+                  
+You can now upgrade the primary
+            BIG-IQ.
+
+               
+
+
+            
+
+            
+
+  
+               
+Upgrade the primary BIG-IQ version 5.0 to
+    BIG-IQ version 5.1
+
+  
+               
+
+                  
+
+                     
+You need at least two volumes to
+        upgrade F5®
+        BIG-IQ® Centralized Management. If you are running BIG-IQ Virtual
+        Edition and don't have two volumes, refer to: SOL17406: Using the tmsh utility to
+          create a new software volume for installing a new image or hotfix on the BIG-IQ
+          system at
+          support.f5.com/kb/en-us/solutions/public/17000/400/sol17406.html
+                     
+
+Before
+      upgrading BIG-IQ, download the BIG-IQ version 5.1 .iso image from the F5
+      downloads site.
+
+                  
+
+                     
+
+                        
+Warning: These procedures require
+        that the BIG-IQ system is temporarily unavailable and unable to manage BIG-IP® devices until the upgrade is complete. BIG-IP devices can continue to manage
+        traffic during this time.
+
+                     
+The upgrade process involves installing the new version of the software, booting into that
+        new version, and reviewing the settings on the setup screens. 
+
+                  
+
+
+                  
+
+                     
+
+                        
+Log in to the primary BIG-IQ with your admin user name and password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select System Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+At the top of the screen, click Inventory.
+                     
+
+                     
+
+                        
+On the left, click BIG-IQ HA.
+                     
+
+                     
+
+                        
+Click the name of the primary BIG-IQ.
+                     
+
+                     
+
+                        
+On the left, click Software Version.
+                     
+
+                     
+
+                        
+Click the Update button.
+                     
+
+                     
+
+                        
+From the Software Image list, select the image you want to
+          install.
+                     
+
+                     
+
+                        
+From the Target Volume list, select the volume you want to install the image on.
+                     
+
+                     
+
+                        
+To prompt BIG-IQ to reboot into the new software installation volume, select
+                    the Reboot into Target Volume check box.
+                     
+
+                     
+
+                        
+Click the Apply button.
+                     
+
+                     
+
+                        
+Click the Continue button.
+                     
+
+                     
+
+                        
+Wait while BIG-IQ loads the new software and reboots.
+                     
+
+                     
+
+                        
+Log back in to the primary BIG-IQ.
+                     
+
+                  
+
+
+                  
+
+                     
+
+                        
+Important: In the unlikely event
+        that you are unable to log in to a BIG-IQ® 7000 series platform after
+        you upgraded it, refer to SOL40338232: The BIG-IQ system interface might be
+          inaccessible after the BIG-IQ system is upgraded from BIG-IQ Centralized Management
+          version to 5.1.0  at
+          support.f5.com/kb/en-us/solutions/public/k/40/sol40338232.html for
+        more information.
+
+                  
+
+
+               
+
+
+            
+
+            
+
+    
+               
+Upgrade the secondary BIG-IQ version 5.0
+        to BIG-IQ version 5.1
+
+    
+               
+
+                  
+
+                     
+After you upgrade the primary BIG-IQ® Centralized Management system to version 5.1 and
+                discover and import services for your managed devices, you can upgrade the secondary
+                BIG-IQ system in a HA configuration. 
+You need at least two volumes to upgrade
+            BIG-IQ. If you are running BIG-IQ Virtual Edition and you don't have two volumes, refer
+            to: SOL17406: Using the tmsh utility to create a new software volume for
+                installing a new image or hotfix on the BIG-IQ system at
+                support.f5.com/kb/en-us/solutions/public/17000/400/sol17406.html
+                  
+
+
+                  
+You upgrade the secondary BIG-IQ in
+            a HA configuration so it is running the same software version as the primary
+            BIG-IQ.
+
+                  
+
+                     
+
+                        
+Log in to the secondary BIG-IQ system's user interface with your admin user
+                    name and password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select System Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+At the top of the screen, click Inventory.
+                     
+
+                     
+
+                        
+On the left, click BIG-IQ HA.
+                     
+
+                     
+
+                        
+On the left, click Software Version.
+                     
+
+                     
+
+                        
+From the Software Image list, select the image you want
+                    to install. 
+                     
+
+                     
+
+                        
+From the Install Location list, select the volume to
+                    which you want to install the image.
+                     
+
+                     
+
+                        
+To set the location for where BIG-IQ installs this software image, select
+                        Target Volume.
+                     
+
+                     
+
+                        
+Click the Apply button.
+                        
+A popup screen opens, prompting you to confirm the
+                    installation.
+                     
+
+                     
+
+                        
+Click the Continue button.
+                     
+
+                     
+
+                        
+Wait while BIG-IQ loads the new software and reboots.
+                     
+
+                     
+
+                        
+Log in to the secondary BIG-IQ system with your admin user name and
+                    password.
+                     
+
+                  
+
+
+                  
+The secondary BIG-IQ system is now
+            upgraded to BIG-IQ version 5.1.
+
+                  
+You can now re-establish the BIG-IQ
+            HA configuration.
+
+               
+
+
+               
+
+                  
+
+                     
+Related tasks
+                     
+
+                     
+
+                        
+Re-establish the HA configuration after upgrading to BIG-IQ version 5.1
+                     
+
+                  
+
+               
+
+            
+
+            
+
+    
+    
+    
+               
+Re-establish the HA configuration after
+        upgrading to BIG-IQ version 5.1
+
+    
+               
+
+                  
+After you upgrade both F5®
+            BIG-IQ® Centralized Management systems in a HA configuration, you
+            can re-associate the secondary system with the primary BIG-IQ system.
+
+                  
+
+                     
+
+                        
+Log in to primary BIG-IQ system with your administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select System Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+At the top of the screen, click Inventory.
+                     
+
+                     
+
+                        
+On the left, click BIG-IQ HA.
+                     
+
+                     
+
+                        
+Click the Add Device button.
+                     
+
+                     
+
+                        
+In the IP Address field, type the BIG-IQ system's self
+                    IP address.
+                     
+
+                     
+
+                        
+In the User name and Password
+                    fields, type the administrative user name and password for the system.
+                     
+
+                     
+
+                        
+Click the Add button to add this device to this high
+                    availability configuration.
+                     
+
+                  
+
+
+                  
+Both BIG-IQ systems in the HA
+            configuration are now running BIG-IQ version 5.1.
+
+                  
+Next, you should verify that both
+            BIG-IQ systems have the same configuration.
+
+               
+
+
+            
+
+         
+
+         
+
+            
+After you upgrade from BIG-IQ version 5.0 to
+  BIG-IQ version 5.1
+
+ 
+            
+
+               
+After you upgrade to F5®
+   BIG-IQ® Centralized Management, you can continue to manage your devices.
+  
+
+            
+
+
+            
+
+               
+Discover and reimport services after you
+        upgrade from BIG-IQ version 5.0 to version 5.1
+
+    
+               
+
+                  
+
+                     
+To take advantage of the new features introduced in F5®
+                BIG-IQ® Centralized Management version 5.1, after you upgrade,
+                you must rediscover and reimport the service configurations for your BIG-IP® devices.
+
+                  
+
+
+                  
+
+                     
+
+                        
+Log in to F5®
+                    BIG-IQ® Centralized Management with your user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select Device Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+At the top of the screen, click Inventory.
+                     
+
+                     
+
+                        
+Click the name of the device you want to discover a service configuration
+                    from.
+                     
+
+                     
+
+                        
+On the left, click Services.
+                     
+
+                     
+
+                        
+Click the Import button next to the service you want to
+                    import to the BIG-IQ system.
+                        
+If the current configuration on the BIG-IQ is
+                    different than the one on the BIG-IP® device, BIG-IQ
+                    displays a screen for you to resolve the conflicts.
+                     
+
+                     
+
+                        
+If there are conflicts, select one of the following options for each object
+                    that is different, and then click the Continue
+                    button:
+                        
+
+                           
+
+                              
+Use BIG-IQ to use the configuration settings
+                        stored on BIG-IQ.
+
+                           
+
+                              
+Use BIG-IP to override the configuration setting
+                        stored on BIG-IQ with the settings from the BIG-IP device.
+
+                        
+
+
+                     
+
+                     
+
+                        
+Click the arrow button to return to the BIG-IP Device inventory screen.
+                        
+The device should display with a green status. This means the device is active
+                    and running.
+                        
+Repeat steps 4-7 for each device in the inventory.
+                     
+
+                  
+
+
+                  
+
+
+                  
+
+
+               
+
+
+            
+
+         
+
+      
+
+
+
+
+
+
+
+         
+
+ 
+         
+
+
+         
+
+            
+Upgrade version 5.0 BIG-IQ systems to version
+  5.1
+
+ 
+            
+
+               
+After you mount the storage drives, use these procedures to upgrade the managing BIG-IQ® Centralized Management devices in your cluster.
+
+            
+
+
+            
+
+               
+What you need to do before you upgrade to
+  BIG-IQ version 5.1
+
+ 
+               
+
+                  
+Before you can upgrade F5®
+      BIG-IQ® Centralized Management, you must perform each of the following
+      procedures.
+
+    
+    
+                  
+
+                     
+
+        
+        
+                        
+
+                           
+
+                              
+Required Procedures
+
+                              Notes
+
+                           
+
+
+                        
+
+
+                        
+
+                           
+
+                              
+Re-activate the BIG-IQ system license. 
+
+                              You must do this on both the active and the standby BIG-IQ if they are running in
+              an HA pair. For specific instructions about how to reactivate a license, refer to the
+                  F5®
+                BIG-IQ® Central Management: Licensing and Initial Setup
+              guide.
+
+                           
+
+
+                           
+
+                              
+Create a UCS backup of the BIG-IQ system's current configuration and store it on
+              a remote server.
+
+                              You can use this backup in the event you want to restore BIG-IQ version
+              5.0.
+
+                           
+
+
+                           
+
+                              
+Decide which disk volume you want to install the upgrade on. You must have at
+              least two volumes to upgrade BIG-IQ. 
+
+                              If you are running BIG-IQ Virtual Edition and you don't have two volumes, refer
+              to: SOL17406: Using the tmsh utility to create a new software volume for installing a
+              new image or hotfix on the BIG-IQ system at:
+                https://support.f5.com/kb/en-us/solutions/public/17000/400/sol17406.html
+                              
+
+                           
+
+
+                           
+
+                              
+Upgrade all managed BIG-IP devices to version 11.5.2 or later.
+
+                              For more information about this process, review the documentation associated with
+              the functionality that you're deploying changes for.
+
+                           
+
+
+                        
+
+
+                     
+
+                  
+
+
+
+               
+
+
+            
+
+            
+
+               
+How to upgrade from BIG-IQ version 5.0 to
+  BIG-IQ version 5.1
+
+ 
+               
+
+                  
+To upgrade F5®
+   BIG-IQ® Centralized Management from BIG-IQ version 5.0 to version 5.1,
+   perform these procedures.
+
+                  
+
+                     
+
+                        
+Note: It is important that you follow these
+    procedures in the order stated.
+
+                  
+
+
+                  
+
+                     
+Complete all of the pre-requisites outlined in
+    the topic titled, What you need to do before you upgrade to BIG-IQ version
+    5.1.
+
+                     
+Download the BIG-IQ version 5.1
+     iso file from the F5 Downloads site to your desktop. 
+
+                     
+Upload the software image to BIG-IQ.
+
+                     
+Remove the secondary BIG-IQ system from the
+    primary BIG-IQ system, if they are configured in an HA pair.
+
+                     
+Upgrade the primary BIG-IQ system, if they are
+    configured in an HA pair. 
+
+                     
+Upgrade the secondary BIG-IQ system, if they
+    are configured in an HA pair.
+
+                     
+Re-establish the HA configuration, if they are
+    configured in an HA pair.
+
+                  
+
+
+               
+
+
+            
+
+            
+
+    
+    
+               
+Download the BIG-IQ version 5.1 software
+        image from F5 Networks
+
+    
+               
+
+                  
+ Downloading a software image from
+            F5 Networks is the first step to making it available to install on BIG-IQ® Centralized Management.
+
+                  
+
+                     
+
+                        
+Log in to the F5 Downloads site,
+                    https://downloads.f5.com.
+                     
+
+                     
+
+                        
+Click the Find a Download button.
+                     
+
+                     
+
+                        
+Click the name of the product line.
+                     
+
+                     
+
+                        
+Click the product name, Centralized Management.
+                     
+
+                     
+
+                        
+Click V5.1.0.
+                     
+
+                     
+
+                        
+Read the End User Software License agreement and click the I
+                        Accept button if you agree with the terms.
+                     
+
+                     
+
+                        
+Click the BIG-IQ version 5.1 .iso file name.
+                     
+
+                     
+
+                        
+Click the name of the closest geographical location to you.
+                        
+The software image downloads to your local system
+                     
+
+                  
+
+
+                  
+The software image is now available
+            for you to upload to BIG-IQ.
+
+               
+
+
+            
+
+            
+
+    
+               
+Upload the BIG-IQ version 5.1 software
+        image to BIG-IQ version 5.0
+
+    
+               
+
+                  
+Before you can upload the software
+            image to BIG-IQ®Centralized Management, you must have first
+            downloaded it from the F5 Downloads site.
+
+                  
+
+                     
+Upload the BIG-IQ version 5.1 software image to make it available for this upgrade.
+            
+
+                  
+
+
+                  
+
+                     
+
+                        
+Log in to F5®
+                    BIG-IQ® Centralized Management with your user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select System Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+On the left, click SOFTWARE MANAGEMENT.
+                     
+
+                     
+
+                        
+On the left, click 
+                              SOFTWARE MANAGEMENT > Available Images
+                           .
+                     
+
+                     
+
+                        
+Click the Upload Image button.
+                     
+
+                     
+
+                        
+Click the Choose File button and navigate to the
+                    location to which you downloaded the image, and click the
+                        Open button to upload it to BIG-IQ.
+                     
+
+                     
+
+                        
+Click the Upload button.
+                        
+The screen refreshes to display the progress of the upload.
+                     
+
+                  
+
+
+                  
+When the image is done uploading, it
+            shows in the Available Images list.
+
+               
+
+
+            
+
+            
+
+    
+    
+               
+Remove the secondary BIG-IQ version 5.0
+        from an HA pair
+
+    
+               
+
+                  
+If the F5®BIG-IQ® Centralized Management system version 5.0 is configured in
+            an HA pair, you must remove the secondary BIG-IQ® system before you
+            upgrade the primary BIG-IQ.
+
+                  
+
+                     
+
+                        
+Log in to the primary BIG-IQ system with your administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select System Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+At the top of the screen, click Inventory.
+                     
+
+                     
+
+                        
+On the left, click BIG-IQ HA.
+                     
+
+                     
+
+                        
+Select the check box next to the secondary BIG-IQ, and click the
+                        Remove Device button.
+                        
+A dialog box opens, prompting you to confirm that you want to remove the
+                    peer device from this group.
+                     
+
+                     
+
+                        
+Click Delete in the dialog box to confirm the
+                    removal.
+                     
+
+                  
+
+
+                  
+You can now upgrade the primary
+            BIG-IQ.
+
+               
+
+
+            
+
+            
+
+  
+               
+Upgrade the primary BIG-IQ version 5.0 to
+    BIG-IQ version 5.1
+
+  
+               
+
+                  
+
+                     
+You need at least two volumes to
+        upgrade F5®
+        BIG-IQ® Centralized Management. If you are running BIG-IQ Virtual
+        Edition and don't have two volumes, refer to: SOL17406: Using the tmsh utility to
+          create a new software volume for installing a new image or hotfix on the BIG-IQ
+          system at
+          support.f5.com/kb/en-us/solutions/public/17000/400/sol17406.html
+                     
+
+Before
+      upgrading BIG-IQ, download the BIG-IQ version 5.1 .iso image from the F5
+      downloads site.
+
+                  
+
+                     
+
+                        
+Warning: These procedures require
+        that the BIG-IQ system is temporarily unavailable and unable to manage BIG-IP® devices until the upgrade is complete. BIG-IP devices can continue to manage
+        traffic during this time.
+
+                     
+The upgrade process involves installing the new version of the software, booting into that
+        new version, and reviewing the settings on the setup screens. 
+
+                  
+
+
+                  
+
+                     
+
+                        
+Log in to the primary BIG-IQ with your admin user name and password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select System Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+At the top of the screen, click Inventory.
+                     
+
+                     
+
+                        
+On the left, click BIG-IQ HA.
+                     
+
+                     
+
+                        
+Click the name of the primary BIG-IQ.
+                     
+
+                     
+
+                        
+On the left, click Software Version.
+                     
+
+                     
+
+                        
+Click the Update button.
+                     
+
+                     
+
+                        
+From the Software Image list, select the image you want to
+          install.
+                     
+
+                     
+
+                        
+From the Target Volume list, select the volume you want to install the image on.
+                     
+
+                     
+
+                        
+To prompt BIG-IQ to reboot into the new software installation volume, select
+                    the Reboot into Target Volume check box.
+                     
+
+                     
+
+                        
+Click the Apply button.
+                     
+
+                     
+
+                        
+Click the Continue button.
+                     
+
+                     
+
+                        
+Wait while BIG-IQ loads the new software and reboots.
+                     
+
+                     
+
+                        
+Log back in to the primary BIG-IQ.
+                     
+
+                  
+
+
+                  
+
+                     
+
+                        
+Important: In the unlikely event
+        that you are unable to log in to a BIG-IQ® 7000 series platform after
+        you upgraded it, refer to SOL40338232: The BIG-IQ system interface might be
+          inaccessible after the BIG-IQ system is upgraded from BIG-IQ Centralized Management
+          version to 5.1.0  at
+          support.f5.com/kb/en-us/solutions/public/k/40/sol40338232.html for
+        more information.
+
+                  
+
+
+               
+
+
+            
+
+            
+
+    
+               
+Upgrade the secondary BIG-IQ version 5.0
+        to BIG-IQ version 5.1
+
+    
+               
+
+                  
+
+                     
+After you upgrade the primary BIG-IQ® Centralized Management system to version 5.1 and
+                discover and import services for your managed devices, you can upgrade the secondary
+                BIG-IQ system in a HA configuration. 
+You need at least two volumes to upgrade
+            BIG-IQ. If you are running BIG-IQ Virtual Edition and you don't have two volumes, refer
+            to: SOL17406: Using the tmsh utility to create a new software volume for
+                installing a new image or hotfix on the BIG-IQ system at
+                support.f5.com/kb/en-us/solutions/public/17000/400/sol17406.html
+                  
+
+
+                  
+You upgrade the secondary BIG-IQ in
+            a HA configuration so it is running the same software version as the primary
+            BIG-IQ.
+
+                  
+
+                     
+
+                        
+Log in to the secondary BIG-IQ system's user interface with your admin user
+                    name and password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select System Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+At the top of the screen, click Inventory.
+                     
+
+                     
+
+                        
+On the left, click BIG-IQ HA.
+                     
+
+                     
+
+                        
+On the left, click Software Version.
+                     
+
+                     
+
+                        
+From the Software Image list, select the image you want
+                    to install. 
+                     
+
+                     
+
+                        
+From the Install Location list, select the volume to
+                    which you want to install the image.
+                     
+
+                     
+
+                        
+To set the location for where BIG-IQ installs this software image, select
+                        Target Volume.
+                     
+
+                     
+
+                        
+Click the Apply button.
+                        
+A popup screen opens, prompting you to confirm the
+                    installation.
+                     
+
+                     
+
+                        
+Click the Continue button.
+                     
+
+                     
+
+                        
+Wait while BIG-IQ loads the new software and reboots.
+                     
+
+                     
+
+                        
+Log in to the secondary BIG-IQ system with your admin user name and
+                    password.
+                     
+
+                  
+
+
+                  
+The secondary BIG-IQ system is now
+            upgraded to BIG-IQ version 5.1.
+
+                  
+You can now re-establish the BIG-IQ
+            HA configuration.
+
+               
+
+
+               
+
+                  
+
+                     
+Related tasks
+                     
+
+                     
+
+                        
+Re-establish the HA configuration after upgrading to BIG-IQ version 5.1
+                     
+
+                  
+
+               
+
+            
+
+            
+
+    
+    
+    
+               
+Re-establish the HA configuration after
+        upgrading to BIG-IQ version 5.1
+
+    
+               
+
+                  
+After you upgrade both F5®
+            BIG-IQ® Centralized Management systems in a HA configuration, you
+            can re-associate the secondary system with the primary BIG-IQ system.
+
+                  
+
+                     
+
+                        
+Log in to primary BIG-IQ system with your administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select System Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+At the top of the screen, click Inventory.
+                     
+
+                     
+
+                        
+On the left, click BIG-IQ HA.
+                     
+
+                     
+
+                        
+Click the Add Device button.
+                     
+
+                     
+
+                        
+In the IP Address field, type the BIG-IQ system's self
+                    IP address.
+                     
+
+                     
+
+                        
+In the User name and Password
+                    fields, type the administrative user name and password for the system.
+                     
+
+                     
+
+                        
+Click the Add button to add this device to this high
+                    availability configuration.
+                     
+
+                  
+
+
+                  
+Both BIG-IQ systems in the HA
+            configuration are now running BIG-IQ version 5.1.
+
+                  
+Next, you should verify that both
+            BIG-IQ systems have the same configuration.
+
+               
+
+
+            
+
+         
+
+         
+
+            
+After you upgrade from BIG-IQ version 5.0 to
+  BIG-IQ version 5.1
+
+ 
+            
+
+               
+After you upgrade to F5®
+   BIG-IQ® Centralized Management, you can continue to manage your devices.
+  
+
+            
+
+
+            
+
+               
+Discover and reimport services after you
+        upgrade from BIG-IQ version 5.0 to version 5.1
+
+    
+               
+
+                  
+
+                     
+To take advantage of the new features introduced in F5®
+                BIG-IQ® Centralized Management version 5.1, after you upgrade,
+                you must rediscover and reimport the service configurations for your BIG-IP® devices.
+
+                  
+
+
+                  
+
+                     
+
+                        
+Log in to F5®
+                    BIG-IQ® Centralized Management with your user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top left of the screen, select Device Management
+                    from the BIG-IQ menu.
+                     
+
+                     
+
+                        
+At the top of the screen, click Inventory.
+                     
+
+                     
+
+                        
+Click the name of the device you want to discover a service configuration
+                    from.
+                     
+
+                     
+
+                        
+On the left, click Services.
+                     
+
+                     
+
+                        
+Click the Import button next to the service you want to
+                    import to the BIG-IQ system.
+                        
+If the current configuration on the BIG-IQ is
+                    different than the one on the BIG-IP® device, BIG-IQ
+                    displays a screen for you to resolve the conflicts.
+                     
+
+                     
+
+                        
+If there are conflicts, select one of the following options for each object
+                    that is different, and then click the Continue
+                    button:
+                        
+
+                           
+
+                              
+Use BIG-IQ to use the configuration settings
+                        stored on BIG-IQ.
+
+                           
+
+                              
+Use BIG-IP to override the configuration setting
+                        stored on BIG-IQ with the settings from the BIG-IP device.
+
+                        
+
+
+                     
+
+                     
+
+                        
+Click the arrow button to return to the BIG-IP Device inventory screen.
+                        
+The device should display with a green status. This means the device is active
+                    and running.
+                        
+Repeat steps 4-7 for each device in the inventory.
+                     
+
+                  
+
+
+                  
+
+
+                  
+
+
+               
+
+
+            
+
+         
+
+      
+
+
+
+
+
+
+
+         
+Legal Notices
+
+ 
+         
+
+
+         
+
+            
+Legal notices
+
+ 
+ 
+            
+
+               
+
+                  
+Publication Date
+   
+                  
+This document was published on December 9, 2015.
+
+               
+
+
+               
+
+                  
+Publication Number
+   
+                  
+
+                     
+MAN-0535-01
+                  
+
+
+               
+
+
+               
+
+                  
+Copyright
+   
+                  
+Copyright © 2015, F5 Networks, Inc. All rights reserved.
+
+                  
+F5 Networks, Inc. (F5) believes the information it furnishes to be accurate and reliable. However, F5
+    assumes no responsibility for the use of this information, nor any infringement of patents or other rights
+    of third parties which may result from its use. No license is granted by implication or otherwise under
+    any patent, copyright, or other intellectual property right of F5 except as specifically described by
+    applicable user licenses. F5 reserves the right to change specifications at any time without notice.
+
+               
+
+
+               
+
+                  
+Trademarks
+   
+   
+                  
+AAM, Access Policy Manager, Advanced Client Authentication, Advanced Firewall Manager, Advanced Routing,
+    AFM, APM, Application Acceleration Manager, Application Security Manager, AskF5, ASM, BIG-IP, BIG-IP EDGE
+    GATEWAY, BIG-IQ, Cloud Extender, Cloud Manager, CloudFucious, Clustered Multiprocessing, CMP, COHESION,
+    Data Manager, DDoS Frontline, DDoS SWAT, Defense.Net, defense.net [DESIGN], DevCentral, DevCentral
+    [DESIGN], DNS Express, DSC, DSI, Edge Client, Edge Gateway, Edge Mobile, Edge Mobility, Edge Portal,
+    ELEVATE, EM, ENGAGE, Enterprise Manager, F5, F5 [DESIGN], F5 Agility, F5 Certified [DESIGN], F5 Networks,
+    F5 SalesXchange [DESIGN], F5 Synthesis, f5 Synthesis, F5 Synthesis [DESIGN], F5 TechXchange [DESIGN], Fast
+    Application Proxy, Fast Cache, FCINCO, Global Traffic Manager, GTM, GUARDIAN, iApps, IBR, iCall, iControl,
+    iHealth, Intelligent Browser Referencing, Intelligent Compression, IPv6 Gateway, iQuery, iRules, iRules
+    OnDemand, iSession, L7 Rate Shaping, LC, Link Controller, LineRate, LineRate Point, LineRate Precision,
+    LineRate Systems [DESIGN], Local Traffic Manager, LROS, LTM, Message Security Manager, MobileSafe, MSM,
+    OneConnect, Packet Velocity, PEM, Policy Enforcement Manager, Protocol Security Manager, PSM, Ready
+    Defense, Real Traffic Policy Builder, SalesXchange, ScaleN, SDAS (except in Japan), SDC, Signalling
+    Delivery Controller, Solutions for an application world, Software Designed Application Services,
+    Silverline, SSL Acceleration, SSL Everywhere, StrongBox, SuperVIP, SYN Check, SYNTHESIS, TCP Express, TDR,
+    TechXchange, TMOS, TotALL, TDR, TMOS, Traffic Management Operating System, Traffix, Traffix [DESIGN],
+    Transparent Data Reduction, UNITY, VAULT, vCMP, VE F5 [DESIGN], Versafe, Versafe [DESIGN], VIPRION,
+    Virtual Clustered Multiprocessing, WebSafe, and ZoneRunner, are trademarks or service marks of F5
+    Networks, Inc., in the U.S. and other countries, and may not be used without F5's express written consent. 
+
+                  
+All other product and company names herein may be trademarks of their respective owners.
+
+               
+
+
+               
+
+                  
+Patents
+   
+   
+                  
+This product may be protected by one or more patents indicated at: https://f5.com/about-us/policies/patents
+                  
+
+
+               
+
+
+  
+               
+
+                  
+Link Controller Availability
+                  
+This product is not currently available in the United States.
+               
+
+
+               
+
+                  
+Export Regulation Notice
+   
+                  
+This product may include cryptographic software. Under the Export Administration Act, the United States
+    government may consider it a criminal offense to export this product from the United States.
+
+               
+
+
+               
+
+                  
+RF Interference Warning
+   
+                  
+This is a Class A product. In a domestic environment this product may cause radio interference, in which
+    case the user may be required to take adequate measures.
+
+               
+
+
+               
+
+                  
+FCC Compliance
+   
+                  
+This equipment has been tested and found to comply with the limits for a Class A digital device pursuant
+    to Part 15 of FCC rules. These limits are designed to provide reasonable protection against harmful
+    interference when the equipment is operated in a commercial environment. This unit generates, uses, and
+    can radiate radio frequency energy and, if not installed and used in accordance with the instruction
+    manual, may cause harmful interference to radio communications. Operation of this equipment in a
+    residential area is likely to cause harmful interference, in which case the user, at his own expense, will
+    be required to take whatever measures may be required to correct the interference.
+
+                  
+Any modifications to this device, unless expressly approved by the manufacturer, can void the user's
+    authority to operate this equipment under part 15 of the FCC rules.
+
+               
+
+
+               
+
+                  
+Canadian Regulatory Compliance
+   
+                  
+This Class A digital apparatus complies with Canadian ICES-003.
+
+               
+
+
+               
+
+                  
+Standards Compliance
+   
+                  
+This product conforms to the IEC, European Union, ANSI/UL and Canadian CSA standards applicable to
+    Information Technology products at the time of manufacture.
+
+               
+
+
+            
+
+
+         
+
+      
+
+
+
+
+
+
+
+         
+Legal Notices
+
+ 
+         
+
+
+         
+
+            
+Legal notices
+
+ 
+ 
+            
+
+               
+
+                  
+Publication Date
+   
+                  
+This document was published on December 9, 2015.
+
+               
+
+
+               
+
+                  
+Publication Number
+   
+                  
+
+                     
+MAN-0535-01
+                  
+
+
+               
+
+
+               
+
+                  
+Copyright
+   
+                  
+Copyright © 2015, F5 Networks, Inc. All rights reserved.
+
+                  
+F5 Networks, Inc. (F5) believes the information it furnishes to be accurate and reliable. However, F5
+    assumes no responsibility for the use of this information, nor any infringement of patents or other rights
+    of third parties which may result from its use. No license is granted by implication or otherwise under
+    any patent, copyright, or other intellectual property right of F5 except as specifically described by
+    applicable user licenses. F5 reserves the right to change specifications at any time without notice.
+
+               
+
+
+               
+
+                  
+Trademarks
+   
+   
+                  
+AAM, Access Policy Manager, Advanced Client Authentication, Advanced Firewall Manager, Advanced Routing,
+    AFM, APM, Application Acceleration Manager, Application Security Manager, AskF5, ASM, BIG-IP, BIG-IP EDGE
+    GATEWAY, BIG-IQ, Cloud Extender, Cloud Manager, CloudFucious, Clustered Multiprocessing, CMP, COHESION,
+    Data Manager, DDoS Frontline, DDoS SWAT, Defense.Net, defense.net [DESIGN], DevCentral, DevCentral
+    [DESIGN], DNS Express, DSC, DSI, Edge Client, Edge Gateway, Edge Mobile, Edge Mobility, Edge Portal,
+    ELEVATE, EM, ENGAGE, Enterprise Manager, F5, F5 [DESIGN], F5 Agility, F5 Certified [DESIGN], F5 Networks,
+    F5 SalesXchange [DESIGN], F5 Synthesis, f5 Synthesis, F5 Synthesis [DESIGN], F5 TechXchange [DESIGN], Fast
+    Application Proxy, Fast Cache, FCINCO, Global Traffic Manager, GTM, GUARDIAN, iApps, IBR, iCall, iControl,
+    iHealth, Intelligent Browser Referencing, Intelligent Compression, IPv6 Gateway, iQuery, iRules, iRules
+    OnDemand, iSession, L7 Rate Shaping, LC, Link Controller, LineRate, LineRate Point, LineRate Precision,
+    LineRate Systems [DESIGN], Local Traffic Manager, LROS, LTM, Message Security Manager, MobileSafe, MSM,
+    OneConnect, Packet Velocity, PEM, Policy Enforcement Manager, Protocol Security Manager, PSM, Ready
+    Defense, Real Traffic Policy Builder, SalesXchange, ScaleN, SDAS (except in Japan), SDC, Signalling
+    Delivery Controller, Solutions for an application world, Software Designed Application Services,
+    Silverline, SSL Acceleration, SSL Everywhere, StrongBox, SuperVIP, SYN Check, SYNTHESIS, TCP Express, TDR,
+    TechXchange, TMOS, TotALL, TDR, TMOS, Traffic Management Operating System, Traffix, Traffix [DESIGN],
+    Transparent Data Reduction, UNITY, VAULT, vCMP, VE F5 [DESIGN], Versafe, Versafe [DESIGN], VIPRION,
+    Virtual Clustered Multiprocessing, WebSafe, and ZoneRunner, are trademarks or service marks of F5
+    Networks, Inc., in the U.S. and other countries, and may not be used without F5's express written consent. 
+
+                  
+All other product and company names herein may be trademarks of their respective owners.
+
+               
+
+
+               
+
+                  
+Patents
+   
+   
+                  
+This product may be protected by one or more patents indicated at: https://f5.com/about-us/policies/patents
+                  
+
+
+               
+
+
+  
+               
+
+                  
+Link Controller Availability
+                  
+This product is not currently available in the United States.
+               
+
+
+               
+
+                  
+Export Regulation Notice
+   
+                  
+This product may include cryptographic software. Under the Export Administration Act, the United States
+    government may consider it a criminal offense to export this product from the United States.
+
+               
+
+
+               
+
+                  
+RF Interference Warning
+   
+                  
+This is a Class A product. In a domestic environment this product may cause radio interference, in which
+    case the user may be required to take adequate measures.
+
+               
+
+
+               
+
+                  
+FCC Compliance
+   
+                  
+This equipment has been tested and found to comply with the limits for a Class A digital device pursuant
+    to Part 15 of FCC rules. These limits are designed to provide reasonable protection against harmful
+    interference when the equipment is operated in a commercial environment. This unit generates, uses, and
+    can radiate radio frequency energy and, if not installed and used in accordance with the instruction
+    manual, may cause harmful interference to radio communications. Operation of this equipment in a
+    residential area is likely to cause harmful interference, in which case the user, at his own expense, will
+    be required to take whatever measures may be required to correct the interference.
+
+                  
+Any modifications to this device, unless expressly approved by the manufacturer, can void the user's
+    authority to operate this equipment under part 15 of the FCC rules.
+
+               
+
+
+               
+
+                  
+Canadian Regulatory Compliance
+   
+                  
+This Class A digital apparatus complies with Canadian ICES-003.
+
+               
+
+
+               
+
+                  
+Standards Compliance
+   
+                  
+This product conforms to the IEC, European Union, ANSI/UL and Canadian CSA standards applicable to
+    Information Technology products at the time of manufacture.
+
+               
+
+
+            
+
+
+         
+
+      
+
+
+

@@ -1,0 +1,1560 @@
+
+
+
+
+         
+
+ 
+         
+
+
+         
+
+            
+Overview: Users, user groups, and roles
+
+ 
+            
+
+               
+A user is an individual to whom you provide resources. You provide access to users
+   for specific BIG-IQ® system functionality through authentication. You can
+   associate a user with a specific role, or associate a user with a user group and then associate
+   the group with a role. 
+
+               
+A role is defined by its specific privileges. A user group is a group
+   of individuals that have access to the same resources. When you associate a role with a user or
+   user group, that user or user group is granted all of the role's corresponding privileges. 
+
+               
+By default, the BIG-IQ® system provides the following default user
+   types:
+
+               
+
+   
+                  
+
+                     
+
+     
+     
+     
+                        
+
+                           
+
+                              
+Default user type
+
+                              Default password
+
+                              Access rights
+
+                           
+
+
+                        
+
+
+                        
+
+                           
+
+                              
+admin
+
+                              admin
+
+                              This user type can access all aspects of the BIG-IQ system from the system's user
+        interface.
+
+                           
+
+
+                           
+
+                              
+root
+
+                              default
+
+                              This user has access to all aspects of the BIG-IQ system from the system's console
+        command line.
+
+                           
+
+
+                        
+
+
+                     
+
+                  
+
+
+               
+
+
+               
+User types persist and are available after a BIG-IQ system failover.
+   
+
+            
+
+
+            
+
+               
+About default passwords for pre-defined users
+
+ 
+               
+
+                  
+When you initially license the BIG-IQ® system, it creates the following
+   administrative roles with a default password.
+
+                  
+
+                     
+admin
+
+                     
+root
+
+                  
+
+
+               
+
+
+            
+
+            
+
+               
+Changing the default password for the administrator user
+
+    
+               
+
+                  
+You must specify the management IP address settings for the BIG-IQ® system to prompt the system to automatically create the administrator
+            user.
+
+                  
+After you initially license and configure the BIG-IQ system, it is important to
+            change the administrator role password from the default, admin. 
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+
+                    At the top of the screen, click Access Control.
+                     
+
+                     
+
+                        
+
+                    On the Users panel, for Admin User, click the gear icon and then Properties.
+                     
+
+                     
+
+                        
+For the admin account, in the Old Password field, type admin.
+                     
+
+                     
+
+                        
+In the New Password and Confirm New Password fields, type a new password.
+                     
+
+                     
+
+                        
+For the root account, in the Old Password field, type default.
+                     
+
+                     
+
+                        
+In the New Password and Confirm New Password fields, type a new password.
+                     
+
+                     
+
+                        
+To save this configuration, click the Next button.
+                     
+
+                  
+
+
+               
+
+
+            
+
+            
+
+               
+Adding a locally-authenticated BIG-IQ user
+
+    
+               
+
+                  
+You create a user so you can then associate that user with a particular role to
+            define access to specific BIG-IQ® system resources. 
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+ At the top of the screen, click Access Control.
+                     
+
+                     
+
+                        
+ In the Users panel, hover over a user, and click the gear icon when it
+                    appears.
+                        
+The panel expands to display the User properties.
+                     
+
+                     
+
+                        
+ From the Auth Type Provider list, select
+                        Local.
+                     
+
+                     
+
+                        
+ In the Full Name field, type a name to identify this
+                    user.
+                        
+The full name can contain a combination of symbols, letters, numbers and
+                    spaces.
+                     
+
+                     
+
+                        
+ In the Password and Confirm
+                        Password fields, type the password for the new user.
+                     
+
+                     
+
+                        
+ Click the Add button.
+                     
+
+                  
+
+
+                  
+You can now associate this user with a role.
+
+               
+
+
+            
+
+         
+
+         
+
+            
+About user roles
+
+ 
+            
+
+               
+As a system manager, you need a way to differentiate between users and to limit user privileges
+   based on their responsibilities. To assist you, the BIG-IQ® system has
+   created a default set of roles you can assign to a user. Roles persist and are available after a
+   BIG-IQ system failover. 
+
+            
+
+
+            
+
+               
+Roles definitions
+
+
+  
+  
+               
+
+                  
+BIG-IQ® system ships with several standard roles, which you can
+    assign to individual users.
+
+    
+                  
+
+                     
+
+                        
+
+                           
+
+                              
+Role
+
+                              Description
+
+                           
+
+
+                        
+
+
+                        
+
+                           
+
+                              
+Administrator
+
+                              Responsible for overall administration of all licensed aspects of the BIG-IQ
+              system. These responsibilities include adding individual users, assigning roles,
+              discovering BIG-IP® systems, installing updates, activating
+              licenses, and configuring a BIG-IQ high availability (HA) configuration.
+
+                           
+
+
+                           
+
+                              
+Tenant
+
+                              A tenant is an entity that can consist of one or more users accessing resources
+              provided by an administrator. Responsibilities include: customizing and deploying
+              application templates, and monitoring the health statistics and performance of
+              applications and servers. 
+                                    
+Note: The BIG-IQ system creates a new role when
+                an administrator creates a new tenant. The connectors each tenant can access are
+                specified when the tenant is created. The name of the new role is based on the
+                tenant name. For example, creating a new tenant named
+                  headquarters-user, produces a new role named
+                  headquarters-user (Cloud Tenant). 
+
+                              
+
+
+                           
+
+
+
+                        
+
+
+                     
+
+                  
+
+
+               
+
+
+            
+
+            
+
+               
+Associating a user or user group with a role 
+
+    
+               
+
+                  
+Before you can associate a user or user group with a role, you must create a user or
+            user group.
+
+                  
+When you associate a user or user group with a role, you define the resources users
+            can view and modify. You can associate multiple roles with a given user.
+
+
+
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+ At the top of the screen, click Access Control.
+                     
+
+                     
+
+                        
+ In the Users or User Groups panel, click the name you want to associate with a
+                    role, and drag and drop it on a role in the Roles panel.
+                        
+A confirmation pop-up screen opens.
+                     
+
+                     
+
+                        
+Click the Confirm button to assign the user or user group to the selected role.
+                     
+
+                  
+
+
+                  
+This user or user group now has access to the resources associated with the role you
+            specified.
+
+               
+
+
+
+            
+
+            
+
+               
+Disassociating a user from a role
+
+    
+               
+
+                  
+ Use this procedure to disassociate a user from an assigned role. 
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top of the screen, click 
+                              System > Users
+                           .
+                     
+
+                     
+
+                        
+Click the name of the user you want to edit.
+                     
+
+                     
+
+                        
+For the User Roles property, delete the user role that you want to disassociate
+                    from this user.
+                     
+
+                     
+
+                        
+Click the Save button to save your changes.
+                     
+
+                  
+
+
+                  
+This user no longer has the privileges associated with the role you
+            deleted.
+
+               
+
+
+            
+
+         
+
+      
+
+
+
+
+
+
+
+         
+
+ 
+         
+
+
+         
+
+            
+Overview: Users, user groups, and roles
+
+ 
+            
+
+               
+A user is an individual to whom you provide resources. You provide access to users
+   for specific BIG-IQ® system functionality through authentication. You can
+   associate a user with a specific role, or associate a user with a user group and then associate
+   the group with a role. 
+
+               
+A role is defined by its specific privileges. A user group is a group
+   of individuals that have access to the same resources. When you associate a role with a user or
+   user group, that user or user group is granted all of the role's corresponding privileges. 
+
+               
+By default, the BIG-IQ® system provides the following default user
+   types:
+
+               
+
+   
+                  
+
+                     
+
+     
+     
+     
+                        
+
+                           
+
+                              
+Default user type
+
+                              Default password
+
+                              Access rights
+
+                           
+
+
+                        
+
+
+                        
+
+                           
+
+                              
+admin
+
+                              admin
+
+                              This user type can access all aspects of the BIG-IQ system from the system's user
+        interface.
+
+                           
+
+
+                           
+
+                              
+root
+
+                              default
+
+                              This user has access to all aspects of the BIG-IQ system from the system's console
+        command line.
+
+                           
+
+
+                        
+
+
+                     
+
+                  
+
+
+               
+
+
+               
+User types persist and are available after a BIG-IQ system failover.
+   
+
+            
+
+
+            
+
+               
+About default passwords for pre-defined users
+
+ 
+               
+
+                  
+When you initially license the BIG-IQ® system, it creates the following
+   administrative roles with a default password.
+
+                  
+
+                     
+admin
+
+                     
+root
+
+                  
+
+
+               
+
+
+            
+
+            
+
+               
+Changing the default password for the administrator user
+
+    
+               
+
+                  
+You must specify the management IP address settings for the BIG-IQ® system to prompt the system to automatically create the administrator
+            user.
+
+                  
+After you initially license and configure the BIG-IQ system, it is important to
+            change the administrator role password from the default, admin. 
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+
+                    At the top of the screen, click Access Control.
+                     
+
+                     
+
+                        
+
+                    On the Users panel, for Admin User, click the gear icon and then Properties.
+                     
+
+                     
+
+                        
+For the admin account, in the Old Password field, type admin.
+                     
+
+                     
+
+                        
+In the New Password and Confirm New Password fields, type a new password.
+                     
+
+                     
+
+                        
+For the root account, in the Old Password field, type default.
+                     
+
+                     
+
+                        
+In the New Password and Confirm New Password fields, type a new password.
+                     
+
+                     
+
+                        
+To save this configuration, click the Next button.
+                     
+
+                  
+
+
+               
+
+
+            
+
+            
+
+               
+Adding a locally-authenticated BIG-IQ user
+
+    
+               
+
+                  
+You create a user so you can then associate that user with a particular role to
+            define access to specific BIG-IQ® system resources. 
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+ At the top of the screen, click Access Control.
+                     
+
+                     
+
+                        
+ In the Users panel, hover over a user, and click the gear icon when it
+                    appears.
+                        
+The panel expands to display the User properties.
+                     
+
+                     
+
+                        
+ From the Auth Type Provider list, select
+                        Local.
+                     
+
+                     
+
+                        
+ In the Full Name field, type a name to identify this
+                    user.
+                        
+The full name can contain a combination of symbols, letters, numbers and
+                    spaces.
+                     
+
+                     
+
+                        
+ In the Password and Confirm
+                        Password fields, type the password for the new user.
+                     
+
+                     
+
+                        
+ Click the Add button.
+                     
+
+                  
+
+
+                  
+You can now associate this user with a role.
+
+               
+
+
+            
+
+         
+
+         
+
+            
+About user roles
+
+ 
+            
+
+               
+As a system manager, you need a way to differentiate between users and to limit user privileges
+   based on their responsibilities. To assist you, the BIG-IQ® system has
+   created a default set of roles you can assign to a user. Roles persist and are available after a
+   BIG-IQ system failover. 
+
+            
+
+
+            
+
+               
+Roles definitions
+
+
+  
+  
+               
+
+                  
+BIG-IQ® system ships with several standard roles, which you can
+    assign to individual users.
+
+    
+                  
+
+                     
+
+                        
+
+                           
+
+                              
+Role
+
+                              Description
+
+                           
+
+
+                        
+
+
+                        
+
+                           
+
+                              
+Administrator
+
+                              Responsible for overall administration of all licensed aspects of the BIG-IQ
+              system. These responsibilities include adding individual users, assigning roles,
+              discovering BIG-IP® systems, installing updates, activating
+              licenses, and configuring a BIG-IQ high availability (HA) configuration.
+
+                           
+
+
+                           
+
+                              
+Tenant
+
+                              A tenant is an entity that can consist of one or more users accessing resources
+              provided by an administrator. Responsibilities include: customizing and deploying
+              application templates, and monitoring the health statistics and performance of
+              applications and servers. 
+                                    
+Note: The BIG-IQ system creates a new role when
+                an administrator creates a new tenant. The connectors each tenant can access are
+                specified when the tenant is created. The name of the new role is based on the
+                tenant name. For example, creating a new tenant named
+                  headquarters-user, produces a new role named
+                  headquarters-user (Cloud Tenant). 
+
+                              
+
+
+                           
+
+
+
+                        
+
+
+                     
+
+                  
+
+
+               
+
+
+            
+
+            
+
+               
+Associating a user or user group with a role 
+
+    
+               
+
+                  
+Before you can associate a user or user group with a role, you must create a user or
+            user group.
+
+                  
+When you associate a user or user group with a role, you define the resources users
+            can view and modify. You can associate multiple roles with a given user.
+
+
+
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+ At the top of the screen, click Access Control.
+                     
+
+                     
+
+                        
+ In the Users or User Groups panel, click the name you want to associate with a
+                    role, and drag and drop it on a role in the Roles panel.
+                        
+A confirmation pop-up screen opens.
+                     
+
+                     
+
+                        
+Click the Confirm button to assign the user or user group to the selected role.
+                     
+
+                  
+
+
+                  
+This user or user group now has access to the resources associated with the role you
+            specified.
+
+               
+
+
+
+            
+
+            
+
+               
+Disassociating a user from a role
+
+    
+               
+
+                  
+ Use this procedure to disassociate a user from an assigned role. 
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top of the screen, click 
+                              System > Users
+                           .
+                     
+
+                     
+
+                        
+Click the name of the user you want to edit.
+                     
+
+                     
+
+                        
+For the User Roles property, delete the user role that you want to disassociate
+                    from this user.
+                     
+
+                     
+
+                        
+Click the Save button to save your changes.
+                     
+
+                  
+
+
+                  
+This user no longer has the privileges associated with the role you
+            deleted.
+
+               
+
+
+            
+
+         
+
+      
+
+
+
+
+
+
+
+         
+
+ 
+         
+
+
+         
+
+            
+Overview: Users, user groups, and roles
+
+ 
+            
+
+               
+A user is an individual to whom you provide resources. You provide access to users
+   for specific BIG-IQ® system functionality through authentication. You can
+   associate a user with a specific role, or associate a user with a user group and then associate
+   the group with a role. 
+
+               
+A role is defined by its specific privileges. A user group is a group
+   of individuals that have access to the same resources. When you associate a role with a user or
+   user group, that user or user group is granted all of the role's corresponding privileges. 
+
+               
+By default, the BIG-IQ® system provides the following default user
+   types:
+
+               
+
+   
+                  
+
+                     
+
+     
+     
+     
+                        
+
+                           
+
+                              
+Default user type
+
+                              Default password
+
+                              Access rights
+
+                           
+
+
+                        
+
+
+                        
+
+                           
+
+                              
+admin
+
+                              admin
+
+                              This user type can access all aspects of the BIG-IQ system from the system's user
+        interface.
+
+                           
+
+
+                           
+
+                              
+root
+
+                              default
+
+                              This user has access to all aspects of the BIG-IQ system from the system's console
+        command line.
+
+                           
+
+
+                        
+
+
+                     
+
+                  
+
+
+               
+
+
+               
+User types persist and are available after a BIG-IQ system failover.
+   
+
+            
+
+
+            
+
+               
+About default passwords for pre-defined users
+
+ 
+               
+
+                  
+When you initially license the BIG-IQ® system, it creates the following
+   administrative roles with a default password.
+
+                  
+
+                     
+admin
+
+                     
+root
+
+                  
+
+
+               
+
+
+            
+
+            
+
+               
+Changing the default password for the administrator user
+
+    
+               
+
+                  
+You must specify the management IP address settings for the BIG-IQ® system to prompt the system to automatically create the administrator
+            user.
+
+                  
+After you initially license and configure the BIG-IQ system, it is important to
+            change the administrator role password from the default, admin. 
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+
+                    At the top of the screen, click Access Control.
+                     
+
+                     
+
+                        
+
+                    On the Users panel, for Admin User, click the gear icon and then Properties.
+                     
+
+                     
+
+                        
+For the admin account, in the Old Password field, type admin.
+                     
+
+                     
+
+                        
+In the New Password and Confirm New Password fields, type a new password.
+                     
+
+                     
+
+                        
+For the root account, in the Old Password field, type default.
+                     
+
+                     
+
+                        
+In the New Password and Confirm New Password fields, type a new password.
+                     
+
+                     
+
+                        
+To save this configuration, click the Next button.
+                     
+
+                  
+
+
+               
+
+
+            
+
+            
+
+               
+Adding a locally-authenticated BIG-IQ user
+
+    
+               
+
+                  
+You create a user so you can then associate that user with a particular role to
+            define access to specific BIG-IQ® system resources. 
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+ At the top of the screen, click Access Control.
+                     
+
+                     
+
+                        
+ In the Users panel, hover over a user, and click the gear icon when it
+                    appears.
+                        
+The panel expands to display the User properties.
+                     
+
+                     
+
+                        
+ From the Auth Type Provider list, select
+                        Local.
+                     
+
+                     
+
+                        
+ In the Full Name field, type a name to identify this
+                    user.
+                        
+The full name can contain a combination of symbols, letters, numbers and
+                    spaces.
+                     
+
+                     
+
+                        
+ In the Password and Confirm
+                        Password fields, type the password for the new user.
+                     
+
+                     
+
+                        
+ Click the Add button.
+                     
+
+                  
+
+
+                  
+You can now associate this user with a role.
+
+               
+
+
+            
+
+         
+
+         
+
+            
+About user roles
+
+ 
+            
+
+               
+As a system manager, you need a way to differentiate between users and to limit user privileges
+   based on their responsibilities. To assist you, the BIG-IQ® system has
+   created a default set of roles you can assign to a user. Roles persist and are available after a
+   BIG-IQ system failover. 
+
+            
+
+
+            
+
+               
+Roles definitions
+
+
+  
+  
+               
+
+                  
+BIG-IQ® system ships with several standard roles, which you can
+    assign to individual users.
+
+    
+                  
+
+                     
+
+                        
+
+                           
+
+                              
+Role
+
+                              Description
+
+                           
+
+
+                        
+
+
+                        
+
+                           
+
+                              
+Administrator
+
+                              Responsible for overall administration of all licensed aspects of the BIG-IQ
+              system. These responsibilities include adding individual users, assigning roles,
+              discovering BIG-IP® systems, installing updates, activating
+              licenses, and configuring a BIG-IQ high availability (HA) configuration.
+
+                           
+
+
+                           
+
+                              
+Tenant
+
+                              A tenant is an entity that can consist of one or more users accessing resources
+              provided by an administrator. Responsibilities include: customizing and deploying
+              application templates, and monitoring the health statistics and performance of
+              applications and servers. 
+                                    
+Note: The BIG-IQ system creates a new role when
+                an administrator creates a new tenant. The connectors each tenant can access are
+                specified when the tenant is created. The name of the new role is based on the
+                tenant name. For example, creating a new tenant named
+                  headquarters-user, produces a new role named
+                  headquarters-user (Cloud Tenant). 
+
+                              
+
+
+                           
+
+
+
+                        
+
+
+                     
+
+                  
+
+
+               
+
+
+            
+
+            
+
+               
+Associating a user or user group with a role 
+
+    
+               
+
+                  
+Before you can associate a user or user group with a role, you must create a user or
+            user group.
+
+                  
+When you associate a user or user group with a role, you define the resources users
+            can view and modify. You can associate multiple roles with a given user.
+
+
+
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+ At the top of the screen, click Access Control.
+                     
+
+                     
+
+                        
+ In the Users or User Groups panel, click the name you want to associate with a
+                    role, and drag and drop it on a role in the Roles panel.
+                        
+A confirmation pop-up screen opens.
+                     
+
+                     
+
+                        
+Click the Confirm button to assign the user or user group to the selected role.
+                     
+
+                  
+
+
+                  
+This user or user group now has access to the resources associated with the role you
+            specified.
+
+               
+
+
+
+            
+
+            
+
+               
+Disassociating a user from a role
+
+    
+               
+
+                  
+ Use this procedure to disassociate a user from an assigned role. 
+
+                  
+
+                     
+
+                        
+Log in to BIG-IQ® Cloud with the administrator user name and
+                    password.
+                     
+
+                     
+
+                        
+At the top of the screen, click 
+                              System > Users
+                           .
+                     
+
+                     
+
+                        
+Click the name of the user you want to edit.
+                     
+
+                     
+
+                        
+For the User Roles property, delete the user role that you want to disassociate
+                    from this user.
+                     
+
+                     
+
+                        
+Click the Save button to save your changes.
+                     
+
+                  
+
+
+                  
+This user no longer has the privileges associated with the role you
+            deleted.
+
+               
+
+
+            
+
+         
+
+      
+
+
+

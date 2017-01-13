@@ -1,0 +1,22 @@
+
+
+
+Known IssueCreating custom URL categories may fail.This issue occurs when all of the following conditions are met:You access the BIG-IP Secure Web Gateway (SWG) Configuration utility using Internet Explorer 8.0 with Compatibility View enabled.You attempt to create a custom URL category.ImpactThe system does not create the URL category.SymptomsAs a result of this issue, you may encounter one or more of the following symptoms:When you attempt to create a custom URL category, the Configuration utility displays an error message similar to the following example:	General database error	When you view the /var/log/apm and /var/log/ltm SWG log files, the system gives you no indication that it failed to create the custom URL category.When you view the Access Policy SWG URL categories, the newly created category is not listed.ResolutionStatusF5 Product Development has assigned ID 510437 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:Type of FixFixes Introduced InRelated ArticlesReleaseNoneNoneHotfixNoneNoneWorkaroundTo work around this issue, you can disable the Internet Explorer 8.0 Compatibility View, or use an alternate browser.Impact of workaround: Performing the suggested workaround should not have a negative impact on your system.Supplemental Information
+
+SOL4918: Overview of the F5 critical issue hotfix policy
+SOL167: Downloading software and firmware from F5
+SOL13123: Managing BIG-IP product hotfixes (11.x - 12.x)
+
+
+
+
+
+
+Known IssueCreating custom URL categories may fail.This issue occurs when all of the following conditions are met:You access the BIG-IP Secure Web Gateway (SWG) Configuration utility using Internet Explorer 8.0 with Compatibility View enabled.You attempt to create a custom URL category.ImpactThe system does not create the URL category.SymptomsAs a result of this issue, you may encounter one or more of the following symptoms:When you attempt to create a custom URL category, the Configuration utility displays an error message similar to the following example:	General database error	When you view the /var/log/apm and /var/log/ltm SWG log files, the system gives you no indication that it failed to create the custom URL category.When you view the Access Policy SWG URL categories, the newly created category is not listed.ResolutionStatusF5 Product Development has assigned ID 510437 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:Type of FixFixes Introduced InRelated ArticlesReleaseNoneNoneHotfixNoneNoneWorkaroundTo work around this issue, you can disable the Internet Explorer 8.0 Compatibility View, or use an alternate browser.Impact of workaround: Performing the suggested workaround should not have a negative impact on your system.Supplemental Information
+
+SOL4918: Overview of the F5 critical issue hotfix policy
+SOL167: Downloading software and firmware from F5
+SOL13123: Managing BIG-IP product hotfixes (11.x - 12.x)
+
+
+

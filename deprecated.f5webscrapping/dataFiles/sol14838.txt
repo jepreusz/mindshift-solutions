@@ -1,0 +1,112 @@
+
+
+
+Known Issue
+
+On rare occasions, the BIG-IP system may stop responding and produce a Traffic Management Microkernel (TMM) core file during the system startup process.
+This issue occurs when all of the following conditions are met:
+
+The BIG-IP system configuration contains a self IP address that is associated with any of the following tunnel types.
+ 
+
+Point-to-Point Generic Routing Encapsulation (GRE)
+ 
+EtherIP 
+ 
+IPIP
+VXLAN
+
+
+The BIG-IP system is starting due to a restart or a system startup.
+
+
+Impact
+
+The BIG-IP system may temporarily fail to process traffic while TMM restarts.
+
+Symptoms
+
+As a result of this issue, you may encounter the following symptoms:
+
+A stand-alone device stops processing connections while TMM restarts.
+The BIG-IP system generates a TMM core file to the /shared/core directory.
+
+ResolutionStatus
+
+F5 Product Development has assigned ID 431503 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+11.5.0
+SOL2200: Most recent versions of F5 software
+Hotfix
+11.4.1 HF6
+ 11.4.0 HF4
+SOL9502: BIG-IP hotfix matrix
+
+
+Workaround
+
+None
+Supplemental InformationSOL4918: Overview of the F5 critical issue hotfix policySOL167: Downloading software and firmware from F5SOL13123: Managing BIG-IP product hotfixes (11.x - 12.x)
+
+
+
+
+Known Issue
+
+On rare occasions, the BIG-IP system may stop responding and produce a Traffic Management Microkernel (TMM) core file during the system startup process.
+This issue occurs when all of the following conditions are met:
+
+The BIG-IP system configuration contains a self IP address that is associated with any of the following tunnel types.
+ 
+
+Point-to-Point Generic Routing Encapsulation (GRE)
+ 
+EtherIP 
+ 
+IPIP
+VXLAN
+
+
+The BIG-IP system is starting due to a restart or a system startup.
+
+
+Impact
+
+The BIG-IP system may temporarily fail to process traffic while TMM restarts.
+
+Symptoms
+
+As a result of this issue, you may encounter the following symptoms:
+
+A stand-alone device stops processing connections while TMM restarts.
+The BIG-IP system generates a TMM core file to the /shared/core directory.
+
+ResolutionStatus
+
+F5 Product Development has assigned ID 431503 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+11.5.0
+SOL2200: Most recent versions of F5 software
+Hotfix
+11.4.1 HF6
+ 11.4.0 HF4
+SOL9502: BIG-IP hotfix matrix
+
+
+Workaround
+
+None
+Supplemental InformationSOL4918: Overview of the F5 critical issue hotfix policySOL167: Downloading software and firmware from F5SOL13123: Managing BIG-IP product hotfixes (11.x - 12.x)
+

@@ -1,0 +1,344 @@
+
+
+
+Note: Versions that are not listed in this Solution have not been evaluated for vulnerability to this security advisory. For information about the F5 security policy regarding evaluating older and unsupported versions of F5 products, refer to SOL4602: Overview of the F5 security vulnerability response policy.
+F5 products and versions that have been evaluated for this Security Advisory
+
+Product
+Affected
+Not Affected
+BIG-IP LTM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP GTM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP ASM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP Link Controller
+None
+9.x
+ 10.x
+ 11.x 
+
+BIG-IP WebAccelerator
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP PSM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP WAN Optimization
+None
+10.x
+ 11.x
+BIG-IP APM
+None
+10.x
+ 11.x
+BIG-IP Edge Gateway
+None
+10.x
+ 11.x
+BIG-IP Analytics
+None
+11.x
+BIG-IP AFM
+None
+11.x
+BIG-IP PEM
+
+None
+11.x
+FirePass
+None
+5.x
+ 6.x
+ 7.x
+Enterprise Manager
+None
+1.x
+ 2.x 
+ 3.x
+ARX
+None
+2.x
+ 3.x
+ 4.x
+ 5.x
+ 6.x
+
+Vulnerability description and product information
+A flaw in the ISDN CAPI subsystem allows a remote user to cause a denial of service or potential remote access. Exploitation would require the attacker to be able to send arbitrary frames over the ISDN network to the vulnerable system.
+Information about this advisory is available at the following location:
+http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1217
+
+
+
+
+
+Note: Versions that are not listed in this Solution have not been evaluated for vulnerability to this security advisory. For information about the F5 security policy regarding evaluating older and unsupported versions of F5 products, refer to SOL4602: Overview of the F5 security vulnerability response policy.
+F5 products and versions that have been evaluated for this Security Advisory
+
+Product
+Affected
+Not Affected
+BIG-IP LTM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP GTM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP ASM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP Link Controller
+None
+9.x
+ 10.x
+ 11.x 
+
+BIG-IP WebAccelerator
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP PSM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP WAN Optimization
+None
+10.x
+ 11.x
+BIG-IP APM
+None
+10.x
+ 11.x
+BIG-IP Edge Gateway
+None
+10.x
+ 11.x
+BIG-IP Analytics
+None
+11.x
+BIG-IP AFM
+None
+11.x
+BIG-IP PEM
+
+None
+11.x
+FirePass
+None
+5.x
+ 6.x
+ 7.x
+Enterprise Manager
+None
+1.x
+ 2.x 
+ 3.x
+ARX
+None
+2.x
+ 3.x
+ 4.x
+ 5.x
+ 6.x
+
+Vulnerability description and product information
+A flaw in the ISDN CAPI subsystem allows a remote user to cause a denial of service or potential remote access. Exploitation would require the attacker to be able to send arbitrary frames over the ISDN network to the vulnerable system.
+Information about this advisory is available at the following location:
+http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1217
+
+
+
+
+
+Note: Versions that are not listed in this Solution have not been evaluated for vulnerability to this security advisory. For information about the F5 security policy regarding evaluating older and unsupported versions of F5 products, refer to SOL4602: Overview of the F5 security vulnerability response policy.
+F5 products and versions that have been evaluated for this Security Advisory
+
+Product
+Affected
+Not Affected
+BIG-IP LTM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP GTM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP ASM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP Link Controller
+None
+9.x
+ 10.x
+ 11.x 
+
+BIG-IP WebAccelerator
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP PSM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP WAN Optimization
+None
+10.x
+ 11.x
+BIG-IP APM
+None
+10.x
+ 11.x
+BIG-IP Edge Gateway
+None
+10.x
+ 11.x
+BIG-IP Analytics
+None
+11.x
+BIG-IP AFM
+None
+11.x
+BIG-IP PEM
+
+None
+11.x
+FirePass
+None
+5.x
+ 6.x
+ 7.x
+Enterprise Manager
+None
+1.x
+ 2.x 
+ 3.x
+ARX
+None
+2.x
+ 3.x
+ 4.x
+ 5.x
+ 6.x
+
+Vulnerability description and product information
+A flaw in the ISDN CAPI subsystem allows a remote user to cause a denial of service or potential remote access. Exploitation would require the attacker to be able to send arbitrary frames over the ISDN network to the vulnerable system.
+Information about this advisory is available at the following location:
+http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1217
+
+
+
+
+
+Note: Versions that are not listed in this Solution have not been evaluated for vulnerability to this security advisory. For information about the F5 security policy regarding evaluating older and unsupported versions of F5 products, refer to SOL4602: Overview of the F5 security vulnerability response policy.
+F5 products and versions that have been evaluated for this Security Advisory
+
+Product
+Affected
+Not Affected
+BIG-IP LTM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP GTM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP ASM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP Link Controller
+None
+9.x
+ 10.x
+ 11.x 
+
+BIG-IP WebAccelerator
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP PSM
+None
+9.x
+ 10.x
+ 11.x
+BIG-IP WAN Optimization
+None
+10.x
+ 11.x
+BIG-IP APM
+None
+10.x
+ 11.x
+BIG-IP Edge Gateway
+None
+10.x
+ 11.x
+BIG-IP Analytics
+None
+11.x
+BIG-IP AFM
+None
+11.x
+BIG-IP PEM
+
+None
+11.x
+FirePass
+None
+5.x
+ 6.x
+ 7.x
+Enterprise Manager
+None
+1.x
+ 2.x 
+ 3.x
+ARX
+None
+2.x
+ 3.x
+ 4.x
+ 5.x
+ 6.x
+
+Vulnerability description and product information
+A flaw in the ISDN CAPI subsystem allows a remote user to cause a denial of service or potential remote access. Exploitation would require the attacker to be able to send arbitrary frames over the ISDN network to the vulnerable system.
+Information about this advisory is available at the following location:
+http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-1217
+
+

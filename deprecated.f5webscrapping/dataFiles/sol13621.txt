@@ -1,0 +1,120 @@
+
+
+
+Description
+Downloading PDF documents using BIG-IP WebAccelerator may cause a browser's PDF plugin to hang.
+This issue occurs when all of the following conditions are met:
+
+You are using the PDF linearization feature of BIG-IP WebAccelerator
+Your BIG-IP WebAccelerator system is under heavy load, a high latency exists between the client and the server, or you have large non-linearized PDF documents
+
+When a browser requests a PDF document using the BIG-IP WebAccelerator system and the full document takes too long to fully download, either due to size or network latency, the PDF plugin will abort the connection and start a new HTTP session for individual pieces of the PDF content, known as range requests. If the range requests commence before BIG-IP WebAccelerator has downloaded and converted the original non-linearized PDF to a linearized document and placed it into cache, the request will be proxied directly to the origin web server. Subsequently, the range request may be served to the client in non-linearized form. When BIG-IP WebAccelerator eventually caches the PDF file, further range requests will be served from cache in linearized form, causing the PDF plugin to crash or hang due to the responses consisting of a combination of linearized and non-linearized data.
+
+Impact
+Clients may intermittently be unable to view PDF documents.
+Symptoms
+As a result of this issue, you may encounter the following symptoms:
+
+PDF documents may display as blank documents or render incorrectly
+Your browsers PDF plugin may hang
+
+Status
+F5 Product Development has assigned ID 366839 to this issue, and has confirmed that this issue exists in the products listed in the Applies To box. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+None
+None
+
+Hotfix
+None
+None
+
+
+Workaround
+You can work around this issue by bypassing all PDF documents using an HTTP class. Alternately, you can use an iRule to selectively disable range requests on PDF documents. To do so, perform one of the following procedures:
+
+Bypass BIG-IP WebAccelerator for PDF documents
+You can configure an HTTP class to bypass BIG-IP WebAccelerator for any URI that ends in .pdf. To do so, perform the following procedure:
+
+Impact of workaround: PDF documents will not be passed through BIG-IP WebAccelerator and will not be cached, but linearization will still occur if the original PDF file is linearized.
+
+Log in to the Configuration utility.
+On the Main tab, click Local Traffic > Profiles > Protocol > HTTP Class.
+
+From the HTTP Class profile list screen, click Create.
+
+In the Name field, type a name for the profile. 
+ 
+ Note: Names must begin with a letter, and they can contain only letters, numbers, and the underscore ( _ ) character.
+
+From the Parent Profile list, select a profile from which the new profile inherits properties.
+ 
+ For example: 
+ 
+ httpclass
+
+Select the Custom check box for URI Paths.  
+
+In the URI Paths drop-down menu, select Match Only.
+
+In the URI Path: field, enter the following content:
+ 
+ *.pdf
+
+In the Entry Type drop-down menu, select Regular Expression (regex).
+Click Add.
+
+Click the actions custom check box.
+
+In the send-to field, select Pool.
+Select the pool for which you want bypassed traffic to be redirected. Select the pool that you want 
+
+Under WebAccelerator, select Bypass.
+
+Click Finished.
+
+Associate this HTTP class with your virtual server.
+
+Disable range requests by removing the Accept-Ranges: header from the origin web server response
+To disable range requests, create and attach the following iRule to your BIG-IP WebAccelerator-enabled virtual server. This iRule removes the Accept-Ranges header from the origin web server response for any PDF document with a MIME type of application/pdf. To do so, perform the following procedure:
+
+Impact of workaround: PDF files will pass through the BIG-IP WebAccelerator system and be cached, but linearization will be disabled.
+
+Log in to the Configuration utility.
+Navigate to Local Traffic > iRules.
+Click Create.
+Name the iRule.
+ 
+ For example:
+ 
+pdf_filter 
+
+Copy and paste the following iRule into the Definition box:
+Click Finished.
+Associate this iRule with your virtual server from the Local Traffic > Virtual Servers menu options.
+From the Resources tab, enter the pdf_filter iRule under the iRules window:
+
+when HTTP_RESPONSE {
+
+if { [HTTP::header value Content-Type] equals "application/pdf"} {
+
+HTTP::header remove accept-ranges
+ 
+}
+}
+ 
+ This change will take effect immediately.
+
+Supplemental Information
+
+SOL4918: Overview of the F5 critical issue hotfix policy
+The About the HTTP Class Profile chapter in the BIG-IP WebAccelerator System: Implementations guide
+
+
+
+

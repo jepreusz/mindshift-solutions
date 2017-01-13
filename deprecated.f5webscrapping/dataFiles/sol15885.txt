@@ -1,0 +1,145 @@
+
+
+
+Description
+
+The GNU C Library (aka glibc or libc6) before 2.12.2 and Embedded GLIBC (EGLIBC) allow context-dependent attackers to execute arbitrary code or cause a denial of service (memory consumption) via a long UTF8 string that is used in an fnmatch call, aka a "stack extension attack," a related issue to CVE-2010-2898, CVE-2010-1917, and CVE-2007-4782, as originally reported for use of this library by Google Chrome. (CVE-2011-1071)
+Impact
+
+An attacker may be able to run arbitrary code or cause a denial of service (memory consumption) by way of a long UTF8 string.
+Status
+F5 Product Development has assigned ID 356183, ID 474397 (BIG-IP and Enterprise Manager) and ID 476571 (ARX) to this vulnerability, and has evaluated the currently supported releases for potential vulnerability. Additionally, BIG-IP iHealth may list Heuristic H492717 on the Diagnostics > Identified > Medium screen.
+
+To determine if your release is known to be vulnerable, the components or features that are affected by the vulnerability, and for information about releases or hotfixes that address the vulnerability, refer to the following table:
+
+Product
+Versions known to be vulnerable
+Versions known to be not vulnerable
+Vulnerable component or feature
+BIG-IP LTM
+10.0.0 - 10.2.4
+
+11.0.0 - 11.6.0
+
+glibc
+
+BIG-IP AAM
+None
+11.4.0 - 11.6.0
+None
+BIG-IP AFM
+None
+11.3.0 - 11.6.0
+
+None
+BIG-IP Analytics
+None
+11.0.0 - 11.6.0
+
+None
+BIG-IP APM
+10.1.0 - 10.2.4
+
+11.0.0 - 11.6.0
+
+glibc
+BIG-IP ASM
+10.0.0 - 10.2.4
+
+11.0.0 - 11.6.0
+
+glibc
+BIG-IP Edge Gateway
+
+10.1.0 - 10.2.4
+
+11.0.0 - 11.3.0
+
+glibc
+BIG-IP GTM
+10.0.0 - 10.2.4
+
+11.0.0 - 11.6.0
+
+glibc
+BIG-IP Link Controller
+10.0.0 - 10.2.4
+
+11.0.0 - 11.6.0
+
+glibc
+BIG-IP PEM
+None
+
+11.3.0 - 11.6.0
+
+None
+BIG-IP PSM
+10.0.0 - 10.2.4
+11.0.0 - 11.4.1
+
+glibc
+BIG-IP WebAccelerator
+10.0.0 - 10.2.4
+11.0.0 - 11.3.0
+
+glibc
+BIG-IP WOM
+10.0.0 - 10.2.4
+11.0.0 - 11.3.0
+
+glibc
+ARX
+6.0.0 - 6.4.0
+
+None
+Multiple*
+Enterprise Manager
+2.1.0 - 2.3.0
+3.0.0 - 3.1.1
+
+glibc
+FirePass
+None
+7.0.0
+ 6.0.0 - 6.1.0
+
+None
+BIG-IQ Cloud
+None
+
+4.0.0 - 4.5.0
+
+None
+BIG-IQ Device
+None
+
+4.2.0 - 4.5.0
+
+None
+BIG-IQ Security
+None
+
+4.0.0 - 4.5.0
+
+None
+BIG-IQ ADC
+
+None
+4.5.0
+None
+
+*Most ARX components are based on GNU C library code.
+Recommended Action
+If the previous table lists a version in the Versions known to be not vulnerable column, you can eliminate this vulnerability by upgrading to the listed version. If the listed version is older than the version you are currently running, or if the table does not list any version in the column, then no upgrade candidate currently exists.
+F5 is responding to this vulnerability as determined by the parameters defined in SOL4602: Overview of the F5 security vulnerability response policy.
+
+Supplemental Information
+
+SOL9970: Subscribing to email notifications regarding F5 products
+SOL9957: Creating a custom RSS feed to view new and updated documents
+SOL4918: Overview of the F5 critical issue hotfix policy
+SOL167: Downloading software and firmware from F5
+
+
+

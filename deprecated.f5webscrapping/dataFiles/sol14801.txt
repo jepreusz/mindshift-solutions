@@ -1,0 +1,100 @@
+
+
+
+Description
+The Traffic Management Microkernel (TMM) process may produce a core file when the system processes some WebAccelerator requests.
+This issue exists when the following sequence of conditions occurs:
+
+The BIG-IP WebAccelerator system creates a negative cache entry for an HTTP GET request.
+The BIG-IP WebAccelerator system receives an HTTP 206 response for a partial range GET of the negatively cached request.
+The BIG-IP WebAccelerator system receives an If-None-Match conditional HEAD request for the negatively cached request. 
+
+
+Impact
+The BIG-IP system stops processing traffic, and fails over to another system in the device group.
+Symptoms
+As a result of this issue, you may encounter the following symptoms:
+
+The TMM process exits and produces a core file.
+The BIG-IP system fails over to another host in the device group.
+
+Status
+F5 Product Development has assigned ID 429890 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+None
+None
+
+Hotfix
+11.3.0 HF8
+
+SOL9502: BIG-IP hotfix matrix
+
+
+Workaround
+None
+Supplemental Information
+
+SOL4918: Overview of the F5 critical issue hotfix policy
+SOL167: Downloading software and firmware from F5
+SOL13123: Managing BIG-IP product hotfixes (11.x)
+SOL13714: Overview of the positive and negative caching features
+
+
+
+
+
+
+
+Description
+The Traffic Management Microkernel (TMM) process may produce a core file when the system processes some WebAccelerator requests.
+This issue exists when the following sequence of conditions occurs:
+
+The BIG-IP WebAccelerator system creates a negative cache entry for an HTTP GET request.
+The BIG-IP WebAccelerator system receives an HTTP 206 response for a partial range GET of the negatively cached request.
+The BIG-IP WebAccelerator system receives an If-None-Match conditional HEAD request for the negatively cached request. 
+
+
+Impact
+The BIG-IP system stops processing traffic, and fails over to another system in the device group.
+Symptoms
+As a result of this issue, you may encounter the following symptoms:
+
+The TMM process exits and produces a core file.
+The BIG-IP system fails over to another host in the device group.
+
+Status
+F5 Product Development has assigned ID 429890 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of this article. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+None
+None
+
+Hotfix
+11.3.0 HF8
+
+SOL9502: BIG-IP hotfix matrix
+
+
+Workaround
+None
+Supplemental Information
+
+SOL4918: Overview of the F5 critical issue hotfix policy
+SOL167: Downloading software and firmware from F5
+SOL13123: Managing BIG-IP product hotfixes (11.x)
+SOL13714: Overview of the positive and negative caching features
+
+
+
+

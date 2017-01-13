@@ -1,0 +1,126 @@
+
+
+
+Known Issue
+
+The mcpd process may stop responding when configured with a parent-child rate class.
+This issue occurs when the following conditions are met:
+
+You attempt to configure a rate class.
+The sum of the base rate of the parent rate class added to the base rates of all the child rate classes attached to a parent rate class exceeds the ceiling of the parent rate class.
+
+For example:
+
+The BIG-IP system is configured with a myrateA rate class with the Base Rate set to 1Gbps and the Ceiling Rate set to 1Gbps. 
+
+The system is then configured with a myrateB rate class with the Base Rate set to 100Mbps, the Ceiling Rate set to 300Mbps, and the Parent Class set to myrateA. 
+
+The sum of the base rate of myrateA and myrateB exceeds the ceiling rate of myrateA. 
+
+When you attempt to save this class configuration, the mcpd process will stop responding.
+
+
+Impact
+
+The BIG-IP system may temporarily fail to process traffic and fail over if configured as part of a high-availability system.
+
+Symptoms
+
+As a result of this issue, you may encounter the following symptoms:
+
+BIG-IP iHealth lists Heuristic H425251 on the Diagnostics > Identified > Medium screen.
+The BIG-IP system may fail over if configured as part of a high-availability system.
+The BIG-IP system generates an mcpd core file to the /shared/core directory.
+In the /var/log/daemon.log file, you may observe error messages that appear similar to the following examples:err sflow_agent[<pid>]: Failed with err(16908291) while reading.
+ 
+ err sflow_agent[<pid>]: sflow_mcp.cpp::547:
+
+
+ResolutionStatus
+
+F5 Product Development has assigned ID 421289 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of the article. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+11.5.0
+SOL2200: Most recent versions of F5 software
+Hotfix
+None
+None
+
+
+Workaround
+
+There is no workaround for this issue. However, you can avoid this issue by configuring valid rate classes where the sum of parent and child rate classes does not exceed the ceiling of the parent class.
+Alternatively, you may set the base rate of a parent rate class to 0 (the default value). For more information, refer to the Rate Shaping chapter in the BIG-IP TMOS: Concepts manual.
+Supplemental Information
+None
+
+
+
+
+
+Known Issue
+
+The mcpd process may stop responding when configured with a parent-child rate class.
+This issue occurs when the following conditions are met:
+
+You attempt to configure a rate class.
+The sum of the base rate of the parent rate class added to the base rates of all the child rate classes attached to a parent rate class exceeds the ceiling of the parent rate class.
+
+For example:
+
+The BIG-IP system is configured with a myrateA rate class with the Base Rate set to 1Gbps and the Ceiling Rate set to 1Gbps. 
+
+The system is then configured with a myrateB rate class with the Base Rate set to 100Mbps, the Ceiling Rate set to 300Mbps, and the Parent Class set to myrateA. 
+
+The sum of the base rate of myrateA and myrateB exceeds the ceiling rate of myrateA. 
+
+When you attempt to save this class configuration, the mcpd process will stop responding.
+
+
+Impact
+
+The BIG-IP system may temporarily fail to process traffic and fail over if configured as part of a high-availability system.
+
+Symptoms
+
+As a result of this issue, you may encounter the following symptoms:
+
+BIG-IP iHealth lists Heuristic H425251 on the Diagnostics > Identified > Medium screen.
+The BIG-IP system may fail over if configured as part of a high-availability system.
+The BIG-IP system generates an mcpd core file to the /shared/core directory.
+In the /var/log/daemon.log file, you may observe error messages that appear similar to the following examples:err sflow_agent[<pid>]: Failed with err(16908291) while reading.
+ 
+ err sflow_agent[<pid>]: sflow_mcp.cpp::547:
+
+
+ResolutionStatus
+
+F5 Product Development has assigned ID 421289 to this issue. F5 has confirmed that this issue exists in the products listed in the Applies To box, located in the upper-right corner of the article. For information about releases or hotfixes that resolve this issue, refer to the following table:
+
+Type of Fix
+
+Versions Fixed
+
+Related Articles
+Release
+11.5.0
+SOL2200: Most recent versions of F5 software
+Hotfix
+None
+None
+
+
+Workaround
+
+There is no workaround for this issue. However, you can avoid this issue by configuring valid rate classes where the sum of parent and child rate classes does not exceed the ceiling of the parent class.
+Alternatively, you may set the base rate of a parent rate class to 0 (the default value). For more information, refer to the Rate Shaping chapter in the BIG-IP TMOS: Concepts manual.
+Supplemental Information
+None
+
+
