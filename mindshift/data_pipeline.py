@@ -49,11 +49,15 @@ if __name__ == "__main__":
         df = pipeline.load_data()
         # clean_data = pandas.DataFrame(df.apply(pipeline.preprocess_data, axis=1))
         # clean_data.columns = ['content']
-        vectorized_data = pipeline.transform_data(df['content'], model="lda")
+        vectorized_data = pipeline.transform_data(df['content'])
         # print(vectorized_data.toarray())
         # print(pipeline.data_transformer.get_features())
         labels = pipeline.process_data(vectorized_data, alg='kmeans')
         clustered_df = df.join(pandas.DataFrame(labels, index=df.index))
         print(clustered_df)
         clustered_df.columns = ['content', 'cluster_id']
-        clustered_df.to_csv('cluster_output.csv')
+        topic_df = clustered_df[clustered_df['cluster_id'] == 10]
+        lda_vector = pipeline.transform_data(topic_df['content'])
+        topic_labels = pipeline.process_data(lda_vector, alg='kmeans')
+        topic_df = topic_df.join(pandas.DataFrame(topic_labels, index=topic_df.index))
+        topic_df.to_csv('cluster_output.csv')
