@@ -21,8 +21,11 @@ class DataPipeline:
     def preprocess_data(self, data):
         return self.datafilter.rm_stopwords(str(data))
 
-    def transform_data(self, data):
-        return self.data_transformer.vectorize_text(data)
+    def transform_data(self, data, model="bag of words"):
+        if model == "bag of words":
+            return self.data_transformer.vectorize_text(data)
+        elif model == "lda":
+            return self.data_transformer.lda_vectorize_text(data)
 
     def process_data(self, data, alg='kmeans'):
         if alg == 'kmeans':
@@ -55,4 +58,9 @@ if __name__ == "__main__":
         
         clustered_df.columns = ['content', 'cluster_id']
         print(Counter(clustered_df.cluster_id))
-        clustered_df.to_csv('./cluster_output_normalized.csv')
+        topic_df = clustered_df[clustered_df['cluster_id'] == 10]
+        lda_vector = pipeline.transform_data(topic_df['content'])
+        topic_labels = pipeline.process_data(lda_vector, alg='kmeans')
+        topic_df = topic_df.join(pandas.DataFrame(topic_labels, index=topic_df.index))
+        topic_df.columns = ['content', 'cluster_id', 'sub_cluster_id']
+        topic_df.to_csv('cluster_output.csv')

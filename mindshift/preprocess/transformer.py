@@ -10,6 +10,7 @@ from gensim import corpora, models, similarities
 from nltk import sent_tokenize, word_tokenize
 import string
 
+
 class Transformer:
 
     def __init__(self):
@@ -19,7 +20,7 @@ class Transformer:
         self.vectorizer = TfidfVectorizer('english', min_df=5, analyzer='word', vocabulary=self.custom_vocabulary,
                                           tokenizer=self.tokenizer.tokenzie_and_stem)
         self.vector_features = []
-        self.lda_model=Modelling()
+        self.lda_model=None
 
     def vectorize_text(self, text):
         
@@ -44,9 +45,8 @@ class Transformer:
         #back to bag of word
         
         corpus = [dictionary.doc2bow(doc) for doc in final_text]
-        self.lda_model.lda_model(corpus, dictionary)
+        self.lda_model = Modelling(corpus, dictionary)
         return self.lda_model.get_vectors()
-     
 
     def get_features(self):
         return self.vector_features
