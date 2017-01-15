@@ -8,7 +8,7 @@ class Cluster:
 
     def __init__(self):
         self.NCLUSTERS = 40
-        self.NITER = 40
+        self.NITER = 10
         # Trial variable for number of cluster
         self.max_d = 50
 

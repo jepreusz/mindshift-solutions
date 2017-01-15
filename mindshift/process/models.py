@@ -5,6 +5,7 @@ from gensim import models, similarities, matutils
 
 
 class Modelling:
+
     def __init__(self):
         self.similar_index = 0
         self.corpus = "None"
@@ -12,7 +13,7 @@ class Modelling:
         
     def lda_model(self, corpus, dictionary):
         self.lda = models.LdaMulticore(corpus, id2word=dictionary, workers=8, num_topics=100)
-        # print(self.lda.show_topics())
+        print(self.lda.show_topics())
         # self.similar_index = similarities.MatrixSimilarity(self.lda[corpus])
         self.corpus = self.lda[corpus]
         

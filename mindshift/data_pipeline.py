@@ -55,3 +55,5 @@ if __name__ == "__main__":
         labels = pipeline.process_data(vectorized_data, alg='kmeans')
         clustered_df = df.join(pandas.DataFrame(labels, index=df.index))
         print(clustered_df)
+        clustered_df.columns = ['content', 'cluster_id']
+        clustered_df.to_csv('cluster_output.csv')

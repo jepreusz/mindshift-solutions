@@ -35,7 +35,7 @@ class Transformer:
         # Remove punctuation
         text_punc = [self._remove_punc(doc) for k,doc in text.iteritems()]
         # Tokenize
-        tokenized_text = [self.tokenizer.tokenzie_and_stem(word) for word in text_punc]
+        tokenized_text = [self.tokenizer.tokenzie_and_stem(word) for word in text]
         # StopWords
         final_text= [[word for word in text if word not in stopwords.words('english')] for text in tokenized_text]
         # print(final_text)
@@ -44,7 +44,7 @@ class Transformer:
         #back to bag of word
         
         corpus = [dictionary.doc2bow(doc) for doc in final_text]
-        self.lda_model.lda_model(corpus,dictionary)
+        self.lda_model.lda_model(corpus, dictionary)
         return self.lda_model.get_vectors()
      
 
