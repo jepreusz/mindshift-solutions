@@ -9,7 +9,7 @@ class Cluster:
     def __init__(self):
         self.NCLUSTERS = 40
         self.NITER = 40
-        #Trial variable for number of cluster
+        # Trial variable for number of cluster
         self.max_d = 50
 
     def do_kmeans(self, dataset):
@@ -18,7 +18,7 @@ class Cluster:
         return km_model.labels_
    
     def do_ward(self, dataset):
-        #Pass cosine distance matrix
+        # Pass cosine distance matrix
         linkage_matrix = ward(dataset)
         clusters = fcluster(linkage_matrix, self.max_d, criterion='distance')
         return clusters

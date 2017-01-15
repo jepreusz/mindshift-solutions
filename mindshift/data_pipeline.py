@@ -21,7 +21,7 @@ class DataPipeline:
     def preprocess_data(self, data):
         return self.datafilter.rm_stopwords(str(data))
 
-    def transform_data(self, data ,model="bag of words"):
+    def transform_data(self, data, model="bag of words"):
         if model == "bag of words":
             return self.data_transformer.vectorize_text(data)
         elif model == "lda":
@@ -33,7 +33,6 @@ class DataPipeline:
         elif alg == 'hierarchical':
             Z = self.data_transformer.get_cosine(data)
             return self.processor.do_ward(Z)
-            
 
 
 if __name__ == "__main__":
@@ -50,9 +49,9 @@ if __name__ == "__main__":
         df = pipeline.load_data()
         # clean_data = pandas.DataFrame(df.apply(pipeline.preprocess_data, axis=1))
         # clean_data.columns = ['content']
-        vectorized_data = pipeline.transform_data(df['content'],model="lda")
-        #print(vectorized_data.toarray())
-        #print(pipeline.data_transformer.get_features())
+        vectorized_data = pipeline.transform_data(df['content'], model="lda")
+        # print(vectorized_data.toarray())
+        # print(pipeline.data_transformer.get_features())
         labels = pipeline.process_data(vectorized_data, alg='kmeans')
         clustered_df = df.join(pandas.DataFrame(labels, index=df.index))
         print(clustered_df)
