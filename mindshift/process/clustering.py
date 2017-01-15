@@ -12,8 +12,8 @@ from sklearn.preprocessing import Normalizer
 class Cluster:
 
     def __init__(self):
-        self.NCLUSTERS = 20
-        self.NITER = 10
+        self.NCLUSTERS = 40
+        self.NITER = 5
         # Trial variable for number of cluster
         self.max_d = 50
 
@@ -21,7 +21,7 @@ class Cluster:
         # normalization
         svd = TruncatedSVD(self.NCLUSTERS)
         normalizer = Normalizer(copy=False)
-        lsa = make_pipeline(svd,normalizer)
+        lsa = make_pipeline(svd, normalizer)
         dataset = lsa.fit_transform(dataset)
         # finish normalization,start k-means
         km_model = KMeans(n_clusters=self.NCLUSTERS, n_init=self.NITER)

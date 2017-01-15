@@ -23,5 +23,5 @@ class TestDataFilter(TestCase):
 
     def test_tokenzie_and_stem(self):
         data_filt = data_filter.DataFilter()
-        cleaned_text = data_filt.tokenzie_and_stem("Will this, be removed?.")
+        cleaned_text = data_filt.tokenize_and_stem("Will this, be removed?.")
         print(cleaned_text)

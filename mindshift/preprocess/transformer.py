@@ -18,12 +18,11 @@ class Transformer:
         self.stemmer = SnowballStemmer('english')
         self.custom_vocabulary = self._get_vocabulary()
         self.vectorizer = TfidfVectorizer('english', min_df=5, analyzer='word', vocabulary=self.custom_vocabulary,
-                                          tokenizer=self.tokenizer.tokenzie_and_stem)
+                                          ngram_range=(1, 3), tokenizer=self.tokenizer.tokenize_and_stem)
         self.vector_features = []
         self.lda_model=None
 
     def vectorize_text(self, text):
-        
         vectorized_text = self.vectorizer.fit_transform(text)
         self.vector_features = self.vectorizer.get_feature_names()
         return vectorized_text
@@ -34,9 +33,9 @@ class Transformer:
         
     def lda_vectorize_text(self, text):
         # Remove punctuation
-        text_punc = [self._remove_punc(doc) for k,doc in text.iteritems()]
+        text_punc = [self._remove_punc(doc) for k, doc in text.iteritems()]
         # Tokenize
-        tokenized_text = [self.tokenizer.tokenzie_and_stem(word) for word in text]
+        tokenized_text = [self.tokenizer.tokenize_and_stem(word) for word in text]
         # StopWords
         final_text= [[word for word in text if word not in stopwords.words('english')] for text in tokenized_text]
         # print(final_text)
