@@ -16,18 +16,29 @@ class Cluster:
         self.NITER = 5
         # Trial variable for number of cluster
         self.max_d = 50
+        self.model = None
+        self.svd = None
 
     def do_kmeans(self, dataset):
         # normalization
-        svd = TruncatedSVD(self.NCLUSTERS)
+        self.svd = TruncatedSVD(self.NCLUSTERS)
         normalizer = Normalizer(copy=False)
-        lsa = make_pipeline(svd, normalizer)
+        lsa = make_pipeline(self.svd, normalizer)
         dataset = lsa.fit_transform(dataset)
         # finish normalization,start k-means
-        km_model = KMeans(n_clusters=self.NCLUSTERS, n_init=self.NITER)
-        km_model.fit_transform(dataset)
-        return km_model.labels_
-   
+        self.model = KMeans(n_clusters=self.NCLUSTERS, n_init=self.NITER)
+        self.model.fit_transform(dataset)
+        return self.model.labels_
+
+    def print_top_terms(self, features):
+        original_space_centroids = self.svd.inverse_transform(self.model.cluster_centers_)
+        order_centroids = original_space_centroids.argsort()[:, ::-1]
+        for i in range(self.NCLUSTERS):
+            print("Cluster id: {0}".format(i))
+            for ind in order_centroids[i, :15]:
+                print(' %s' % features[ind], end='')
+            print()
+
     def do_ward(self, dataset):
         # Pass cosine distance matrix
         linkage_matrix = ward(dataset)

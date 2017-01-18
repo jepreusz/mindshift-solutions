@@ -23,6 +23,9 @@ class DataFilter:
     def ngram_tokenize(self, text):
         return [word for sent in sent_tokenize(text) for word in ngrams(self.re_tokenizer.tokenize(sent), self.NGRAM_RANGE)]
 
+    def tokenize_(self, text):
+        return [word for sent in sent_tokenize(text) for word in self.re_tokenizer.tokenize(sent)]
+
     def tokenize_and_stem(self, text):
         return [self.stemmer.stem(word) for sent in sent_tokenize(text) for word in self.re_tokenizer.tokenize(sent)]
 

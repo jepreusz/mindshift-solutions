@@ -17,7 +17,7 @@ class Transformer:
         self.tokenizer = data_filter.DataFilter()
         self.stemmer = SnowballStemmer('english')
         self.custom_vocabulary = self._get_vocabulary()
-        self.vectorizer = TfidfVectorizer('english', min_df=5, analyzer='word', vocabulary=self.custom_vocabulary,
+        self.vectorizer = TfidfVectorizer(stop_words='english', min_df=5, analyzer='word', vocabulary=self.custom_vocabulary,
                                           ngram_range=(1, 3), tokenizer=self.tokenizer.tokenize_and_stem)
         self.vector_features = []
         self.lda_model=None
@@ -29,23 +29,20 @@ class Transformer:
 
     def _remove_punc(self,text):
         tokens = [word.lower() for sentence in sent_tokenize(text) for word in word_tokenize(sentence)]
-        return "".join([" "+ i if not i in string.punctuation else i for i in tokens])
+        return "".join([" " + i if not i in string.punctuation else i for i in tokens])
         
     def lda_vectorize_text(self, text):
-        # Remove punctuation
-        text_punc = [self._remove_punc(doc) for k, doc in text.iteritems()]
-        # Tokenize
-        tokenized_text = [self.tokenizer.tokenize_and_stem(word) for word in text]
-        # StopWords
-        final_text= [[word for word in text if word not in stopwords.words('english')] for text in tokenized_text]
-        # print(final_text)
-        
+        self.create_lda_model(text)
+        return self.lda_model.get_vectors()
+
+    def create_lda_model(self, text):
+        tokenized_text = [self.tokenizer.tokenize_(word) for word in text]
+        final_text = [[word for text in tokenized_text for word in text if word.lower() not in stopwords.words('english')]]
         dictionary = corpora.Dictionary(final_text)
-        #back to bag of word
-        
         corpus = [dictionary.doc2bow(doc) for doc in final_text]
         self.lda_model = Modelling(corpus, dictionary)
-        return self.lda_model.get_vectors()
+        print("Topics created:")
+        self.lda_model.print_topics()
 
     def get_features(self):
         return self.vector_features

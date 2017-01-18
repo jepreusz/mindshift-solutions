@@ -8,8 +8,12 @@ class Modelling:
 
     def __init__(self, corpus, dictionary):
         self.similar_index = 0
-        self.lda = models.LdaMulticore(corpus, id2word=dictionary, workers=8, num_topics=100)
+        self.lda = models.LdaMulticore(corpus, id2word=dictionary, workers=8, num_topics=20)
         self.corpus = self.lda[corpus]
+
+    def print_topics(self):
+        for topic in self.lda.show_topics():
+            print(topic)
         
     def get_vectors(self):
         return self._get_vector(self.corpus)
