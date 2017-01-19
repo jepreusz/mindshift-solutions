@@ -17,7 +17,7 @@ class Transformer:
         self.stemmer = SnowballStemmer('english')
         self.custom_vocabulary = self._get_vocabulary()
         self.vectorizer = TfidfVectorizer(stop_words='english', min_df=0.1, max_df=0.7, analyzer='word',
-                                          vocabulary=self.custom_vocabulary, tokenizer=self.tokenizer.tokenize_)
+                                          tokenizer=self.tokenizer.tokenize_)
         self.vector_features = []
         self.modeller = clustering.Cluster()
         self.lda_model=None

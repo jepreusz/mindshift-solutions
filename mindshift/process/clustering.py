@@ -8,11 +8,14 @@ from sklearn.decomposition import TruncatedSVD
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import Normalizer
 
-# imports for LDA. refactored from transformer.py
+# imports for LDA using gensim module. refactored from transformer.py
 from mindshift.process.models import Modelling
 from gensim import corpora
 from nltk.corpus import stopwords
 from mindshift.preprocess import data_filter
+
+# imports for LDA using scikit-learn module.
+from sklearn.decomposition import LatentDirichletAllocation
 
 
 class Cluster:
@@ -37,16 +40,24 @@ class Cluster:
         self.model.fit_transform(dataset)
         return self.model.labels_
 
-    def print_top_terms(self, features):
-        for ind, term in enumerate(self.get_top_cluster_terms(features)):
-            print("Cluster #: {0}   Top terms: {1}".format(ind, term))
+    def print_top_terms(self, features, model='kmeans'):
+        if model == 'kmeans':
+            for ind, term in enumerate(self.get_top_cluster_terms(features, model='kmeans')):
+                print("Cluster #: {0}   Top terms: {1}".format(ind, term))
+        elif model == 'lda':
+            for ind, term in enumerate(self.get_top_cluster_terms(features, model='lda')):
+                print("Topic #: {0}   Top terms: {1}".format(ind, term))
 
-    def get_top_cluster_terms(self, features, num_terms=15):
-        original_space_centroids = self.svd.inverse_transform(self.model.cluster_centers_)
-        order_centroids = original_space_centroids.argsort()[:, ::-1]
+    def get_top_cluster_terms(self, features, model='kmeans', num_terms=15):
         top_terms = []
-        for cluster_num in range(self.NCLUSTERS):
-            top_terms.append(", ".join([features[i] for i in order_centroids[cluster_num, :num_terms]]))
+        if model == 'kmeans':
+            original_space_centroids = self.svd.inverse_transform(self.model.cluster_centers_)
+            order_centroids = original_space_centroids.argsort()[:, ::-1]
+            for cluster_num in range(self.NCLUSTERS):
+                top_terms.append(", ".join([features[i] for i in order_centroids[cluster_num, :num_terms]]))
+        elif model == 'lda':
+            for topic in self.model.components_:
+                top_terms.append(", ".join([features[i] for i in topic.argsort()[:-num_terms - 1:-1]]))
         return top_terms
 
     def do_ward(self, dataset):
@@ -65,3 +76,8 @@ class Cluster:
         print("Topics created:")
         self.model.print_topics()
         return self.model
+
+    def do_lda_sk(self, dataset):
+        self.model = LatentDirichletAllocation(n_topics=10, max_iter=5)
+        self.model.fit(dataset)
+        return self.model.components_

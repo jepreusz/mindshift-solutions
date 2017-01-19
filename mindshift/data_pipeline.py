@@ -33,6 +33,8 @@ class DataPipeline:
         elif alg == 'hierarchical':
             Z = self.data_transformer.get_cosine(data)
             return self.processor.do_ward(Z)
+        elif alg == 'lda':
+            return self.processor.do_lda_sk(data)
 
     def export_results(self, filename, *dataframes, **fileparams):
         file_format = fileparams['format']
@@ -40,7 +42,8 @@ class DataPipeline:
             writer = pandas.ExcelWriter(filename)
             for ind, dataframe in enumerate(dataframes):
                 sheet_name = fileparams['sheet_names'][ind]
-                dataframe.to_excel(writer, sheet_name=sheet_name, engine='xlsxwriter')
+                keep_index = fileparams['indices'][ind]
+                dataframe.to_excel(writer, sheet_name=sheet_name, engine='xlsxwriter', index=keep_index)
             writer.save()
             writer.close()
         elif file_format == 'csv':
@@ -66,7 +69,16 @@ if __name__ == "__main__":
         clustered_df.index.name = 'Article ID'
         cluster_terms_df = pandas.DataFrame(pipeline.processor.get_top_cluster_terms(pipeline.data_transformer.
                                                                                      get_features()))
-        cluster_terms_df.index.name = 'Cluster #'
+        cluster_terms_df.index.name = 'Cluster ID'
         cluster_terms_df.columns = ['Top Terms']
-        pipeline.export_results('cluster_output.xlsx', clustered_df, cluster_terms_df, format='xlsx',
-                                sheet_names=['clusters', 'top terms'])
+        lda_df = pandas.DataFrame()
+        for ind in range(100):
+            vectorized_data = pipeline.transform_data(clustered_df[clustered_df['Cluster ID'] == ind]['Content'])
+            pipeline.process_data(vectorized_data, alg='lda')
+            topics = pipeline.processor.get_top_cluster_terms(pipeline.data_transformer.get_features(), model='lda')
+            temp_df = pandas.DataFrame([[ind, i, topic] for i, topic in enumerate(topics)])
+            lda_df = lda_df.append(temp_df)
+        lda_df.columns = ['Cluster ID', 'Topic ID', 'Top Topic Keywords']
+        pipeline.export_results('cluster_output.xlsx', clustered_df, cluster_terms_df, lda_df, format='xlsx',
+                                sheet_names=['clusters', 'top cluster terms', 'top cluster topics'],
+                                indices=[True, True, False])
