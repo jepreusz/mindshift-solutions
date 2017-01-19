@@ -3,10 +3,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from mindshift.preprocess import data_filter
+from mindshift.process import clustering
 from nltk.corpus import webtext,stopwords
 from nltk.stem import SnowballStemmer
-from mindshift.process.models import Modelling
-from gensim import corpora, models, similarities
 from nltk import sent_tokenize, word_tokenize
 import string
 
@@ -17,9 +16,10 @@ class Transformer:
         self.tokenizer = data_filter.DataFilter()
         self.stemmer = SnowballStemmer('english')
         self.custom_vocabulary = self._get_vocabulary()
-        self.vectorizer = TfidfVectorizer(stop_words='english', min_df=5, analyzer='word', vocabulary=self.custom_vocabulary,
-                                          ngram_range=(1, 3), tokenizer=self.tokenizer.tokenize_and_stem)
+        self.vectorizer = TfidfVectorizer(stop_words='english', min_df=0.1, max_df=0.7, analyzer='word',
+                                          vocabulary=self.custom_vocabulary, tokenizer=self.tokenizer.tokenize_)
         self.vector_features = []
+        self.modeller = clustering.Cluster()
         self.lda_model=None
 
     def vectorize_text(self, text):
@@ -32,17 +32,11 @@ class Transformer:
         return "".join([" " + i if not i in string.punctuation else i for i in tokens])
         
     def lda_vectorize_text(self, text):
-        self.create_lda_model(text)
+        self.lda_model = self.create_lda_model(text)
         return self.lda_model.get_vectors()
 
     def create_lda_model(self, text):
-        tokenized_text = [self.tokenizer.tokenize_(word) for word in text]
-        final_text = [[word for text in tokenized_text for word in text if word.lower() not in stopwords.words('english')]]
-        dictionary = corpora.Dictionary(final_text)
-        corpus = [dictionary.doc2bow(doc) for doc in final_text]
-        self.lda_model = Modelling(corpus, dictionary)
-        print("Topics created:")
-        self.lda_model.print_topics()
+        return self.modeller.do_lda(text)
 
     def get_features(self):
         return self.vector_features

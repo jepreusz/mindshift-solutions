@@ -4,7 +4,6 @@ from mindshift.preprocess import data_filter, transformer
 from mindshift.process import clustering
 import argparse
 import pandas
-from collections import *
 
 
 class DataPipeline:
@@ -35,6 +34,18 @@ class DataPipeline:
             Z = self.data_transformer.get_cosine(data)
             return self.processor.do_ward(Z)
 
+    def export_results(self, filename, *dataframes, **fileparams):
+        file_format = fileparams['format']
+        if file_format == 'xlsx':
+            writer = pandas.ExcelWriter(filename)
+            for ind, dataframe in enumerate(dataframes):
+                sheet_name = fileparams['sheet_names'][ind]
+                dataframe.to_excel(writer, sheet_name=sheet_name, engine='xlsxwriter')
+            writer.save()
+            writer.close()
+        elif file_format == 'csv':
+            dataframes[0].to_csv(filename)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Enter source data location and action to perform on data',
@@ -46,19 +57,16 @@ if __name__ == "__main__":
     pipeline = DataPipeline(args.src_data, clean=False)
     if args.task == 'show':
         print(pipeline.load_data())
-    elif args.task == 'transform':
+    elif args.task == 'process':
         df = pipeline.load_data()
-        # clean_data = pandas.DataFrame(df.apply(pipeline.preprocess_data, axis=1))
-        # clean_data.columns = ['content']
         vectorized_data = pipeline.transform_data(df['content'])
         labels = pipeline.process_data(vectorized_data, alg='kmeans')
         clustered_df = df.join(pandas.DataFrame(labels, index=df.index))
-        clustered_df.columns = ['content', 'cluster_id']
-        topic_df = clustered_df[clustered_df['cluster_id'] == 25]
-        lda_vector = pipeline.transform_data(topic_df['content'])
-        topic_labels = pipeline.process_data(lda_vector, alg='kmeans')
-        topic_df = topic_df.join(pandas.DataFrame(topic_labels, index=topic_df.index))
-        topic_df.columns = ['content', 'cluster_id', 'sub_cluster_id']
-        print(pipeline.processor.print_top_terms(pipeline.data_transformer.get_features()))
-        pipeline.data_transformer.create_lda_model(clustered_df['content'])
-        topic_df.to_csv('cluster_output_ensemble.csv')
+        clustered_df.columns = ['Content', 'Cluster ID']
+        clustered_df.index.name = 'Article ID'
+        cluster_terms_df = pandas.DataFrame(pipeline.processor.get_top_cluster_terms(pipeline.data_transformer.
+                                                                                     get_features()))
+        cluster_terms_df.index.name = 'Cluster #'
+        cluster_terms_df.columns = ['Top Terms']
+        pipeline.export_results('cluster_output.xlsx', clustered_df, cluster_terms_df, format='xlsx',
+                                sheet_names=['clusters', 'top terms'])

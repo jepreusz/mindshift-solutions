@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 import numpy as np
 import scipy
 from gensim import models, similarities, matutils
@@ -8,11 +8,12 @@ class Modelling:
 
     def __init__(self, corpus, dictionary):
         self.similar_index = 0
-        self.lda = models.LdaMulticore(corpus, id2word=dictionary, workers=8, num_topics=20)
+        self.lda = models.LdaMulticore(corpus, id2word=dictionary, workers=8, num_topics=50)
         self.corpus = self.lda[corpus]
 
     def print_topics(self):
-        for topic in self.lda.show_topics():
+        print("# topics: {0}".format(self.lda.num_topics))
+        for topic in self.lda.show_topics(num_topics=50):
             print(topic)
         
     def get_vectors(self):
