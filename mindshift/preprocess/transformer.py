@@ -8,6 +8,9 @@ from nltk.corpus import webtext,stopwords
 from nltk.stem import SnowballStemmer
 from nltk import sent_tokenize, word_tokenize
 import string
+import configparser
+from mindshift.util import vocab_builder
+import pickle
 
 
 class Transformer:
@@ -15,12 +18,14 @@ class Transformer:
     def __init__(self):
         self.tokenizer = data_filter.DataFilter()
         self.stemmer = SnowballStemmer('english')
-        self.custom_vocabulary = self._get_vocabulary()
-        self.vectorizer = TfidfVectorizer(stop_words='english', min_df=0.1, max_df=0.7, analyzer='word',
-                                          tokenizer=self.tokenizer.tokenize_)
+        self.vocabulary_builder = vocab_builder.VocabBuilder("C:\\Users\\ramji\\PycharmProjects\\mindshift-solutions\\mindshift\\dataFiles\\business_terms.txt")
+        # self.custom_vocabulary = self._build_custom_vocabulary()
+        self.vectorizer = TfidfVectorizer(stop_words='english', min_df=0.1, max_df=0.8, analyzer='word',
+                                          vocabulary=self.custom_vocabulary)
         self.vector_features = []
         self.modeller = clustering.Cluster()
         self.lda_model=None
+        self.config_handler = configparser.ConfigParser()
 
     def vectorize_text(self, text):
         vectorized_text = self.vectorizer.fit_transform(text)
@@ -45,11 +50,17 @@ class Transformer:
         dist = 1 - cosine_similarity(dtm)
         return np.round(dist, 2)
 
-    def _get_vocabulary(self):
+    def get_vocabulary(self):
+        return self.vectorizer.vocabulary_
+
+    def _build_custom_vocabulary(self):
         vocab = {}
-        index = 0
-        for word in webtext.words():
-            if self.stemmer.stem(word) not in vocab:
-                vocab[self.stemmer.stem(word)] = index
+        # load existing vocabulary
+        with open("C:\\Users\\ramji\\PycharmProjects\\mindshift-solutions\\mindshift\\preprocess\\corpus_vocab", 'rb') as file:
+            vocab = pickle.load(file)
+        index = len(vocab.keys())
+        for word in self.vocabulary_builder.build_vocab():
+            if word not in vocab:
+                vocab[word] = index
                 index += 1
         return vocab

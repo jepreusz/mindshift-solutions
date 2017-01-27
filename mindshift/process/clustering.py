@@ -21,8 +21,9 @@ from sklearn.decomposition import LatentDirichletAllocation
 class Cluster:
 
     def __init__(self):
-        self.NCLUSTERS = 100
+        self.NCLUSTERS = 50
         self.NITER = 5
+        self.NTOPICS = 5
         # Trial variable for number of cluster
         self.max_d = 50
         self.model = None
@@ -78,6 +79,6 @@ class Cluster:
         return self.model
 
     def do_lda_sk(self, dataset):
-        self.model = LatentDirichletAllocation(n_topics=10, max_iter=5)
+        self.model = LatentDirichletAllocation(n_topics=self.NTOPICS, max_iter=self.NITER)
         self.model.fit(dataset)
         return self.model.components_
