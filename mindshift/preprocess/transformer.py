@@ -19,9 +19,9 @@ class Transformer:
         self.tokenizer = data_filter.DataFilter()
         self.stemmer = SnowballStemmer('english')
         self.vocabulary_builder = vocab_builder.VocabBuilder("C:\\Users\\ramji\\PycharmProjects\\mindshift-solutions\\mindshift\\dataFiles\\business_terms.txt")
-        # self.custom_vocabulary = self._build_custom_vocabulary()
+        self.custom_vocabulary = self._build_custom_vocabulary()
         self.vectorizer = TfidfVectorizer(stop_words='english', min_df=0.1, max_df=0.8, analyzer='word',
-                                          vocabulary=self.custom_vocabulary)
+                                          ngram_range=(1, 3), vocabulary=self.custom_vocabulary)
         self.vector_features = []
         self.modeller = clustering.Cluster()
         self.lda_model=None
@@ -56,7 +56,8 @@ class Transformer:
     def _build_custom_vocabulary(self):
         vocab = {}
         # load existing vocabulary
-        with open("C:\\Users\\ramji\\PycharmProjects\\mindshift-solutions\\mindshift\\preprocess\\corpus_vocab", 'rb') as file:
+        with open("C:\\Users\\ramji\\PycharmProjects\\mindshift-solutions\\mindshift\\preprocess\\corpus_vocab", 'rb') \
+                as file:
             vocab = pickle.load(file)
         index = len(vocab.keys())
         for word in self.vocabulary_builder.build_vocab():

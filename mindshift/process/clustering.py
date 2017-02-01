@@ -23,7 +23,7 @@ class Cluster:
     def __init__(self):
         self.NCLUSTERS = 50
         self.NITER = 5
-        self.NTOPICS = 5
+        self.NTOPICS = 10
         # Trial variable for number of cluster
         self.max_d = 50
         self.model = None

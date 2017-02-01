@@ -78,14 +78,14 @@ if __name__ == "__main__":
         cluster_terms_df.index.name = 'Cluster ID'
         cluster_terms_df.columns = ['Top Terms']
         lda_df = pandas.DataFrame()
-        for ind in range(50):
+        for ind in range(10):
             vectorized_data = pipeline.transform_data(clustered_df[clustered_df['Cluster ID'] == ind]['Content'])
             pipeline.process_data(vectorized_data, alg='lda')
             topics = pipeline.processor.get_top_cluster_terms(pipeline.data_transformer.get_features(), model='lda')
             temp_df = pandas.DataFrame([[ind, i, topic] for i, topic in enumerate(topics)])
             lda_df = lda_df.append(temp_df)
         lda_df.columns = ['Cluster ID', 'Topic ID', 'Top Topic Keywords']
-        pipeline.export_results('Mindshift Clustering Spreadsheet v11 - unigrams - 50 clusters - 10,791 documents.xlsx', clustered_df,
-                                cluster_terms_df, lda_df, format='xlsx',
+        pipeline.export_results('Mindshift Clustering Spreadsheet - ngrams - custom vocabulary - 50 clusters - 10 topics - 10,791 documents.xlsx',
+                                clustered_df, cluster_terms_df, lda_df, format='xlsx',
                                 sheet_names=['clusters', 'top cluster terms', 'top cluster topics'],
                                 indices=[True, True, False])
