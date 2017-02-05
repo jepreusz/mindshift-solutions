@@ -1,1 +1,1 @@
-#Repo for sklearn packages
+#Repo for sklearn fuzzy c mean packages
