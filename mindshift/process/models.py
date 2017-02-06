@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import numpy as np
+import pandas as pd
 import scipy
 from gensim import models, similarities, matutils
 
@@ -15,6 +16,24 @@ class Modelling:
         print("# topics: {0}".format(self.lda.num_topics))
         for topic in self.lda.show_topics(num_topics=50):
             print(topic)
+            
+    def get_doc_lda(self):
+        #For creating lda of whole corpus
+        doc_percent=dict()
+        doc_topics=dict()
+        #Print the document topic and percentage:
+        for doc_id, doc in enumerate(self.corpus):
+            doc_topics[doc_id] = list()
+            doc_percent[doc_id] = list()
+            for (topic_n, prob) in doc:
+                word_list=list()
+                for (word, _ ) in self.lda.show_topic(topic_n):
+                    word_list.append(word)
+                doc_topics[doc_id].append(word_list)
+                doc_percent[doc_id].append(format(round(prob*100,2), '.2f'))
+        df = pd.DataFrame([doc_topics, doc_percent]).T
+        df.columns = ['List of Words','Percentage']
+        return df
         
     def get_vectors(self):
         return self._get_vector(self.corpus)

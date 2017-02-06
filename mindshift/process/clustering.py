@@ -69,13 +69,13 @@ class Cluster:
 
     def do_lda(self, dataset):
         tokenized_text = [self.tokenizer.tokenize_(word) for word in dataset]
-        final_text = [[word for text in tokenized_text for word in text if word.lower() not in
-                       stopwords.words('english')]]
+        stopword_list = stopwords.words('english')
+        final_text=[[word.lower() for word in text if word.lower() not in stopword_list] for text in tokenized_text]
         dictionary = corpora.Dictionary(final_text)
+        dictionary.filter_extremes(no_below=1, no_above=0.8)
+        self.lda_token_id = dictionary.token2id
         corpus = [dictionary.doc2bow(doc) for doc in final_text]
         self.model = Modelling(corpus, dictionary)
-        print("Topics created:")
-        self.model.print_topics()
         return self.model
 
     def do_lda_sk(self, dataset):

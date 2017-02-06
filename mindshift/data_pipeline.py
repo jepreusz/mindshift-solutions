@@ -27,6 +27,16 @@ class DataPipeline:
             return self.data_transformer.vectorize_text(data)
         elif model == "lda":
             return self.data_transformer.lda_vectorize_text(data)
+        elif model == "lda_whole_corpus":
+            vectorized_data=self.data_transformer.lda_vectorize_text(data)
+            vectorized_data= vectorized_data.set_index(df.index)
+            '''
+            Changes to be done in process:
+            
+            vectorized_data = pipeline.transform_data(df['content'],model="lda_whole_corpus")
+            clustered_df_lda=pandas.concat([df,vectorized_data['List of Words'],vectorized_data['Percentage']],axis=1)
+            '''
+            return vectorized_data
 
     def process_data(self, data, alg='kmeans'):
         if alg == 'kmeans':
