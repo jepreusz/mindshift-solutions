@@ -17,7 +17,9 @@ from mindshift.preprocess import data_filter
 # imports for LDA using scikit-learn module.
 from sklearn.decomposition import LatentDirichletAllocation
 
-
+#imports for fuzzy:
+import skfuzzy as fuzzy
+import numpy as np
 class Cluster:
 
     def __init__(self):
@@ -82,3 +84,19 @@ class Cluster:
         self.model = LatentDirichletAllocation(n_topics=self.NTOPICS, max_iter=self.NITER)
         self.model.fit(dataset)
         return self.model.components_
+        
+    def do_fuzzy(self,dataset):
+        cntr, u, u0, d, jm, p, fpc = fuzzy.cluster.cmeans(dataset.T, 
+            self.NCLUSTERS, 2, error=0.005, maxiter=1000, init=None)
+        '''
+        #Top three cluster
+        cluster_membership = [u.T.argsort()[-3:][::-1]]
+        print(np.shape(cluster_membership))
+        print(cluster_membership[0])
+        
+        '''
+        #Single cluster return
+        cluster_membership = np.argmax(u, axis=0)
+        print(np.shape(cluster_membership))
+        #print(cluster_membership)
+        return cluster_membership.T
