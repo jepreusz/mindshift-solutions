@@ -25,7 +25,7 @@ data.drop(data[data.Detail.isnull()].index.values,axis=0,inplace=True)
 # drop columns used for merging
 data.drop(data.columns.values[[4,5,6,7,8]],axis=1, inplace=True)
 
-# d.to_excel('F5_concat_detail.xlsx',encoding='utf8')
+# data.to_excel('F5_concat_detail.xlsx',encoding='utf8')
 
 # filter html format code
 data['clean_detail'] = data.Detail.map(lambda x:''.join(re.split('\n|<.*?>',x)))
